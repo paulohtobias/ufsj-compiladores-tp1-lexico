@@ -1,0 +1,90 @@
+# Main Makefile
+CC := gcc
+CFLAGS := -Wall -MMD
+
+# Default target
+TARGET := debug
+
+# Check for debug/release build
+ifeq ($(TARGET), debug)
+    CFLAGS += -g -DDEBUG
+else
+	CFLAGS += -O3
+endif
+
+# Library name for dll
+LIB_NAME :=
+
+# OS-dependent variables
+ifeq ($(OS),Windows_NT)
+	BIN := main-$(TARGET).exe
+	DLE := dll
+	ODIR := obj/windows
+
+	CFLAGS+= -mno-ms-bitfields
+#	LOADLIBES := -municode
+else
+	BIN := main-$(TARGET).out
+	DLE := so
+	ODIR := obj/linux
+endif
+
+# Directories
+IDIR := include
+SDIR := src
+
+# Include Paths
+INCLUDE_PATHS := -I$(IDIR)
+
+# Libraries
+LIBS :=
+#CFLAGS += `pkg-config --cflags $(LIBS)`
+#LOADLIBES += `pkg-config --libs $(LIBS)`
+
+#Compilation line
+COMPILE := $(CC) $(CFLAGS) $(INCLUDE_PATHS)
+
+#FILEs
+#---------------Source----------------#
+SRCS := $(wildcard $(SDIR)/*.c)
+
+#---------------Object----------------#
+OBJS := $(SRCS:$(SDIR)/%.c=$(ODIR)/$(TARGET)/%.o)
+#-------------Dependency--------------#
+DEPS := $(OBJS:%.o=%.d)
+
+
+# Build Rules
+all: $(OBJS) $(BIN)
+
+debug: all
+
+release: all
+
+run: $(BIN)
+	./$(BIN)
+
+$(BIN): $(OBJS) main.c
+	$(COMPILE) $(OBJS) main.c -o $(BIN) $(LOADLIBES)
+
+dll: LOADLIBES += -lm -fPIC
+dll: $(OBJS)
+	$(COMPILE) -shared -o lib$(LIB_NAME).$(DLE) $(OBJS) $(LOADLIBES)
+
+# Include all .d files
+-include $(DEPS)
+
+$(ODIR)/$(TARGET)/%.o: $(SDIR)/%.c
+	@mkdir -p $(ODIR)/$(TARGET)
+	$(COMPILE) -c $< -o $@ $(LOADLIBES)
+
+
+# Other Rules
+init:
+	@mkdir $(IDIR) $(SDIR)
+
+clean:
+	-rm -rf $(ODIR)/ *.d $(BIN) lib$(LIB_NAME).$(DLE)
+
+
+.PHONY: all init release debug dll run clean
