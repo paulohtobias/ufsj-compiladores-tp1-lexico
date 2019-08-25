@@ -16,9 +16,9 @@ int main(int argc, char const *argv[]) {
 
 		if (token != NULL) {
 			printf("%s\n", token->tipo);
-			printf("\t%s\n", token->str);
-			printf("\t%d,%d\n", token->linha, token->coluna);
-			printf("\t%s\n\n", (char *) token->valor);
+			printf("\tsrc:%s\n", token->str);
+			printf("\tlinha: %d | coluna: %d\n", token->linha, token->coluna);
+			printf("\tvalor: %s\n\n", (char *) token->valor);
 
 			token_free(token);
 

@@ -36,8 +36,8 @@ int32_t afd_transicao_match_interval_not(const struct afd_transicao_t *transicao
 
 
 token_t *afd_get_token(const afd_t *afd, const char **pstr) {
-	static int32_t linha = 0;
-	static int32_t coluna = 0;
+	static int32_t linha = 1;
+	static int32_t coluna = 1;
 
 	const char *str = *pstr;
 
@@ -74,6 +74,12 @@ token_t *afd_get_token(const afd_t *afd, const char **pstr) {
 			}
 
 			// TODO: atualizar linha e coluna.
+			if (**pstr == '\n') {
+				linha++;
+				coluna = 0;
+			} else {
+				coluna++;
+			}
 
 			// TODO: avançar em modo utf-8.
 			(*pstr)++;
