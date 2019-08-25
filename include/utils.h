@@ -12,6 +12,8 @@
 
 #include <stdlib.h>
 
+#define ARR_SIZE(arr) (sizeof arr / sizeof arr[0])
+
 #define PMALLOC(arr, size) arr = malloc(size * sizeof *arr)
 #define PCALLOC(arr, size) arr = calloc(size, sizeof *arr)
 

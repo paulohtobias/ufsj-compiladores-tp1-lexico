@@ -16,7 +16,7 @@ int main(int argc, char const *argv[]) {
 
 		if (token != NULL) {
 			printf("%s\n", token->tipo);
-			printf("\tsrc:%s\n", token->str);
+			printf("\tsrc:%s\n", token->src);
 			printf("\tlinha: %d | coluna: %d\n", token->linha, token->coluna);
 			printf("\tvalor: %s\n\n", (char *) token->valor);
 
@@ -27,6 +27,9 @@ int main(int argc, char const *argv[]) {
 	}
 
 	free(codigo_fonte);
+
+	puts("hex: \xc2\xa9");
+	puts("oct: \302\251");
 
 	return 0;
 }

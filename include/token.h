@@ -22,7 +22,7 @@ typedef struct token_t {
 
 
 	/// Cópia do texto onde o token foi encontrado.
-	char *str;
+	char *src;
 
 	/// Linha do arquivo onde o token foi encontrado.
 	int32_t linha;
@@ -31,7 +31,7 @@ typedef struct token_t {
 	int32_t coluna;
 
 
-	/// Representação binária de `str`.
+	/// Representação binária de `src`.
 	void *valor;
 
 	/// Tamanho em bytes de `valor`.

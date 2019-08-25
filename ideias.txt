@@ -1,0 +1,3 @@
+Criar uma forma para logar warnings e erros.
+Qualquer função em qualquer parte pode emitir uma mensagem de erro ou warning, com um parametro adicional indicando se o PCC pode continuar ou deve ser encerrado.
+Pensar em quando encerrar a execução caso os erros não interrompam a execução.
