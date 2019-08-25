@@ -1,6 +1,32 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "lexico.h"
+#include "utils.h"
 
 int main(int argc, char const *argv[]) {
-	printf("Hello, world!\n");
+	size_t codigo_fonte_len;
+	char *codigo_fonte = file_to_str(argv[1], &codigo_fonte_len);
+
+	lexico_init();
+
+	const char *carriage = codigo_fonte;
+
+	while (*carriage != '\0') {
+		token_t *token = afd_get_token(&lexico_afd, &carriage);
+
+		if (token != NULL) {
+			printf("%s\n", token->tipo);
+			printf("\t%s\n", token->str);
+			printf("\t%d,%d\n", token->linha, token->coluna);
+			printf("\t%s\n\n", (char *) token->valor);
+
+			token_free(token);
+
+			//break;
+		}
+	}
+
+	free(codigo_fonte);
+
 	return 0;
 }
