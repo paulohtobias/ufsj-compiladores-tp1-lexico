@@ -31,10 +31,10 @@ typedef struct token_t {
 	int32_t coluna;
 
 
-	/// Representação binária de `src`.
+	/// Representação binária de `src`. Pode ser NULL.
 	void *valor;
 
-	/// Tamanho em bytes de `valor`.
+	/// Tamanho em bytes de `valor`. Pode ser 0.
 	size_t tamanho;
 
 
@@ -44,6 +44,7 @@ typedef struct token_t {
 
 void token_free(token_t *token);
 
+token_t *token_char_parse(const char *src, size_t comprimento, int32_t linha, int32_t coluna);
 token_t *token_string_parse(const char *src, size_t comprimento, int32_t linha, int32_t coluna);
 
 #endif // TOKEN_H

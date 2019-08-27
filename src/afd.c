@@ -67,6 +67,8 @@ token_t *afd_get_token(const afd_t *afd, const char **pstr) {
 
 		// Se o símbolo não leva a nenhum estado.
 		if (!mudanca) {
+			// TODO: Pensar num jeito de logar erros contextuais
+			// caso o estado não seja final.
 			if (estado_atual->final) {
 				token_free(token);
 

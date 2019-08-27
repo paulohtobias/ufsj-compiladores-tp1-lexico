@@ -30,6 +30,7 @@ int main(int argc, char const *argv[]) {
 
 	puts("hex: \xc2\xa9");
 	puts("oct: \302\251");
+	putchar('\x41');
 
 	return 0;
 }

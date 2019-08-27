@@ -13,5 +13,10 @@ int main(int argc, char const *argv[]) {
 	while(*c != '\0') {
 		printf("%x\n", (unsigned char) *c++);
 	}
+
+	int a = 1;
+
+	int b = a+++++a;
+	printf("a:%d\nb:%d\n", a, b);
 	return 0;
 }
