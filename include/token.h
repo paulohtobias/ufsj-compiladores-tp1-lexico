@@ -14,6 +14,8 @@
 #include <stdint.h>
 
 struct token_vtable {
+	/// Converte o token em uma string.
+	//char *(*to_str)(const token_t *);
 };
 
 typedef struct token_t {

@@ -56,6 +56,11 @@ token_t *token_char_parse(const char *src, size_t comprimento, int32_t linha, in
 	} else {
 		*((char *) token->valor) = *src;
 	}
+	src++;
+
+	if (*src != '\'') {
+		// TODO: warning: 'multi-character constant'.
+	}
 
 	return token;
 }
