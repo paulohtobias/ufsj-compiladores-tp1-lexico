@@ -37,9 +37,9 @@ SDIR := src
 INCLUDE_PATHS := -I$(IDIR)
 
 # Libraries
-LIBS :=
-#CFLAGS += `pkg-config --cflags $(LIBS)`
-#LOADLIBES += `pkg-config --libs $(LIBS)`
+LIBS := libpcre2-8
+CFLAGS += `pkg-config --cflags $(LIBS)`
+LOADLIBES += `pkg-config --libs $(LIBS)`
 
 #Compilation line
 COMPILE := $(CC) $(CFLAGS) $(INCLUDE_PATHS)
