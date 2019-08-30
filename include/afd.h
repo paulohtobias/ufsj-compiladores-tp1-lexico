@@ -46,6 +46,7 @@ typedef struct afd_transicao_t {
 typedef struct afd_estado_t {
 	afd_transicao_t *transicoes;
 	size_t transicoes_quantidade;
+	size_t transicoes_capacidade;
 
 	void *(*gerar_dado)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 } afd_estado_t;

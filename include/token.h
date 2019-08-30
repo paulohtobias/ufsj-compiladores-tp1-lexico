@@ -41,7 +41,7 @@ typedef struct token_t {
 		void *dados;
 		size_t tamanho;
 	} valor;
-};
+} token_t;
 
 
 #endif // TOKEN_H
