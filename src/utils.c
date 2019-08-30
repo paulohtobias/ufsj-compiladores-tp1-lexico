@@ -8,8 +8,7 @@
  */
 
 #include <stdio.h>
-#define PCRE2_CODE_UNIT_WIDTH 8
-#include <pcre2.h>
+#include <string.h>
 #include "utils.h"
 
 char *file_to_str(const char *filename, size_t *len) {
@@ -31,6 +30,24 @@ char *file_to_str(const char *filename, size_t *len) {
 	fclose(in);
 
 	return str;
+}
+
+pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
+	int errornumber;
+	PCRE2_SIZE erroroffset;
+
+	if (tamanho == 0) {
+		tamanho = PCRE2_ZERO_TERMINATED;
+	}
+
+	return pcre2_compile(
+		(PCRE2_SPTR) pattern, /* the pattern */
+		tamanho,              /* indicates pattern is zero-terminated */
+		REGEX_OPTIONS,        /* default flags */
+		&errornumber,         /* for error number */
+		&erroroffset,         /* for error offset */
+		NULL                  /* use default compile context */
+	);
 }
 
 size_t regex_match(const char *str, const char *pattern_str) {
@@ -71,8 +88,7 @@ size_t regex_match(const char *str, const char *pattern_str) {
 	re = pcre2_compile(
 		pattern,                     /* the pattern */
 		PCRE2_ZERO_TERMINATED,       /* indicates pattern is zero-terminated */
-		PCRE2_UTF | PCRE2_ANCHORED | /* flags */
-		PCRE2_NO_AUTO_CAPTURE,
+		REGEX_OPTIONS,               /* default flags */
 		&errornumber,                /* for error number */
 		&erroroffset,                /* for error offset */
 		NULL                         /* use default compile context */
@@ -122,8 +138,6 @@ size_t regex_match(const char *str, const char *pattern_str) {
 
 	PCRE2_SIZE *ovector = pcre2_get_ovector_pointer(match_data);
 	offset = ovector[1];
-
-	printf("\nMatch succeeded at offset %d\n", offset);
 
 exit:
 	pcre2_match_data_free(match_data);   /* Release memory used for the match */
