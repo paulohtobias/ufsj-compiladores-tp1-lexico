@@ -36,7 +36,8 @@ obj
 # Debug files
 *.dSYM/
 
-#Project folders and files
-nbproject
-.vscode
+# Project folders and files
+nbproject/
+.vscode/
+arquivos/
 main
