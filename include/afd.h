@@ -32,6 +32,11 @@ enum {
 };
 #undef AFD_CODIGO
 
+const char *afd_get_erro(int cod);
+
+
+/// Definindo structs.
+
 typedef struct afd_transicao_pattern_t {
 	const char *name;
 	const char *str;

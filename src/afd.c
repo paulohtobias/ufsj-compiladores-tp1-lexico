@@ -17,6 +17,14 @@ const char __afd_msgs[][128] = {
 };
 #undef AFD_CODIGO
 
+const char *afd_get_erro(int cod) {
+	if (cod >= 0 && cod < sizeof __afd_msgs / sizeof __afd_msgs[0]) {
+		return __afd_msgs[cod];
+	} else {
+		return "Código de erro inválido.";
+	}
+}
+
 //afd_t *g_afd_lexico = NULL;
 
 #include <stdio.h>
@@ -95,9 +103,8 @@ int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_
 	// Efim é criada uma transição do estado atual para o novo estado.
 	// transicoes[i] se refere à ultima instrução do vetor.
 	PCALLOC(transicao, 1);
-	transicao->pattern.name = transicoes[i].name;
-	transicao->pattern.str = transicoes[i].str;
-	transicao->pattern.compiled = regex_compile(transicao->pattern.str, PCRE2_ZERO_TERMINATED);
+	transicao->pattern.name = strdup(transicoes[i].name);
+	transicao->pattern.compiled = regex_compile(transicoes[i].str, PCRE2_ZERO_TERMINATED);
 	transicao->estado_indice = afd->estados_quantidade++;
 
 	// Adicionamos a nova transição no último estado.
@@ -134,6 +141,7 @@ fim:
 
 void print_afd(const afd_t *afd) {
 	printf("============ AFD ===========\n");
+	printf("Estado inicial: %d\n", afd->estado_inicial - afd->estados + 1);
 	for (int i = 0; i < afd->estados_quantidade; i++) {
 		const afd_estado_t *estado = &afd->estados[i];
 
@@ -142,7 +150,7 @@ void print_afd(const afd_t *afd) {
 		for (int j = 0; j < estado->transicoes_quantidade; j++) {
 			const afd_transicao_t *transicao = &estado->transicoes[j];
 
-			printf("\t%d/%d: %s => %d\n", j + 1, estado->transicoes_quantidade, transicao->pattern.name, transicao->estado_indice + 1);
+			printf("\t%d => %d:    %s\n", j + 1, transicao->estado_indice + 1, transicao->pattern.name);
 		}
 
 		printf("\n");
