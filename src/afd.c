@@ -28,7 +28,7 @@ const char *afd_get_erro(int cod) {
 //afd_t *g_afd_lexico = NULL;
 
 #include <stdio.h>
-void print_afd(const afd_t *afd);
+void afd_print(const afd_t *afd);
 
 int afd_init(afd_t *afd, size_t quantidade_estados, int32_t estado_inicial) {
 	if (estado_inicial >= quantidade_estados) {
@@ -170,12 +170,12 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 	free(transicao);
 
 fim:
-	print_afd(afd);
+	afd_print(afd);
 
 	return res;
 }
 
-void print_afd(const afd_t *afd) {
+void afd_print(const afd_t *afd) {
 	printf("============ AFD ===========\n");
 	printf("Estado inicial: %ld\n", afd->estado_inicial - afd->estados + 1);
 	for (int i = 0; i < afd->estados_quantidade; i++) {
@@ -188,7 +188,7 @@ void print_afd(const afd_t *afd) {
 		for (int j = 0; j < estado->transicoes_quantidade; j++) {
 			const afd_transicao_t *transicao = &estado->transicoes[j];
 
-			printf("\t%d => %d:    %s\n", j + 1, transicao->estado_indice + 1, transicao->pattern.name);
+			printf("\t%d/%zu \t %d => %d \t %s\n", j + 1, estado->transicoes_quantidade, i + 1, transicao->estado_indice + 1, transicao->pattern.name);
 		}
 
 		printf("\n");
