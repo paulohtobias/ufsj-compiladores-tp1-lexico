@@ -16,7 +16,13 @@
 
 // X-macro para gerar os códigos de token.
 #define TOKEN_CODIGOS \
-	TOKEN_CODIGO(TK_ID, identificador, "Identificador.")
+	TOKEN_CODIGO(TK_ID, identificador, "Identificador.") /*\
+	TOKEN_CODIGO(TK_KW, palavra_chave, "Palavra-chave.") \
+	TOKEN_CODIGO(TK_CNST, constante, "Contante.") \
+	TOKEN_CODIGO(TK_OP, operador, "Operador.") \
+	TOKEN_CODIGO(TK_EXT, extra, "Extra.") \
+	TOKEN_CODIGO(TK_PP, preprocessador, "Pré-processador.") \
+	TOKEN_CODIGO(TK_CMT, comentario, "Comentário.")*/
 
 
 /// Tipos básicos de token.
