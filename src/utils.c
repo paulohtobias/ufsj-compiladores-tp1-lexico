@@ -50,59 +50,27 @@ pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
 	);
 }
 
-size_t regex_match(const char *str, const char *pattern_str) {
+size_t regex_match(const char *str, pcre2_code *re) {
 	size_t offset = 0;
 
 	// Handling NULL strings.
-	if (str == NULL || pattern_str == NULL) {
+	if (str == NULL || re == NULL) {
 		return 0;
 	}
 
-	// Code adapted from https://github.com/luvit/pcre2/blob/a677f5b51bac251082856d35a48a01670e2fd4a7/src/pcre2demo.c#L61
-	pcre2_code *re;
-	PCRE2_SPTR pattern;     /* PCRE2_SPTR is a pointer to unsigned code units of */
 	PCRE2_SPTR subject;     /* the appropriate width (8, 16, or 32 bits). */
 
-	int errornumber;
 	int rc;
-
-	PCRE2_SIZE erroroffset;
 
 	size_t subject_length;
 	pcre2_match_data *match_data;
 
 
-	/* As pattern and subject are char arguments, they can be straightforwardly
+	/* As subject is char argument, it can be straightforwardly
 	cast to PCRE2_SPTR as we are working in 8-bit code units. */
 
-	pattern = (PCRE2_SPTR)pattern_str;
 	subject = (PCRE2_SPTR)str;
 	subject_length = strlen((char *)subject);
-
-
-	/*************************************************************************
-	* Now we are going to compile the regular expression pattern, and handle *
-	* any errors that are detected.                                          *
-	*************************************************************************/
-
-	re = pcre2_compile(
-		pattern,                     /* the pattern */
-		PCRE2_ZERO_TERMINATED,       /* indicates pattern is zero-terminated */
-		REGEX_OPTIONS,               /* default flags */
-		&errornumber,                /* for error number */
-		&erroroffset,                /* for error offset */
-		NULL                         /* use default compile context */
-	);
-
-	/* Compilation failed: print the error message and exit. */
-
-	if (re == NULL) {
-		PCRE2_UCHAR buffer[256];
-		pcre2_get_error_message(errornumber, buffer, sizeof(buffer));
-		printf("PCRE2 compilation failed at offset %d: %s\n", (int)erroroffset,
-			buffer);
-		return 0;
-	}
 
 
 	/*************************************************************************
@@ -141,6 +109,5 @@ size_t regex_match(const char *str, const char *pattern_str) {
 
 exit:
 	pcre2_match_data_free(match_data);   /* Release memory used for the match */
-	pcre2_code_free(re);                 /* data and the compiled pattern. */
 	return offset;
 }

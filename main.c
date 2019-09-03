@@ -1,11 +1,19 @@
-#include "token/identificador.h"
+#include <stdio.h>
+#include "lexico.h"
+#include "utils.h"
 
 int main(int argc, char const *argv[]) {
-	afd_t afd_lexico;
-	afd_init(&afd_lexico, 1, 0);
+	const char *filename = "main.c";
+	if (argc >= 2) {
+		filename = argv[1];
+	}
 
-	token_init(&afd_lexico);
+	size_t comprimento;
+	char *emoji_💩_no_meio = file_to_str(filename, &comprimento);
 
-	afd_print(&afd_lexico);
+	lexico_parse(emoji_💩_no_meio);
+
+	free(emoji_💩_no_meio);
+
 	return 0;
 }

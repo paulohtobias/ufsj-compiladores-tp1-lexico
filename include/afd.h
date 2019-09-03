@@ -83,6 +83,11 @@ afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_qua
 void afd_liberar_estado(afd_estado_t *estado);
 
 /**
+ * TODO: Retorna o índice do estado...
+ */
+int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char **cursor);
+
+/**
  * Procura a transição na lista de transições do estado.
  *
  * PARAMETROS:
