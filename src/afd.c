@@ -43,6 +43,36 @@ int afd_init(afd_t *afd, size_t quantidade_estados, int32_t estado_inicial) {
 	return AFD_OK;
 }
 
+afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna)) {
+	afd_estado_t estado;
+
+	estado.final = final;
+	estado.acao = acao;
+
+	// Transições.
+	estado.transicoes = NULL;
+	estado.transicoes_capacidade = estado.transicoes_quantidade = transicoes_quantidade;
+	if (transicoes != NULL && transicoes_quantidade > 0) {
+		PMALLOC(estado.transicoes, estado.transicoes_capacidade);
+
+		for (size_t i = 0; i < transicoes_quantidade; i++) {
+			estado.transicoes[i].estado_indice = transicoes[i].estado_indice;
+			estado.transicoes[i].pattern.name = strdup(transicoes[i].pattern.name);
+			estado.transicoes[i].pattern.compiled = regex_compile(transicoes[i].pattern.str, PCRE2_ZERO_TERMINATED);
+		}
+	}
+
+	return estado;
+}
+
+void afd_liberar_estado(afd_estado_t *estado) {
+	for (size_t i = 0; i < estado->transicoes_quantidade; i++) {
+		free(estado->transicoes[i].pattern.name);
+		pcre2_code_free(estado->transicoes[i].pattern.compiled);
+	}
+	free(estado->transicoes);
+}
+
 afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char *transicao_id) {
 	for (int32_t i = 0; i < estado->transicoes_quantidade; i++) {
 		afd_transicao_t *transicao = &estado->transicoes[i];
@@ -55,7 +85,7 @@ afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char
 	return NULL;
 }
 
-int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_estado_t *estado_ligacao) {
+int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_t *sub) {
 	int res = AFD_OK;
 
 	afd_transicao_t *transicao = NULL;
@@ -70,18 +100,15 @@ int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_
 
 		// Se a transição intermediária não existir, então criamos um novo estado.
 		if (transicao == NULL) {
-			afd_estado_t *novo_estado = NULL;
-			PCALLOC(novo_estado, 1);
-			novo_estado->transicoes_capacidade = 1;
-			PCALLOC(novo_estado->transicoes, novo_estado->transicoes_capacidade);
+			afd_t novo_sub;
+			novo_sub.estados_capacidade = novo_sub.estados_quantidade = 1;
+			PCALLOC(novo_sub.estados, novo_sub.estados_capacidade);
+			novo_sub.estados[0].transicoes_capacidade = 1;
+			PCALLOC(novo_sub.estados[0].transicoes, novo_sub.estados[0].transicoes_capacidade);
 
-			res = afd_add_estado(afd, transicoes, i + 1, novo_estado);
+			res = afd_add_subautomato(afd, transicoes, i + 1, &novo_sub);
 
-			// Como o valor do novo estado foi copiado para o vetor do automato,
-			// podemos librerar a memória.
-			free(novo_estado);
-
-			// Um realloc pode ocorrer em afd_add_estado que fará com que o ponteiro
+			// Um realloc pode ocorrer em afd_add_subautomato que fará com que o ponteiro
 			// estado_atual esteja desatualizado.
 			estado_atual = &afd->estados[estado_atual_indice];
 
@@ -105,7 +132,8 @@ int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_
 	PCALLOC(transicao, 1);
 	transicao->pattern.name = strdup(transicoes[i].name);
 	transicao->pattern.compiled = regex_compile(transicoes[i].str, PCRE2_ZERO_TERMINATED);
-	transicao->estado_indice = afd->estados_quantidade++;
+	transicao->estado_indice = afd->estados_quantidade;
+	afd->estados_quantidade += sub->estados_quantidade;
 
 	// Adicionamos a nova transição no último estado.
 	estado_atual->transicoes_quantidade++;
@@ -127,7 +155,15 @@ int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_
 		afd->estado_inicial = &afd->estados[estado_inicial_indice];
 	}
 
-	afd->estados[transicao->estado_indice] = *estado_ligacao;
+	// Arruma o índice de todas as transições do sub-autômato.
+	for (i = 0; i < sub->estados_quantidade; i++) {
+		for (int32_t j = 0; j < sub->estados[i].transicoes_quantidade; j++) {
+			sub->estados[i].transicoes[j].estado_indice += transicao->estado_indice;
+		}
+	}
+
+	// Copia os estados do sub-afd para o afd principal.
+	memcpy(&afd->estados[transicao->estado_indice], sub->estados, sub->estados_quantidade * sizeof *sub->estados);
 
 	// Como o valor da nova transição foi copiado para o vetor do estado,
 	// podemos librerar a memória.
@@ -141,11 +177,13 @@ fim:
 
 void print_afd(const afd_t *afd) {
 	printf("============ AFD ===========\n");
-	printf("Estado inicial: %d\n", afd->estado_inicial - afd->estados + 1);
+	printf("Estado inicial: %ld\n", afd->estado_inicial - afd->estados + 1);
 	for (int i = 0; i < afd->estados_quantidade; i++) {
 		const afd_estado_t *estado = &afd->estados[i];
 
-		printf("ESTADO %d/%d (%d transições)\n", i + 1, afd->estados_quantidade, estado->transicoes_quantidade);
+		printf("ESTADO %d/%zu (%zu transições) %s\n",
+			i + 1, afd->estados_quantidade, estado->transicoes_quantidade,
+			estado->final ? "FINAL" : "");
 
 		for (int j = 0; j < estado->transicoes_quantidade; j++) {
 			const afd_transicao_t *transicao = &estado->transicoes[j];

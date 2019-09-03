@@ -10,6 +10,7 @@
 #ifndef AFD_H
 #define AFD_H
 
+#include <stdbool.h>
 #include <stdint.h>
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <pcre2.h>
@@ -53,7 +54,9 @@ typedef struct afd_estado_t {
 	size_t transicoes_quantidade;
 	size_t transicoes_capacidade;
 
-	void *(*gerar_dado)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+	bool final;
+
+	void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 } afd_estado_t;
 
 typedef struct afd_t {
@@ -68,6 +71,16 @@ typedef struct afd_t {
  * TODO
  */
 int afd_init(afd_t *afd, size_t quantidade_estados, int32_t estado_inicial);
+
+/**
+ * TODO
+ */
+afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna));
+
+/**
+ * TODO
+ */
+void afd_liberar_estado(afd_estado_t *estado);
 
 /**
  * Procura a transição na lista de transições do estado.
@@ -86,6 +99,6 @@ afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char
 /**
  * TODO
  */
-int afd_add_estado(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_estado_t *estado_ligacao);
+int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_t *sub);
 
 #endif // AFD_H

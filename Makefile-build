@@ -46,7 +46,7 @@ COMPILE := $(CC) $(CFLAGS) $(INCLUDE_PATHS)
 
 #FILEs
 #---------------Source----------------#
-SRCS := $(wildcard $(SDIR)/*.c)
+SRCS := $(wildcard $(SDIR)/*.c) $(wildcard $(SDIR)/*/*.c)
 
 #---------------Object----------------#
 OBJS := $(SRCS:$(SDIR)/%.c=$(ODIR)/$(TARGET)/%.o)
@@ -75,7 +75,7 @@ dll: $(OBJS)
 -include $(DEPS)
 
 $(ODIR)/$(TARGET)/%.o: $(SDIR)/%.c
-	@mkdir -p $(ODIR)/$(TARGET)
+	@mkdir -p $(@D)
 	$(COMPILE) -c $< -o $@ $(LOADLIBES)
 
 
