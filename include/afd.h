@@ -51,8 +51,6 @@ typedef struct afd_transicao_t {
 
 typedef struct afd_estado_t {
 	afd_transicao_t *transicoes;
-	size_t transicoes_quantidade;
-	size_t transicoes_capacidade;
 
 	bool final;
 

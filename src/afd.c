@@ -54,14 +54,17 @@ afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_qua
 
 	// Transições.
 	estado.transicoes = NULL;
-	estado.transicoes_capacidade = estado.transicoes_quantidade = transicoes_quantidade;
 	if (transicoes != NULL && transicoes_quantidade > 0) {
-		PMALLOC(estado.transicoes, estado.transicoes_capacidade);
+		plist_create(estado.transicoes, transicoes_quantidade);
 
 		for (size_t i = 0; i < transicoes_quantidade; i++) {
-			estado.transicoes[i].estado_indice = transicoes[i].estado_indice;
-			estado.transicoes[i].pattern.name = strdup(transicoes[i].pattern.name);
-			estado.transicoes[i].pattern.compiled = regex_compile(transicoes[i].pattern.str, PCRE2_ZERO_TERMINATED);
+			afd_transicao_t transicao;
+
+			transicao.estado_indice = transicoes[i].estado_indice;
+			transicao.pattern.name = strdup(transicoes[i].pattern.name);
+			transicao.pattern.compiled = regex_compile(transicoes[i].pattern.str, PCRE2_ZERO_TERMINATED);
+
+			plist_insert(estado.transicoes, transicao, i);
 		}
 	}
 
@@ -69,7 +72,7 @@ afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_qua
 }
 
 void afd_liberar_estado(afd_estado_t *estado) {
-	for (size_t i = 0; i < estado->transicoes_quantidade; i++) {
+	for (size_t i = 0; i < plist_len(estado->transicoes); i++) {
 		free(estado->transicoes[i].pattern.name);
 		pcre2_code_free(estado->transicoes[i].pattern.compiled);
 	}
@@ -77,7 +80,7 @@ void afd_liberar_estado(afd_estado_t *estado) {
 }
 
 int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char **cursor) {
-	for (size_t i = 0; i < estado->transicoes_quantidade; i++) {
+	for (size_t i = 0; i < plist_len(estado->transicoes); i++) {
 		const afd_transicao_t *transicao = &estado->transicoes[i];
 
 		// Faz o casamento e anda no texto.
@@ -95,7 +98,7 @@ int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char **c
 }
 
 afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char *transicao_id) {
-	for (int32_t i = 0; i < estado->transicoes_quantidade; i++) {
+	for (int32_t i = 0; i < plist_len(estado->transicoes); i++) {
 		afd_transicao_t *transicao = &estado->transicoes[i];
 
 		if (strcmp(transicao->pattern.name, transicao_id) == 0) {
@@ -123,8 +126,8 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 		if (transicao == NULL) {
 			afd_t novo_sub;
 			afd_init(&novo_sub, 1);
-			novo_sub.estados[0].transicoes_capacidade = 1;
-			PCALLOC(novo_sub.estados[0].transicoes, novo_sub.estados[0].transicoes_capacidade);
+			plist_create(novo_sub.estados[0].transicoes, 1);
+			memset(novo_sub.estados[0].transicoes, 0, sizeof *novo_sub.estados[0].transicoes);
 
 			res = afd_add_subautomato(afd, transicoes, i + 1, &novo_sub);
 
@@ -155,18 +158,12 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 	transicao->estado_indice = plist_len(afd->estados);
 
 	// Adicionamos a nova transição no último estado.
-	estado_atual->transicoes_quantidade++;
-	// Alocamos mais memória para as transições, se necessário.
-	if (estado_atual->transicoes_quantidade > estado_atual->transicoes_capacidade) {
-		estado_atual->transicoes_capacidade += AFD_CAPACIDADE_INC;
-		PREALLOC(estado_atual->transicoes, estado_atual->transicoes_capacidade);
-	}
-	estado_atual->transicoes[estado_atual->transicoes_quantidade - 1] = *transicao;
+	plist_append(estado_atual->transicoes, *transicao);
 
 	// Os novos estados são adicionados enquanto o índice de
 	// suas transições é consertado.
 	for (i = 0; i < plist_len(sub->estados); i++) {
-		for (int32_t j = 0; j < sub->estados[i].transicoes_quantidade; j++) {
+		for (int32_t j = 0; j < plist_len(sub->estados[i].transicoes); j++) {
 			sub->estados[i].transicoes[j].estado_indice += transicao->estado_indice;
 		}
 
@@ -189,13 +186,13 @@ void afd_print(const afd_t *afd) {
 		const afd_estado_t *estado = &afd->estados[i];
 
 		printf("ESTADO %d/%zu (%zu transições) %s\n",
-			i + 1, plist_len(afd->estados), estado->transicoes_quantidade,
+			i + 1, plist_len(afd->estados), plist_len(estado->transicoes),
 			estado->final ? "FINAL" : "");
 
-		for (int j = 0; j < estado->transicoes_quantidade; j++) {
+		for (int j = 0; j < plist_len(estado->transicoes); j++) {
 			const afd_transicao_t *transicao = &estado->transicoes[j];
 
-			printf("\t%d/%zu \t %d => %d \t %s\n", j + 1, estado->transicoes_quantidade, i + 1, transicao->estado_indice + 1, transicao->pattern.name);
+			printf("\t%d/%zu \t %d => %d \t %s\n", j + 1, plist_len(estado->transicoes), i + 1, transicao->estado_indice + 1, transicao->pattern.name);
 		}
 
 		printf("\n");

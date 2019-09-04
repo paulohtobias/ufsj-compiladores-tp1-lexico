@@ -71,6 +71,7 @@ typedef struct plist_t {
 		plist_t *plist = __PLIST_L2P(list); \
 		if (list == NULL) { \
 			plist_create(list, PLIST_CAPACITY_INCREMENT); \
+			plist = __PLIST_L2P(list); \
 		} else if (index >= plist->capacity) { \
 			__PLIST_RESIZE(plist, list, plist->capacity + PLIST_CAPACITY_INCREMENT); \
 		} \
