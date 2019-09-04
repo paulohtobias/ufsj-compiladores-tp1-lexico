@@ -7,9 +7,11 @@
  * paulohtobias@outlook.com
  */
 
-#include "token.h"
+#include <stdio.h>
 #include <string.h>
+#include "token.h"
 #include "utils.h"
+#include "plist.h"
 
 /// Descrição dos códigos.
 #define TOKEN_CODIGO(cod, nome, descricao) descricao,
@@ -28,10 +30,16 @@ TOKEN_CODIGOS
 token_t *lista_tokens = NULL;
 
 /// Tabela de símbolos.
-token_t *tabela_simbolos[TK_COUNT];
+size_t *tabela_simbolos[TK_COUNT];
 
 
 int token_init(afd_t *afd) {
+	// Inicializando a tabela de símbolos.
+	for (int i = 0; i < TK_COUNT; i++) {
+		tabela_simbolos[i] = NULL;
+	}
+
+
 	#define TOKEN_CODIGO(cod, nome, descricao) token_ ## nome ## _init(afd);
 	TOKEN_CODIGOS
 	#undef TOKEN_CODIGO
@@ -63,4 +71,27 @@ token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t 
 	token.valor.to_str = NULL;
 
 	return token;
+}
+
+void token_adicionar(const token_t *token) {
+	// Adiciona na lista de tokens.
+	plist_append(lista_tokens, *token);
+
+	// Adiciona na tabela de símbolos correspondente.
+	plist_append(tabela_simbolos[token->tipo], plist_len(lista_tokens) - 1);
+}
+
+void token_print(const token_t *token) {
+	char *valor = NULL;
+	if (token->valor.to_str != NULL) {
+		// TODO
+	}
+	printf(
+		"TOKEN: %s\n"
+		"\tlinha: %u | coluna: %u\n"
+		"\tlexema: %s\n\n",
+		__token_codigo_str[token->tipo],
+		token->contexto.posicao.linha, token->contexto.posicao.coluna,
+		token->contexto.lexema
+	);
 }

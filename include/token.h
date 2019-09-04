@@ -16,14 +16,7 @@
 
 // X-macro para gerar os códigos de token.
 #define TOKEN_CODIGOS \
-	TOKEN_CODIGO(TK_ID, identificador, "Identificador.") /*\
-	TOKEN_CODIGO(TK_KW, palavra_chave, "Palavra-chave.") \
-	TOKEN_CODIGO(TK_CNST, constante, "Contante.") \
-	TOKEN_CODIGO(TK_OP, operador, "Operador.") \
-	TOKEN_CODIGO(TK_EXT, extra, "Extra.") \
-	TOKEN_CODIGO(TK_PP, preprocessador, "Pré-processador.") \
-	TOKEN_CODIGO(TK_CMT, comentario, "Comentário.")*/
-
+	TOKEN_CODIGO(TK_ID, identificador, "Identificador") \
 
 /// Tipos básicos de token.
 #define TOKEN_CODIGO(cod, nome, descricao) cod,
@@ -61,8 +54,12 @@ typedef struct token_t {
 /// Lista de tokens.
 extern token_t *lista_tokens;
 
-/// Tabela de símbolos.
-extern token_t *tabela_simbolos[TK_COUNT];
+/**
+ * Tabela de símbolos. Armazena o índice do token na
+ * lista de tokens para evitar redundância e reduzir
+ * o gasto de memória.
+ */
+size_t *tabela_simbolos[TK_COUNT];
 
 
 /**
@@ -81,5 +78,10 @@ token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t 
  * tabela de símbolos correspondente.
  */
 void token_adicionar(const token_t *token);
+
+/**
+ * TODO
+ */
+void token_print(const token_t *token);
 
 #endif // TOKEN_H

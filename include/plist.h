@@ -46,7 +46,7 @@ typedef struct plist_t {
 
 #define __PLIST_RESIZE(plist, list, new_capacity) \
 	do { \
-		plist = PLIST_REALLOC(plist, new_capacity * sizeof *list + sizeof *plist); \
+		plist = PLIST_REALLOC(plist, (new_capacity) * sizeof *(list) + sizeof *plist); \
 		plist->capacity = new_capacity; \
 		plist->data = list = (void *) plist + sizeof *plist; \
 	} while(0);

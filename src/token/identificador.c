@@ -64,5 +64,5 @@ void token_identificador_adicionar(const char *lexema, size_t comprimento, int32
 		token.contexto.lexema
 	);
 
-	// TODO: adicionar nas listas.
+	token_adicionar(&token);
 }
