@@ -12,7 +12,7 @@
 int lexico_parse(const char *src) {
 	// Inicializando o AFD.
 	afd_t afd;
-	afd_init(&afd, 1, 0);
+	afd_init(&afd, 1);
 
 	// Inicializando os módulos de token.
 	token_init(&afd);
@@ -25,7 +25,7 @@ int lexico_parse(const char *src) {
 	// DELETE-ME
 	afd_print(&afd);
 
-	afd_estado_t *estado_atual = &afd.estados[afd.estado_inicial - afd.estados];
+	afd_estado_t *estado_atual = afd.estados;
 	while (*src != '\0') {
 		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, &src);
 		if (estado_indice >= 0) {
@@ -56,7 +56,7 @@ int lexico_parse(const char *src) {
 			sentinela = src;
 
 			// Estado atual volta a ser o inicial.
-			estado_atual = &afd.estados[afd.estado_inicial - afd.estados];
+			estado_atual = afd.estados;
 		}
 	}
 	return 0;

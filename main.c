@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "lexico.h"
 #include "utils.h"
+#include "plist.h"
 
 int main(int argc, char const *argv[]) {
 	const char *filename = "main.c";
@@ -9,11 +10,11 @@ int main(int argc, char const *argv[]) {
 	}
 
 	size_t comprimento;
-	char *emoji_💩_no_meio = file_to_str(filename, &comprimento);
+	char *c2c = file_to_str(filename, &comprimento);
 
-	lexico_parse(emoji_💩_no_meio);
+	lexico_parse(c2c);
 
-	free(emoji_💩_no_meio);
+	free(c2c);
 
 	return 0;
 }

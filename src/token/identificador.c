@@ -21,7 +21,7 @@ int token_identificador_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_id;
-	afd_init(&afd_id, 1, 0);
+	afd_init(&afd_id, 1);
 
 	// Transição de ligação. Não pode haver números.
 	afd_transicao_pattern_t transicao_inicial = {

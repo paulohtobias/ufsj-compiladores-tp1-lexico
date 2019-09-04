@@ -7,9 +7,11 @@
  * paulohtobias@outlook.com
  */
 
+#include <stdio.h>
 #include <string.h>
 #include "afd.h"
 #include "utils.h"
+#include "plist.h"
 
 #define AFD_CODIGO(cod, msg) msg,
 const char __afd_msgs[][128] = {
@@ -25,20 +27,21 @@ const char *afd_get_erro(int cod) {
 	}
 }
 
-//afd_t *g_afd_lexico = NULL;
+int afd_init(afd_t *afd, size_t quantidade_estados) {
+	afd->estados = NULL;
 
-#include <stdio.h>
-void afd_print(const afd_t *afd);
+	plist_create(afd->estados, quantidade_estados);
 
-int afd_init(afd_t *afd, size_t quantidade_estados, int32_t estado_inicial) {
-	if (estado_inicial >= quantidade_estados) {
-		return AFD_EINVAL;
-	}
+	// Zerando todos os estados.
+	memset(afd->estados, 0, quantidade_estados * sizeof *afd->estados);
 
-	afd->estados_quantidade = 1; // Estado inicial.
-	afd->estados_capacidade = quantidade_estados;
-	PCALLOC(afd->estados, afd->estados_capacidade);
-	afd->estado_inicial = afd->estados + estado_inicial;
+	// Inicializando o estado inicial
+	plist_append(
+		afd->estados,
+		afd_criar_estado(
+			NULL, 0, false, NULL
+		)
+	);
 
 	return AFD_OK;
 }
@@ -108,8 +111,8 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 
 	afd_transicao_t *transicao = NULL;
 
-	// Pegando o estado inicial usando aritmética de ponteiros.
-	afd_estado_t *estado_atual = &afd->estados[afd->estado_inicial - afd->estados];
+	// Estado inicial.
+	afd_estado_t *estado_atual = afd->estados;
 
 	int32_t i = 0;
 	for (i = 0; i < transicoes_quantidade - 1; i++) {
@@ -119,8 +122,7 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 		// Se a transição intermediária não existir, então criamos um novo estado.
 		if (transicao == NULL) {
 			afd_t novo_sub;
-			novo_sub.estados_capacidade = novo_sub.estados_quantidade = 1;
-			PCALLOC(novo_sub.estados, novo_sub.estados_capacidade);
+			afd_init(&novo_sub, 1);
 			novo_sub.estados[0].transicoes_capacidade = 1;
 			PCALLOC(novo_sub.estados[0].transicoes, novo_sub.estados[0].transicoes_capacidade);
 
@@ -150,8 +152,7 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 	PCALLOC(transicao, 1);
 	transicao->pattern.name = strdup(transicoes[i].name);
 	transicao->pattern.compiled = regex_compile(transicoes[i].str, PCRE2_ZERO_TERMINATED);
-	transicao->estado_indice = afd->estados_quantidade;
-	afd->estados_quantidade += sub->estados_quantidade;
+	transicao->estado_indice = plist_len(afd->estados);
 
 	// Adicionamos a nova transição no último estado.
 	estado_atual->transicoes_quantidade++;
@@ -162,26 +163,15 @@ int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, i
 	}
 	estado_atual->transicoes[estado_atual->transicoes_quantidade - 1] = *transicao;
 
-	// Alocamos mais memória para os estados, se necessário.
-	if (afd->estados_quantidade >= afd->estados_capacidade) {
-		afd->estados_capacidade += AFD_CAPACIDADE_INC;
-
-		// Como o endereço do vetor de estados pode mudar, precisamos manter
-		// o estado_inicial atualizado.
-		size_t estado_inicial_indice = afd->estado_inicial - afd->estados;
-		PREALLOC(afd->estados, afd->estados_capacidade);
-		afd->estado_inicial = &afd->estados[estado_inicial_indice];
-	}
-
-	// Arruma o índice de todas as transições do sub-autômato.
-	for (i = 0; i < sub->estados_quantidade; i++) {
+	// Os novos estados são adicionados enquanto o índice de
+	// suas transições é consertado.
+	for (i = 0; i < plist_len(sub->estados); i++) {
 		for (int32_t j = 0; j < sub->estados[i].transicoes_quantidade; j++) {
 			sub->estados[i].transicoes[j].estado_indice += transicao->estado_indice;
 		}
-	}
 
-	// Copia os estados do sub-afd para o afd principal.
-	memcpy(&afd->estados[transicao->estado_indice], sub->estados, sub->estados_quantidade * sizeof *sub->estados);
+		plist_insert(afd->estados, sub->estados[i], transicao->estado_indice + i);
+	}
 
 	// Como o valor da nova transição foi copiado para o vetor do estado,
 	// podemos librerar a memória.
@@ -195,12 +185,11 @@ fim:
 
 void afd_print(const afd_t *afd) {
 	printf("============ AFD ===========\n");
-	printf("Estado inicial: %ld\n", afd->estado_inicial - afd->estados + 1);
-	for (int i = 0; i < afd->estados_quantidade; i++) {
+	for (int i = 0; i < plist_len(afd->estados); i++) {
 		const afd_estado_t *estado = &afd->estados[i];
 
 		printf("ESTADO %d/%zu (%zu transições) %s\n",
-			i + 1, afd->estados_quantidade, estado->transicoes_quantidade,
+			i + 1, plist_len(afd->estados), estado->transicoes_quantidade,
 			estado->final ? "FINAL" : "");
 
 		for (int j = 0; j < estado->transicoes_quantidade; j++) {

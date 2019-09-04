@@ -61,16 +61,12 @@ typedef struct afd_estado_t {
 
 typedef struct afd_t {
 	afd_estado_t *estados;
-	size_t estados_quantidade;
-	size_t estados_capacidade;
-
-	const afd_estado_t *estado_inicial;
 } afd_t;
 
 /**
  * TODO
  */
-int afd_init(afd_t *afd, size_t quantidade_estados, int32_t estado_inicial);
+int afd_init(afd_t *afd, size_t quantidade_estados);
 
 /**
  * TODO
