@@ -89,19 +89,23 @@ void token_print(FILE *out, const token_t *token) {
 		subtipo = token->subtipo_to_str(token->subtipo);
 	}
 
-	char *valor = NULL;
+	char *_valor = NULL;
 	if (token->valor.to_str != NULL) {
-		// TODO
+		_valor = token->valor.to_str(token->valor.dados, token->valor.tamanho);
 	}
 
 	fprintf(out,
 		"TOKEN: %s\n"
 		"\tSubtipo: %s\n"
-		"\tlinha: %u | coluna: %u\n"
-		"\tlexema: %s\n\n",
+		"\tLinha: %u | Coluna: %u\n"
+		"\tLexema: %s\n"
+		"\tValor: %s\n\n",
 		__token_codigo_str[token->tipo],
 		subtipo,
 		token->contexto.posicao.linha, token->contexto.posicao.coluna,
-		token->contexto.lexema
+		token->contexto.lexema,
+		_valor != NULL ? _valor : ""
 	);
+
+	free(_valor);
 }

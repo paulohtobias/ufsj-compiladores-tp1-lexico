@@ -62,7 +62,7 @@ typedef struct token_t {
 		void *dados;
 		size_t tamanho;
 
-		char *(*to_str)(void *, size_t);
+		char *(*to_str)(const void *, size_t);
 	} valor;
 
 	const char *(*subtipo_to_str)(uint32_t);

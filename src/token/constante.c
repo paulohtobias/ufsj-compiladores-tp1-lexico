@@ -7,6 +7,7 @@
  * paulohtobias@outlook.com
  */
 
+#include <string.h>
 #include <ctype.h>
 #include "token.h"
 #include "utils.h"
@@ -47,6 +48,11 @@ CONSTANTE_SUBTIPOS
 
 /// Funções adicionar.
 #define CONSTANTE_SUBTIPO(cod, nome, str) void token_constante_ ## nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+CONSTANTE_SUBTIPOS
+#undef CONSTANTE_SUBTIPO
+
+/// Funções to_str
+#define CONSTANTE_SUBTIPO(cod, nome, str) char *token_constante_ ## nome ## _to_str(const void *dados, size_t comprimento);
 CONSTANTE_SUBTIPOS
 #undef CONSTANTE_SUBTIPO
 
@@ -175,6 +181,7 @@ void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32
 
 	token.valor.tamanho = comprimento -1;
 	PMALLOC(token.valor.dados, token.valor.tamanho);
+	token.valor.to_str = token_constante_str_to_str;
 
 	// Ignorando as aspas iniciais.
 	lexema++;
@@ -186,13 +193,13 @@ void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32
 			((char *) token.valor.dados)[i] = *lexema;
 		}
 
-		lexema += utf8_simbolo_comprimento(lexema);
+		lexema++;
 	}
 	((char *) token.valor.dados)[i++] = '\0';
 
 	if (i < token.valor.tamanho) {
 		token.valor.tamanho = i;
-		PMALLOC(token.valor.dados, token.valor.tamanho);
+		PREALLOC(token.valor.dados, token.valor.tamanho);
 	}
 
 	token_adicionar(&token);
@@ -204,6 +211,7 @@ void token_constante_char_adicionar(const char *lexema, size_t comprimento, int3
 
 	token.valor.tamanho = 1; // sizeof(char) é sempre 1.
 	PMALLOC(token.valor.dados, 1);
+	token.valor.to_str = token_constante_char_to_str;
 
 	// Ignorando as aspas iniciais.
 	lexema++;
@@ -221,6 +229,19 @@ void token_constante_char_adicionar(const char *lexema, size_t comprimento, int3
 	token_adicionar(&token);
 }
 
+
+/// to_str
+char *token_constante_str_to_str(const void *dados, size_t comprimento) {
+	return strdup(dados);
+}
+char *token_constante_char_to_str(const void *dados, size_t comprimento) {
+	char *str = malloc(2);
+
+	str[0] = *((char *) dados);
+	str[1] = '\0';
+
+	return str;
+}
 
 static void incompleto(char simbolo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);

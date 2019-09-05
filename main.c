@@ -49,6 +49,12 @@ int main(int argc, char const *argv[]) {
 		fclose(out);
 	}
 
+	// Exibe "Fim" na tela.
+	putchar('\x46');
+	putchar('\151');
+	putchar('m');
+	putchar('\n');
+
 fim:
 	// TODO: lexico_finalizar();
 
