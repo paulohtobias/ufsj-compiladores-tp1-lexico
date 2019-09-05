@@ -1,4 +1,4 @@
-   #include <stdio.h>
+#include <stdio.h>
 #include "lexico.h"
 #include "utils.h"
 #include "plist.h"

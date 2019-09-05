@@ -61,6 +61,7 @@ token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t 
 	// Tipo e sub-tipo.
 	token.tipo = tipo;
 	token.subtipo = subtipo;
+	token.subtipo_to_str = NULL;
 
 	// Lexema.
 	token.contexto.comprimento = comprimento;
@@ -89,15 +90,22 @@ void token_adicionar(const token_t *token) {
 }
 
 void token_print(const token_t *token) {
+	const char * subtipo = "N/A";
+	if (token->subtipo_to_str != NULL) {
+		subtipo = token->subtipo_to_str(token->subtipo);
+	}
+
 	char *valor = NULL;
 	if (token->valor.to_str != NULL) {
 		// TODO
 	}
 	printf(
 		"TOKEN: %s\n"
+		"\tSubtipo: %s\n"
 		"\tlinha: %u | coluna: %u\n"
 		"\tlexema: %s\n\n",
 		__token_codigo_str[token->tipo],
+		subtipo,
 		token->contexto.posicao.linha, token->contexto.posicao.coluna,
 		token->contexto.lexema
 	);

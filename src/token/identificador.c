@@ -62,6 +62,7 @@ void token_identificador_adicionar(const char *lexema, size_t comprimento, int32
 	if (palavra_chave_index >= 0) {
 		token.tipo = TK_KW;
 		token.subtipo = palavra_chave_index;
+		token.subtipo_to_str = token_palavra_chave_subtipo_str;
 	}
 
 	token_adicionar(&token);
