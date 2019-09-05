@@ -20,7 +20,7 @@ const char __afd_msgs[][128] = {
 #undef AFD_CODIGO
 
 const char *afd_get_erro(int cod) {
-	if (cod >= 0 && cod < sizeof __afd_msgs / sizeof __afd_msgs[0]) {
+	if (cod >= 0 && cod < ARR_TAMANHO(__afd_msgs)) {
 		return __afd_msgs[cod];
 	} else {
 		return "Código de erro inválido.";

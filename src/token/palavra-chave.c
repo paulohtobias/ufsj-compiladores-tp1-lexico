@@ -8,6 +8,7 @@
  */
 
 #include "token/palavra-chave.h"
+#include "utils.h"
 
 // X-Macro pra cada palavra chave.
 #define PALAVRA_CHAVE_SUBTIPOS \
@@ -50,12 +51,14 @@ enum {
 	PALAVRA_CHAVE_SUBTIPOS
 };
 #undef PALAVRA_CHAVE_SUBTIPO
+
+/// Tipos de palavra-chave em string.
 #define PALAVRA_CHAVE_SUBTIPO(cod, str) str,
 const char __palavras_chave[][16] = {
 	PALAVRA_CHAVE_SUBTIPOS
 };
 #undef PALAVRA_CHAVE_SUBTIPO
-size_t __palavras_chave_quantidade = sizeof __palavras_chave / sizeof __palavras_chave[0];
+size_t __palavras_chave_quantidade = ARR_TAMANHO(__palavras_chave);
 
 int token_palavra_chave_init(afd_t *afd) {
 	return 0;

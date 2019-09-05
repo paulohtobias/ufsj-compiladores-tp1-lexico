@@ -45,8 +45,8 @@ typedef struct afd_transicao_pattern_t {
 } afd_transicao_pattern_t;
 
 typedef struct afd_transicao_t {
-	afd_transicao_pattern_t pattern;
 	int32_t estado_indice;
+	afd_transicao_pattern_t pattern;
 } afd_transicao_t;
 
 typedef struct afd_estado_t {

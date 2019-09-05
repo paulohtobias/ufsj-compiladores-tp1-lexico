@@ -15,11 +15,13 @@
 #define PCRE2_CODE_UNIT_WIDTH 8
 #include <pcre2.h>
 
-#define REGEX_OPTIONS PCRE2_UTF | PCRE2_ANCHORED | PCRE2_NO_AUTO_CAPTURE
+#define ARR_TAMANHO(arr) (sizeof arr / sizeof arr[0])
 
 #define PMALLOC(arr, quantidade) arr = malloc(quantidade * sizeof *arr)
 #define PCALLOC(arr, quantidade) arr = calloc(quantidade, sizeof *arr)
 #define PREALLOC(arr, quantidade) arr = realloc(arr, quantidade * sizeof *arr)
+
+#define REGEX_OPTIONS PCRE2_UTF | PCRE2_ANCHORED | PCRE2_NO_AUTO_CAPTURE
 
 char *file_to_str(const char *filename, size_t *len);
 

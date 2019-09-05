@@ -12,6 +12,30 @@
 #include "lexico.h"
 #include "utils.h"
 
+afd_t *afd_lexico = NULL;
+int lexico_init() {
+	// TODO: liberar o afd caso aconteça algum erro.
+	int res = 0;
+
+	PMALLOC(afd_lexico, 1);
+
+	if ((res = afd_init(afd_lexico, 1)) != AFD_OK) {
+		fprintf(stderr, "Erro ao inicializar o AFD: %s\n", afd_get_erro(res));
+		return res;
+	}
+
+	// Inicializando os módulos de token.
+	if ((res = token_init(afd_lexico)) != 0) {
+		return 1;
+	}
+
+	// DELETE-ME
+	afd_print(afd_lexico);
+	//exit(0);
+
+	return 0;
+}
+
 /// Avança no código fonte.
 static int avancar_cursor(char **src, int8_t comprimento, int32_t *linha, int32_t *coluna, token_contexto_t *contexto) {
 	if (comprimento <= 0) {
@@ -40,21 +64,6 @@ static void ignorar_espacos(char **src, int32_t *linha, int32_t *coluna) {
 	}
 }
 
-afd_t *afd_lexico = NULL;
-int lexico_init() {
-	// TODO: liberar o afd caso aconteça algum erro.
-	int res = 0;
-
-	PMALLOC(afd_lexico, 1);
-
-	if ((res = afd_init(afd_lexico, 1))) {
-		return res;
-	}
-
-	// Inicializando os módulos de token.
-	return token_init(afd_lexico);
-}
-
 int lexico_parse(const char *nome_arquivo) {
 	// Carregando o arquivo para a memória.
 	size_t comprimento;
@@ -80,9 +89,6 @@ int lexico_parse(const char *nome_arquivo) {
 	contexto.comprimento = 0;
 	contexto.posicao.linha = linha;
 	contexto.posicao.coluna = coluna;
-
-	// DELETE-ME
-	afd_print(afd_lexico);
 
 	// Estado inicial.
 	afd_estado_t *estado_atual = afd_lexico->estados;

@@ -25,23 +25,14 @@ int token_identificador_init(afd_t *afd) {
 
 	// Transição de ligação. Não pode haver números.
 	afd_transicao_pattern_t transicao_inicial = {
-		"[a-zA-Z_$]",
-		"[" identificador_letra_pattern "]",
-		NULL
+		"[a-zA-Z_$]", "[" identificador_letra_pattern "]", NULL
 	};
 
 	// Transições.
 	afd_transicao_t transicoes[] = {
-		{
-			{
-				"[a-zA-Z0-9_$]",
-				"[" identificador_letra_pattern "\\d]",
-				NULL
-			},
-			0
-		}
+		{0, {"[a-zA-Z0-9_$]", "[" identificador_letra_pattern "\\d]", NULL}}
 	};
-	afd_id.estados[0] = afd_criar_estado(transicoes, sizeof transicoes / sizeof transicoes[0], true, token_identificador_adicionar);
+	afd_id.estados[0] = afd_criar_estado(transicoes, ARR_TAMANHO(transicoes), true, token_identificador_adicionar);
 
 	afd_print(&afd_id);
 
