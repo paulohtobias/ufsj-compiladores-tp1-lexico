@@ -47,7 +47,14 @@ int token_init(afd_t *afd) {
 	return 0;
 }
 
-/// FUNÇÕES
+const char *token_tipo_str(uint32_t tipo) {
+	if (tipo < TK_COUNT) {
+		return __token_codigo_str[tipo];
+	}
+
+	return "";
+}
+
 token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token;
 

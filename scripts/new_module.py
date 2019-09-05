@@ -1,6 +1,7 @@
 import argparse
 import subprocess
 import sys
+import re
 
 PROJECT_NAME = "PCC - Paulo C Compiler"
 
@@ -100,10 +101,14 @@ class Name:
 		self.header = self.lower + ".h"
 		self.source = self.lower + ".c"
 
-		self.guard = self.upper + "_H"
+		self.guard = self.replace_non_alpha(self.upper) + "_H"
 
-		self.struct = self.lower + "_t"
-		self.instance = self.lower
+		self.struct = self.replace_non_alpha(self.lower) + "_t"
+		self.instance = self.replace_non_alpha(self.lower)
+
+	@staticmethod
+	def replace_non_alpha(name):
+		return re.sub("\W", "_", name)
 
 class Attribute:
 	indent_level = 1

@@ -17,6 +17,7 @@
 // X-macro para gerar os códigos de token.
 #define TOKEN_CODIGOS \
 	TOKEN_CODIGO(TK_ID, identificador, "Identificador") \
+	TOKEN_CODIGO(TK_KW, palavra_chave, "Palavra-chave") \
 
 /// Tipos básicos de token.
 #define TOKEN_CODIGO(cod, nome, descricao) cod,
@@ -28,13 +29,13 @@ enum {
 #undef TOKEN_CODIGO
 
 typedef struct token_contexto_t {
-		char *lexema;
-		size_t comprimento;
+	char *lexema;
+	size_t comprimento;
 
-		struct {
-			int32_t linha;
-			int32_t coluna;
-		} posicao;
+	struct {
+		int32_t linha;
+		int32_t coluna;
+	} posicao;
 } token_contexto_t;
 
 typedef struct token_t {
@@ -69,6 +70,12 @@ size_t *tabela_simbolos[TK_COUNT];
  * de token existente.
  */
 int token_init(afd_t *afd);
+
+/**
+ * Retorna a string correspondente ao tipo do token.
+ * Se o tipo for inválido, retorna uma string vazia.
+ */
+const char *token_tipo_str(uint32_t tipo);
 
 /**
  * Função genérica para criar um novo token.
