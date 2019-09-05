@@ -7,7 +7,6 @@
  * paulohtobias@outlook.com
  */
 
-#include <stdio.h>
 #include <ctype.h>
 #include "token.h"
 #include "utils.h"

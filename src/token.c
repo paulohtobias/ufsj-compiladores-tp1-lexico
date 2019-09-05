@@ -7,7 +7,6 @@
  * paulohtobias@outlook.com
  */
 
-#include <stdio.h>
 #include <string.h>
 #include "token.h"
 #include "utils.h"
@@ -84,7 +83,7 @@ void token_adicionar(const token_t *token) {
 	plist_append(tabela_simbolos[token->tipo], plist_len(lista_tokens) - 1);
 }
 
-void token_print(const token_t *token) {
+void token_print(FILE *out, const token_t *token) {
 	const char * subtipo = "N/A";
 	if (token->subtipo_to_str != NULL) {
 		subtipo = token->subtipo_to_str(token->subtipo);
@@ -94,7 +93,8 @@ void token_print(const token_t *token) {
 	if (token->valor.to_str != NULL) {
 		// TODO
 	}
-	printf(
+
+	fprintf(out,
 		"TOKEN: %s\n"
 		"\tSubtipo: %s\n"
 		"\tlinha: %u | coluna: %u\n"

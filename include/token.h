@@ -10,6 +10,7 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
+#include <stdio.h>
 #include <stdint.h>
 #include <stddef.h>
 #include "afd.h"
@@ -105,6 +106,6 @@ void token_adicionar(const token_t *token);
 /**
  * TODO
  */
-void token_print(const token_t *token);
+void token_print(FILE *out, const token_t *token);
 
 #endif // TOKEN_H
