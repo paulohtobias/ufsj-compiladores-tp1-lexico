@@ -85,10 +85,10 @@ int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char **c
 
 		// Faz o casamento e anda no texto.
 		size_t offset = regex_match(*cursor, transicao->pattern.compiled);
-		(*cursor) += offset;
 
 		// Se houve um casamento, então retornamos o estado.
 		if (offset > 0) {
+			(*cursor) += offset - 1;
 			return transicao->estado_indice;
 		}
 	}

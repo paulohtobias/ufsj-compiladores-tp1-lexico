@@ -27,11 +27,7 @@ enum {
 };
 #undef TOKEN_CODIGO
 
-typedef struct token_t {
-	uint32_t tipo;
-	uint32_t subtipo;
-
-	struct {
+typedef struct token_contexto_t {
 		char *lexema;
 		size_t comprimento;
 
@@ -39,7 +35,13 @@ typedef struct token_t {
 			int32_t linha;
 			int32_t coluna;
 		} posicao;
-	} contexto;
+} token_contexto_t;
+
+typedef struct token_t {
+	uint32_t tipo;
+	uint32_t subtipo;
+
+	token_contexto_t contexto;
 
 	struct {
 		void *dados;
