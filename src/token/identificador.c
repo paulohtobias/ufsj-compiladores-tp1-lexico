@@ -34,8 +34,6 @@ int token_identificador_init(afd_t *afd) {
 	};
 	afd_id.estados[0] = afd_criar_estado(transicoes, ARR_TAMANHO(transicoes), true, token_identificador_adicionar);
 
-	afd_print(&afd_id);
-
 	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_id)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
 

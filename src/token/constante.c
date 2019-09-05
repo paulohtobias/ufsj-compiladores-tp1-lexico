@@ -16,9 +16,9 @@
 // X-Macro pra cada tipo de constante.
 #define CONSTANTE_SUBTIPOS \
 	CONSTANTE_SUBTIPO(TK_CNST_STR, str, "string-literal") \
+	CONSTANTE_SUBTIPO(TK_CNST_CHAR, char, "char") \
 
 	/*
-	CONSTANTE_SUBTIPO(TK_CNST_CHAR, char, "char") \
 	CONSTANTE_SUBTIPO(TK_CNST_OCT, octal, "octal") \
 	CONSTANTE_SUBTIPO(TK_CNST_DEC, decimal, "decimal") \
 	CONSTANTE_SUBTIPO(TK_CNST_HEX, hexadecimal, "hexadecimal") \
@@ -60,6 +60,7 @@ const char *token_constante_subtipo_str(uint32_t subtipo);
 static char parse_escape_sequence(const char **src);
 
 
+/// init
 int token_constante_init(afd_t *afd) {
 	int res;
 	#define CONSTANTE_SUBTIPO(cod, nome, str) \
@@ -88,8 +89,8 @@ int token_constante_str_init(afd_t *afd) {
 
 	// Estado 0.
 	afd_transicao_t transicoes_0[] = {
-		{0, {"[^\"\\\\\\n]", "[^\"\\\n]", NULL}},
-		{1, {"\\", "\\", NULL}},
+		{0, {"[^\"\\\\\\n]", "[^\"\\\\\\n]", NULL}},
+		{1, {"\\", "\\\\", NULL}},
 		{2, {"\"", "\"", NULL}}
 	};
 	afd_str.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, token_constante_str_incompleta);
@@ -103,13 +104,11 @@ int token_constante_str_init(afd_t *afd) {
 		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, token_constante_str_incompleta)
 	)
 
-	// Estado 2.
+	// Estado Final.
 	plist_append(
 		afd_str.estados,
 		afd_criar_estado(NULL, 0, true, token_constante_str_adicionar)
 	);
-
-	afd_print(&afd_str);
 
 	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_str)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
@@ -118,9 +117,61 @@ int token_constante_str_init(afd_t *afd) {
 	return res;
 }
 
+int token_constante_char_init(afd_t *afd) {
+	int res;
+
+	afd_t afd_char;
+	afd_init(&afd_char, 4);
+
+	// Transição de ligação. Deve começar com aspas simples.
+	afd_transicao_pattern_t transicao_inicial = {
+		"'",
+		"'",
+		NULL
+	};
+
+	// Estado 0.
+	afd_transicao_t transicoes_0[] = {
+		{1, {"[^'\\\\\\n]", "[^\'\\\\\n]", NULL}},
+		{2, {"\\", "\\\\", NULL}}
+	};
+	afd_char.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, token_constante_char_incompleto);
+
+	// Estado 1.
+	afd_transicao_t transicoes_1[] = {
+		{3, {"'", "'"}}
+	};
+	plist_append(
+		afd_char.estados,
+		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, token_constante_char_incompleto)
+	)
+
+	// Estado 2.
+	afd_transicao_t transicoes_2[] = {
+		{2, {"[^'\\n]", "[^'\n]"}},
+		{3, {"'", "'"}}
+	};
+	plist_append(
+		afd_char.estados,
+		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, token_constante_char_incompleto)
+	)
+
+	// Estado Final.
+	plist_append(
+		afd_char.estados,
+		afd_criar_estado(NULL, 0, true, token_constante_char_adicionar)
+	);
+
+	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_char)) != AFD_OK) {
+		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+	}
+
+	return res;
+}
+
+/// adicionar
 void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token = token_criar(TK_CNST, TK_CNST_STR, lexema, comprimento, linha, coluna);
-
 	token.subtipo_to_str = token_constante_subtipo_str;
 
 	token.valor.tamanho = comprimento -1;
@@ -143,6 +194,29 @@ void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32
 	if (i < token.valor.tamanho) {
 		token.valor.tamanho = i;
 		PMALLOC(token.valor.dados, token.valor.tamanho);
+	}
+
+	token_adicionar(&token);
+}
+
+void token_constante_char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+	token_t token = token_criar(TK_CNST, TK_CNST_CHAR, lexema, comprimento, linha, coluna);
+	token.subtipo_to_str = token_constante_subtipo_str;
+
+	token.valor.tamanho = 1; // sizeof(char) é sempre 1.
+	PMALLOC(token.valor.dados, 1);
+
+	// Ignorando as aspas iniciais.
+	lexema++;
+	if (*lexema == '\\') {
+		*((char *) token.valor.dados) = parse_escape_sequence(&lexema);
+	} else {
+		*((char *) token.valor.dados) = *lexema;
+	}
+	lexema++;
+
+	if (*lexema != '\'') {
+		// TODO: warning: 'multi-character constant'.
 	}
 
 	token_adicionar(&token);
