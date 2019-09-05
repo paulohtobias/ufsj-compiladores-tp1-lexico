@@ -13,7 +13,7 @@
 #include "utils.h"
 
 /// Avança no código fonte.
-static int avancar_cursor(const char **src, int8_t comprimento, int32_t *linha, int32_t *coluna, token_contexto_t *contexto) {
+static int avancar_cursor(char **src, int8_t comprimento, int32_t *linha, int32_t *coluna, token_contexto_t *contexto) {
 	if (comprimento <= 0) {
 		comprimento = utf8_simbolo_comprimento(*src);
 	}
@@ -34,19 +34,38 @@ static int avancar_cursor(const char **src, int8_t comprimento, int32_t *linha, 
 	return comprimento;
 }
 
-static void ignorar_espacos(const char **src, int32_t *linha, int32_t *coluna) {
+static void ignorar_espacos(char **src, int32_t *linha, int32_t *coluna) {
 	while (isspace((unsigned int) **src)) {
 		avancar_cursor(src, -1, linha, coluna, NULL);
 	}
 }
 
-int lexico_parse(const char *src) {
-	// Inicializando o AFD.
-	afd_t afd;
-	afd_init(&afd, 1);
+afd_t *afd_lexico = NULL;
+int lexico_init() {
+	// TODO: liberar o afd caso aconteça algum erro.
+	int res = 0;
+
+	PMALLOC(afd_lexico, 1);
+
+	if ((res = afd_init(afd_lexico, 1))) {
+		return res;
+	}
 
 	// Inicializando os módulos de token.
-	token_init(&afd);
+	return token_init(afd_lexico);
+}
+
+int lexico_parse(const char *nome_arquivo) {
+	// Carregando o arquivo para a memória.
+	size_t comprimento;
+	char *codigo_fonte = file_to_str(nome_arquivo, &comprimento);
+	if (codigo_fonte == NULL) {
+		fprintf(stderr, "Não foi possível abrir o arquivo '%s': ", nome_arquivo);
+		perror("");
+		return 1;
+	}
+
+	char *src = codigo_fonte;
 
 	// Contadores de linha e coluna.
 	int32_t linha = 1;
@@ -63,10 +82,10 @@ int lexico_parse(const char *src) {
 	contexto.posicao.coluna = coluna;
 
 	// DELETE-ME
-	afd_print(&afd);
+	afd_print(afd_lexico);
 
 	// Estado inicial.
-	afd_estado_t *estado_atual = afd.estados;
+	afd_estado_t *estado_atual = afd_lexico->estados;
 
 	int8_t simbolo_comprimento = 1;
 	bool moveu = false;
@@ -75,7 +94,7 @@ int lexico_parse(const char *src) {
 		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, src);
 
 		if (estado_indice >= 0) {
-			estado_atual = &afd.estados[estado_indice];
+			estado_atual = &afd_lexico->estados[estado_indice];
 			avancar_cursor(&src, simbolo_comprimento, &linha, &coluna, &contexto);
 			moveu = true;
 		} else {
@@ -115,10 +134,12 @@ int lexico_parse(const char *src) {
 			contexto.posicao.coluna = coluna;
 
 			// Estado atual volta a ser o inicial.
-			estado_atual = afd.estados;
+			estado_atual = afd_lexico->estados;
 
 			moveu = false;
 		}
 	}
+	free(codigo_fonte);
+
 	return 0;
 }

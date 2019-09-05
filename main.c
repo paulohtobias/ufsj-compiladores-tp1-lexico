@@ -10,13 +10,10 @@ int main(int argc, char const *argv[]) {
 		filename = argv[1];
 	}
 
-	// Carregando o arquivo para a memória.
-	size_t comprimento;
-	char *c2c = file_to_str(filename, &comprimento);
+	lexico_init();
 
 	// Análise.
-	lexico_parse(c2c);
-	free(c2c);
+	lexico_parse(filename);
 
 	// Exibindo a lista de tokens.
 	for (size_t i = 0; i < plist_len(lista_tokens); i++) {

@@ -12,6 +12,8 @@
 
 #include "token/identificador.h"
 
+int lexico_init();
+
 int lexico_parse(const char *src);
 
 #endif // LEXICO_H
