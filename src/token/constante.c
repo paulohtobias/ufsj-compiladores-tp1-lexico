@@ -14,72 +14,72 @@
 #include "plist.h"
 
 // X-Macro pra cada tipo de constante.
-#define CONSTANTE_SUBTIPOS \
-	CONSTANTE_SUBTIPO(TK_CNST_STR, str, "string-literal") \
-	CONSTANTE_SUBTIPO(TK_CNST_CHAR, char, "char") \
+#define SUBTIPOS \
+	SUBTIPO(TK_CNST_STR, str, "string-literal") \
+	SUBTIPO(TK_CNST_CHAR, char, "char") \
 
 	/*
-	CONSTANTE_SUBTIPO(TK_CNST_OCT, octal, "octal") \
-	CONSTANTE_SUBTIPO(TK_CNST_DEC, decimal, "decimal") \
-	CONSTANTE_SUBTIPO(TK_CNST_HEX, hexadecimal, "hexadecimal") \
-	CONSTANTE_SUBTIPO(TK_CNST_FLT, float, "float") \
-	CONSTANTE_SUBTIPO(TK_CNST_DBL, double, "double")
+	SUBTIPO(TK_CNST_OCT, octal, "octal") \
+	SUBTIPO(TK_CNST_DEC, decimal, "decimal") \
+	SUBTIPO(TK_CNST_HEX, hexadecimal, "hexadecimal") \
+	SUBTIPO(TK_CNST_FLT, float, "float") \
+	SUBTIPO(TK_CNST_DBL, double, "double")
 	*/
 
 /// Tipos de constante.
-#define CONSTANTE_SUBTIPO(cod, nome, str) cod,
+#define SUBTIPO(cod, nome, str) cod,
 enum {
-	CONSTANTE_SUBTIPOS
+	SUBTIPOS
 };
-#undef CONSTANTE_SUBTIPO
+#undef SUBTIPO
 
 /// Tipos de palavra-chave em string.
-#define CONSTANTE_SUBTIPO(cod, nome, str) str,
+#define SUBTIPO(cod, nome, str) str,
 const char __constantes[][16] = {
-	CONSTANTE_SUBTIPOS
+	SUBTIPOS
 };
-#undef CONSTANTE_SUBTIPO
+#undef SUBTIPO
 size_t __constantes_quantidade = ARR_TAMANHO(__constantes);
 
 /// Funções init.
-#define CONSTANTE_SUBTIPO(cod, nome, str) int token_constante_ ## nome ## _init(afd_t *afd);
-CONSTANTE_SUBTIPOS
-#undef CONSTANTE_SUBTIPO
+#define SUBTIPO(cod, nome, str) int nome ## _init(afd_t *afd);
+SUBTIPOS
+#undef SUBTIPO
 
 /// Funções adicionar.
-#define CONSTANTE_SUBTIPO(cod, nome, str) void token_constante_ ## nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-CONSTANTE_SUBTIPOS
-#undef CONSTANTE_SUBTIPO
+#define SUBTIPO(cod, nome, str) void nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+SUBTIPOS
+#undef SUBTIPO
 
 /// Funções to_str
-#define CONSTANTE_SUBTIPO(cod, nome, str) char *token_constante_ ## nome ## _to_str(const void *dados, size_t comprimento);
-CONSTANTE_SUBTIPOS
-#undef CONSTANTE_SUBTIPO
+#define SUBTIPO(cod, nome, str) char * nome ## _to_str(const void *dados, size_t comprimento);
+SUBTIPOS
+#undef SUBTIPO
 
 /// Funções de erro.
-void token_constante_str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-void token_constante_char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Outras funções.
-const char *token_constante_subtipo_str(uint32_t subtipo);
+const char *subtipo_str(uint32_t subtipo);
 static char parse_escape_sequence(const char **src);
 
 
 /// init
 int token_constante_init(afd_t *afd) {
 	int res;
-	#define CONSTANTE_SUBTIPO(cod, nome, str) \
-		if ((res = token_constante_ ## nome ## _init(afd)) != 0) { \
+	#define SUBTIPO(cod, nome, str) \
+		if ((res = nome ## _init(afd)) != 0) { \
 			return 1; \
 		}
 
-	CONSTANTE_SUBTIPOS
-	#undef CONSTANTE_SUBTIPO
+	SUBTIPOS
+	#undef SUBTIPO
 
 	return 0;
 }
 
-int token_constante_str_init(afd_t *afd) {
+int str_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_str;
@@ -98,7 +98,7 @@ int token_constante_str_init(afd_t *afd) {
 		{1, {"\\", "\\\\", NULL}},
 		{2, {"\"", "\"", NULL}}
 	};
-	afd_str.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, token_constante_str_incompleta);
+	afd_str.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, str_incompleta);
 
 	// Estado 1.
 	afd_transicao_t transicoes_1[] = {
@@ -106,13 +106,13 @@ int token_constante_str_init(afd_t *afd) {
 	};
 	plist_append(
 		afd_str.estados,
-		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, token_constante_str_incompleta)
+		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, str_incompleta)
 	)
 
 	// Estado Final.
 	plist_append(
 		afd_str.estados,
-		afd_criar_estado(NULL, 0, true, token_constante_str_adicionar)
+		afd_criar_estado(NULL, 0, true, str_adicionar)
 	);
 
 	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_str)) != AFD_OK) {
@@ -122,7 +122,7 @@ int token_constante_str_init(afd_t *afd) {
 	return res;
 }
 
-int token_constante_char_init(afd_t *afd) {
+int char_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_char;
@@ -140,7 +140,7 @@ int token_constante_char_init(afd_t *afd) {
 		{1, {"[^'\\\\\\n]", "[^\'\\\\\n]", NULL}},
 		{2, {"\\", "\\\\", NULL}}
 	};
-	afd_char.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, token_constante_char_incompleto);
+	afd_char.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, char_incompleto);
 
 	// Estado 1.
 	afd_transicao_t transicoes_1[] = {
@@ -148,7 +148,7 @@ int token_constante_char_init(afd_t *afd) {
 	};
 	plist_append(
 		afd_char.estados,
-		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, token_constante_char_incompleto)
+		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, char_incompleto)
 	)
 
 	// Estado 2.
@@ -158,13 +158,13 @@ int token_constante_char_init(afd_t *afd) {
 	};
 	plist_append(
 		afd_char.estados,
-		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, token_constante_char_incompleto)
+		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, char_incompleto)
 	)
 
 	// Estado Final.
 	plist_append(
 		afd_char.estados,
-		afd_criar_estado(NULL, 0, true, token_constante_char_adicionar)
+		afd_criar_estado(NULL, 0, true, char_adicionar)
 	);
 
 	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_char)) != AFD_OK) {
@@ -175,13 +175,13 @@ int token_constante_char_init(afd_t *afd) {
 }
 
 /// adicionar
-void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token = token_criar(TK_CNST, TK_CNST_STR, lexema, comprimento, linha, coluna);
-	token.subtipo_to_str = token_constante_subtipo_str;
+	token.subtipo_to_str = subtipo_str;
 
 	token.valor.tamanho = comprimento -1;
 	PMALLOC(token.valor.dados, token.valor.tamanho);
-	token.valor.to_str = token_constante_str_to_str;
+	token.valor.to_str = str_to_str;
 
 	// Ignorando as aspas iniciais.
 	lexema++;
@@ -205,13 +205,13 @@ void token_constante_str_adicionar(const char *lexema, size_t comprimento, int32
 	token_adicionar(&token);
 }
 
-void token_constante_char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token = token_criar(TK_CNST, TK_CNST_CHAR, lexema, comprimento, linha, coluna);
-	token.subtipo_to_str = token_constante_subtipo_str;
+	token.subtipo_to_str = subtipo_str;
 
 	token.valor.tamanho = 1; // sizeof(char) é sempre 1.
 	PMALLOC(token.valor.dados, 1);
-	token.valor.to_str = token_constante_char_to_str;
+	token.valor.to_str = char_to_str;
 
 	// Ignorando as aspas iniciais.
 	lexema++;
@@ -231,10 +231,10 @@ void token_constante_char_adicionar(const char *lexema, size_t comprimento, int3
 
 
 /// to_str
-char *token_constante_str_to_str(const void *dados, size_t comprimento) {
+char *str_to_str(const void *dados, size_t comprimento) {
 	return strdup(dados);
 }
-char *token_constante_char_to_str(const void *dados, size_t comprimento) {
+char *char_to_str(const void *dados, size_t comprimento) {
 	char *str = malloc(2);
 
 	str[0] = *((char *) dados);
@@ -246,15 +246,15 @@ char *token_constante_char_to_str(const void *dados, size_t comprimento) {
 static void incompleto(char simbolo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);
 }
-void token_constante_str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	incompleto('"', lexema, comprimento, linha, coluna);
 }
-void token_constante_char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	incompleto('\'', lexema, comprimento, linha, coluna);
 }
 
 
-const char *token_constante_subtipo_str(uint32_t subtipo) {
+const char *subtipo_str(uint32_t subtipo) {
 	if (subtipo < __constantes_quantidade) {
 		return __constantes[subtipo];
 	}
