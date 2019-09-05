@@ -28,6 +28,6 @@ int8_t utf8_simbolo_comprimento(const char *str);
 pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho);
 
 /// Code adapted from https://github.com/luvit/pcre2/blob/a677f5b51bac251082856d35a48a01670e2fd4a7/src/pcre2demo.c#L61
-size_t regex_match(const char *str, pcre2_code *re);
+size_t regex_match(const char *str, pcre2_code *re, size_t subject_length);
 
 #endif // UTILS_H

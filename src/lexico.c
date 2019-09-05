@@ -91,7 +91,7 @@ int lexico_parse(const char *nome_arquivo) {
 	bool moveu = false;
 	while (*src != '\0') {
 		simbolo_comprimento = utf8_simbolo_comprimento(src);
-		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, src);
+		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, src, simbolo_comprimento);
 
 		if (estado_indice >= 0) {
 			estado_atual = &afd_lexico->estados[estado_indice];

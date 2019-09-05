@@ -67,7 +67,7 @@ pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
 	);
 }
 
-size_t regex_match(const char *str, pcre2_code *re) {
+size_t regex_match(const char *str, pcre2_code *re, size_t subject_length) {
 	size_t offset = 0;
 
 	// Handling NULL strings.
@@ -79,15 +79,15 @@ size_t regex_match(const char *str, pcre2_code *re) {
 
 	int rc;
 
-	size_t subject_length;
 	pcre2_match_data *match_data;
-
 
 	/* As subject is char argument, it can be straightforwardly
 	cast to PCRE2_SPTR as we are working in 8-bit code units. */
 
 	subject = (PCRE2_SPTR)str;
-	subject_length = strlen((char *)subject);
+	if (subject_length == PCRE2_ZERO_TERMINATED) {
+		subject_length = strlen((char *)subject);
+	}
 
 
 	/*************************************************************************
