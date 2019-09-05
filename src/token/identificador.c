@@ -9,7 +9,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "token/identificador.h"
 #include "token/palavra-chave.h"
 #include "utils.h"
 

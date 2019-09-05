@@ -20,11 +20,6 @@ const char __token_codigo_str[][64] = {
 };
 #undef TOKEN_CODIGO
 
-/// Funções init.
-#define TOKEN_CODIGO(cod, nome, descricao) extern int token_ ## nome ## _init(afd_t *afd);
-TOKEN_CODIGOS
-#undef TOKEN_CODIGO
-
 
 /// Lista de tokens.
 token_t *lista_tokens = NULL;

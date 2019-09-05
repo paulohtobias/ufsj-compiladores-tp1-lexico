@@ -19,6 +19,14 @@
 	TOKEN_CODIGO(TK_ID, identificador, "Identificador") \
 	TOKEN_CODIGO(TK_KW, palavra_chave, "Palavra-chave") \
 
+	/*\
+	TOKEN_CODIGO(TK_CNST, constante, "Constante") \
+	TOKEN_CODIGO(TK_OP, operador, "Operador") \
+	TOKEN_CODIGO(TK_EXT, extra, "Extra") \
+	TOKEN_CODIGO(TK_PP, preprocessador, "Pré-processador") \
+	TOKEN_CODIGO(TK_CMT, comentario, "Comentário")*/
+
+
 /// Tipos básicos de token.
 #define TOKEN_CODIGO(cod, nome, descricao) cod,
 enum {
@@ -26,6 +34,11 @@ enum {
 
 	TK_COUNT // Quantidade de tipos de token.
 };
+#undef TOKEN_CODIGO
+
+/// Funções init.
+#define TOKEN_CODIGO(cod, nome, descricao) int token_ ## nome ## _init(afd_t *afd);
+TOKEN_CODIGOS
 #undef TOKEN_CODIGO
 
 typedef struct token_contexto_t {
@@ -51,6 +64,7 @@ typedef struct token_t {
 		char *(*to_str)(void *, size_t);
 	} valor;
 
+	const char *(*subtipo_to_str)(uint32_t);
 } token_t;
 
 

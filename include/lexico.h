@@ -10,7 +10,7 @@
 #ifndef LEXICO_H
 #define LEXICO_H
 
-#include "token/identificador.h"
+#include "token.h"
 
 int lexico_init();
 
