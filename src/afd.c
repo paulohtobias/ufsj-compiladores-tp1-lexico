@@ -79,16 +79,15 @@ void afd_liberar_estado(afd_estado_t *estado) {
 	free(estado->transicoes);
 }
 
-int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char **cursor) {
+int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char *cursor) {
 	for (size_t i = 0; i < plist_len(estado->transicoes); i++) {
 		const afd_transicao_t *transicao = &estado->transicoes[i];
 
 		// Faz o casamento e anda no texto.
-		size_t offset = regex_match(*cursor, transicao->pattern.compiled);
+		size_t offset = regex_match(cursor, transicao->pattern.compiled);
 
 		// Se houve um casamento, então retornamos o estado.
 		if (offset > 0) {
-			(*cursor) += offset - 1;
 			return transicao->estado_indice;
 		}
 	}

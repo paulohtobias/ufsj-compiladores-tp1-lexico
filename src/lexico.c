@@ -72,7 +72,7 @@ int lexico_parse(const char *src) {
 	bool moveu = false;
 	while (*src != '\0') {
 		simbolo_comprimento = utf8_simbolo_comprimento(src);
-		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, &src);
+		int32_t estado_indice = afd_estado_get_proximo_estado(estado_atual, src);
 
 		if (estado_indice >= 0) {
 			estado_atual = &afd.estados[estado_indice];

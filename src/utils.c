@@ -33,8 +33,20 @@ char *file_to_str(const char *filename, size_t *len) {
 }
 
 int8_t utf8_simbolo_comprimento(const char *str) {
-	// TODO.
-	return 1;
+	uint8_t fb = (unsigned char) *str;
+
+	if (fb < 0x7f) {
+		return 1;
+	} else if (fb < 0xe0) {
+		return 2;
+	} else if (fb < 0xf0) {
+		return 3;
+	} else if (fb < 0xf8) {
+		return 4;
+	} else {
+		printf("This shouldn't happen.\n");
+		return -1;
+	}
 }
 
 pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
