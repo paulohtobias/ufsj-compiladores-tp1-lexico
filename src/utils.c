@@ -32,6 +32,11 @@ char *file_to_str(const char *filename, size_t *len) {
 	return str;
 }
 
+int8_t utf8_simbolo_comprimento(const char *str) {
+	// TODO.
+	return 1;
+}
+
 pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
 	int errornumber;
 	PCRE2_SIZE erroroffset;
