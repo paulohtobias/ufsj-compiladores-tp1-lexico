@@ -9,7 +9,6 @@
 
 #include <string.h>
 #include <ctype.h>
-#include <limits.h>
 #include <inttypes.h>
 #include <errno.h>
 #include "token.h"
@@ -21,6 +20,9 @@
 	SUBTIPO(TK_CNST_STR, str, "string-literal") \
 	SUBTIPO(TK_CNST_CHAR, char, "char") \
 	SUBTIPO(TK_CNST_INT, int, "inteiro") \
+	SUBTIPO(TK_CNST_UINT, uint, "inteiro-unsigned") \
+	SUBTIPO(TK_CNST_LINT, lint, "inteiro-long") \
+	SUBTIPO(TK_CNST_ULINT, ulint, "inteiro-unsigned_long") \
 
 	/*
 	SUBTIPO(TK_CNST_FLT, float, "float")
@@ -35,7 +37,7 @@ enum {
 
 /// Tipos de palavra-chave em string.
 #define SUBTIPO(cod, nome, str) str,
-const char __constantes[][16] = {
+const char __constantes[][32] = {
 	SUBTIPOS
 };
 #undef SUBTIPO
@@ -47,14 +49,14 @@ SUBTIPOS
 #undef SUBTIPO
 
 /// Funções adicionar.
-#define SUBTIPO(cod, nome, str) static void nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-SUBTIPOS
-#undef SUBTIPO
+static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Funções to_str
-#define SUBTIPO(cod, nome, str) static char * nome ## _to_str(const void *dados, size_t comprimento);
-SUBTIPOS
-#undef SUBTIPO
+static char *str_to_str(const void *dados, size_t comprimento);
+static char *char_to_str(const void *dados, size_t comprimento);
+static char *int_to_str(const void *dados, size_t comprimento);
 
 /// Funções de erro.
 static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
@@ -206,6 +208,15 @@ static int int_init(afd_t *afd) {
 
 	return res;
 }
+static int uint_init(afd_t *afd) {
+	return 0;
+}
+static int lint_init(afd_t *afd) {
+	return 0;
+}
+static int ulint_init(afd_t *afd) {
+	return 0;
+}
 
 /// adicionar
 static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
@@ -279,10 +290,16 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 		if (!u && sufixo == 'u') {
 			fim++;
 			u = sufixo_valido = true;
+
+			// Alterando o subtipo.
+			token.subtipo = l ? TK_CNST_ULINT : TK_CNST_UINT;
 		}
 		if (!l && sufixo == 'l') {
 			fim++;
 			l = sufixo_valido = true;
+
+			// Alterando o subtipo.
+			token.subtipo = u ? TK_CNST_ULINT : TK_CNST_LINT;
 		}
 
 		if (!sufixo_valido) {
@@ -305,7 +322,6 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 
 	token_adicionar(&token);
 }
-
 
 /// to_str
 static char *str_to_str(const void *dados, size_t comprimento) {
