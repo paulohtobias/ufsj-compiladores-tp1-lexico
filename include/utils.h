@@ -21,6 +21,7 @@
 #define PCALLOC(arr, quantidade) arr = calloc(quantidade, sizeof *arr)
 #define PREALLOC(arr, quantidade) arr = realloc(arr, quantidade * sizeof *arr)
 
+#define regex_unicode_letter "\\p{Ll}\\p{Lu}\\p{Lo}_$"
 #define REGEX_OPTIONS PCRE2_UTF | PCRE2_ANCHORED | PCRE2_NO_AUTO_CAPTURE
 
 char *file_to_str(const char *filename, size_t *len);

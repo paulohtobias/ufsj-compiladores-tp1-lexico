@@ -9,6 +9,9 @@
 
 #include <string.h>
 #include <ctype.h>
+#include <limits.h>
+#include <inttypes.h>
+#include <errno.h>
 #include "token.h"
 #include "utils.h"
 #include "plist.h"
@@ -17,13 +20,10 @@
 #define SUBTIPOS \
 	SUBTIPO(TK_CNST_STR, str, "string-literal") \
 	SUBTIPO(TK_CNST_CHAR, char, "char") \
+	SUBTIPO(TK_CNST_INT, int, "inteiro") \
 
 	/*
-	SUBTIPO(TK_CNST_OCT, octal, "octal") \
-	SUBTIPO(TK_CNST_DEC, decimal, "decimal") \
-	SUBTIPO(TK_CNST_HEX, hexadecimal, "hexadecimal") \
-	SUBTIPO(TK_CNST_FLT, float, "float") \
-	SUBTIPO(TK_CNST_DBL, double, "double")
+	SUBTIPO(TK_CNST_FLT, float, "float")
 	*/
 
 /// Tipos de constante.
@@ -42,27 +42,28 @@ const char __constantes[][16] = {
 size_t __constantes_quantidade = ARR_TAMANHO(__constantes);
 
 /// Funções init.
-#define SUBTIPO(cod, nome, str) int nome ## _init(afd_t *afd);
+#define SUBTIPO(cod, nome, str) static int nome ## _init(afd_t *afd);
 SUBTIPOS
 #undef SUBTIPO
 
 /// Funções adicionar.
-#define SUBTIPO(cod, nome, str) void nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+#define SUBTIPO(cod, nome, str) static void nome ## _adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 SUBTIPOS
 #undef SUBTIPO
 
 /// Funções to_str
-#define SUBTIPO(cod, nome, str) char * nome ## _to_str(const void *dados, size_t comprimento);
+#define SUBTIPO(cod, nome, str) static char * nome ## _to_str(const void *dados, size_t comprimento);
 SUBTIPOS
 #undef SUBTIPO
 
 /// Funções de erro.
-void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Outras funções.
-const char *subtipo_str(uint32_t subtipo);
+static const char *subtipo_str(uint32_t subtipo);
 static char parse_escape_sequence(const char **src);
+static char *int_to_str(const void *dados, size_t comprimento);
 
 
 /// init
@@ -78,8 +79,7 @@ int token_constante_init(afd_t *afd) {
 
 	return 0;
 }
-
-int str_init(afd_t *afd) {
+static int str_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_str;
@@ -121,8 +121,7 @@ int str_init(afd_t *afd) {
 
 	return res;
 }
-
-int char_init(afd_t *afd) {
+static int char_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_char;
@@ -173,9 +172,43 @@ int char_init(afd_t *afd) {
 
 	return res;
 }
+static int int_init(afd_t *afd) {
+	int res;
+
+	afd_t afd_int;
+	afd_init(&afd_int, 2);
+
+	// Transição de ligação. Deve começar com número.
+	afd_transicao_pattern_t transicao_inicial = {"\\d", "\\d", NULL};
+
+	// Estado 0.
+	afd_transicao_t transicoes_0[] = {
+		{0, {"\\d", "\\d", NULL}},
+		{1, {"\\w", "[" regex_unicode_letter "]", NULL}}
+	};
+	afd_int.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), true, int_adicionar);
+
+	// Estado Final.
+	afd_transicao_t transicoes_1[] = {
+		{1, {"[\\d\\w\\.]", "[\\d\\." regex_unicode_letter "]", NULL}}
+	};
+	plist_append(
+		afd_int.estados,
+		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), true, int_adicionar)
+	)
+
+	puts("KAMIKAZE");
+	afd_print(&afd_int);
+
+	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_int)) != AFD_OK) {
+		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+	}
+
+	return res;
+}
 
 /// adicionar
-void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token = token_criar(TK_CNST, TK_CNST_STR, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -204,8 +237,7 @@ void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_
 
 	token_adicionar(&token);
 }
-
-void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token = token_criar(TK_CNST, TK_CNST_CHAR, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -228,13 +260,58 @@ void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32
 
 	token_adicionar(&token);
 }
+static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+	token_t token = token_criar(TK_CNST, TK_CNST_INT, lexema, comprimento, linha, coluna);
+	token.subtipo_to_str = subtipo_str;
+
+	// Convertendo o lexema para inteiro.
+	char *fim = NULL;
+	uintmax_t valor = strtoumax(token.contexto.lexema, &fim, 0);
+	size_t tamanho = sizeof valor;
+
+	// Verificando se o sufixo é válido.
+	bool u = false, l = false;
+	bool sufixo_valido = false;
+	while (*fim != '\0') {
+		char sufixo = tolower((unsigned char) *fim);
+
+		sufixo_valido = false;
+		if (!u && sufixo == 'u') {
+			fim++;
+			u = sufixo_valido = true;
+		}
+		if (!l && sufixo == 'l') {
+			fim++;
+			l = sufixo_valido = true;
+		}
+
+		if (!sufixo_valido) {
+			// TODO: warning: também melhorar mensagem.
+			fprintf(stderr, "sufixo %s inválido (%d, %d)\n%s\n", fim, linha, coluna, token.contexto.lexema);
+			break;
+		}
+	}
+
+	// Verificando se houve overflow.
+	if (valor == UINTMAX_MAX && errno == ERANGE) {
+		// TODO: warning
+		fprintf(stderr, "constante inteira é grande demais.\n");
+	}
+
+	token.valor.tamanho = tamanho;
+	PMALLOC(token.valor.dados, token.valor.tamanho);
+	memcpy(token.valor.dados, &valor, sizeof valor);
+	token.valor.to_str = int_to_str;
+
+	token_adicionar(&token);
+}
 
 
 /// to_str
-char *str_to_str(const void *dados, size_t comprimento) {
+static char *str_to_str(const void *dados, size_t comprimento) {
 	return strdup(dados);
 }
-char *char_to_str(const void *dados, size_t comprimento) {
+static char *char_to_str(const void *dados, size_t comprimento) {
 	char *str = malloc(2);
 
 	str[0] = *((char *) dados);
@@ -242,19 +319,30 @@ char *char_to_str(const void *dados, size_t comprimento) {
 
 	return str;
 }
+static char *int_to_str(const void *dados, size_t comprimento) {
+	char *str = malloc(64);
+
+	long valor;
+	memcpy(&valor, dados, sizeof valor);
+
+	sprintf(str, "%"PRIuMAX, valor);
+
+	return str;
+}
+
 
 static void incompleto(char simbolo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);
 }
-void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	incompleto('"', lexema, comprimento, linha, coluna);
 }
-void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	incompleto('\'', lexema, comprimento, linha, coluna);
 }
 
 
-const char *subtipo_str(uint32_t subtipo) {
+static const char *subtipo_str(uint32_t subtipo) {
 	if (subtipo < __constantes_quantidade) {
 		return __constantes[subtipo];
 	}

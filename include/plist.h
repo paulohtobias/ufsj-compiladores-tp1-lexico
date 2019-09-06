@@ -42,18 +42,18 @@ typedef struct plist_t {
 	void *data;
 } plist_t;
 
-#define __PLIST_L2P(list) (list != NULL ? (void *) list - sizeof(plist_t) : NULL)
+#define __PLIST_L2P(list) ((list) != NULL ? (void *) (list) - sizeof(plist_t) : NULL)
 
 #define __PLIST_RESIZE(plist, list, new_capacity) \
 	do { \
 		plist = PLIST_REALLOC(plist, (new_capacity) * sizeof *(list) + sizeof *plist); \
-		plist->capacity = new_capacity; \
-		plist->data = list = (void *) plist + sizeof *plist; \
+		plist->capacity = (new_capacity); \
+		plist->data = (list) = (void *) plist + sizeof *plist; \
 	} while(0);
 
 #define plist_create(list, initial_capacity) \
 	do { \
-		if (list == NULL) { \
+		if ((list) == NULL) { \
 			plist_t *plist = NULL; \
 			__PLIST_RESIZE(plist, list, initial_capacity); \
 			plist->length = 0; \
@@ -61,22 +61,22 @@ typedef struct plist_t {
 	} while(0);
 
 #define plist_len(list) \
-	(list != NULL ? ((plist_t *) __PLIST_L2P(list))->length : 0)
+	((list) != NULL ? ((plist_t *) __PLIST_L2P(list))->length : 0)
 
 #define plist_cap(list) \
-	(list != NULL ? ((plist_t *) __PLIST_L2P(list))->capacity : 0)
+	((list) != NULL ? ((plist_t *) __PLIST_L2P(list))->capacity : 0)
 
 #define plist_insert(list, item, index) \
 	do { \
 		plist_t *plist = __PLIST_L2P(list); \
-		if (list == NULL) { \
+		if ((list) == NULL) { \
 			plist_create(list, PLIST_CAPACITY_INCREMENT); \
 			plist = __PLIST_L2P(list); \
 		} else if (index >= plist->capacity) { \
 			__PLIST_RESIZE(plist, list, plist->capacity + PLIST_CAPACITY_INCREMENT); \
 		} \
 \
-		list[index] = item; \
+		(list)[(index)] = (item); \
 		plist->length++; \
 	} while(0);
 
