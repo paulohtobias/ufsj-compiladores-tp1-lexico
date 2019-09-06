@@ -25,7 +25,9 @@
 	SUBTIPO(TK_CNST_ULINT, ulint, "inteiro-unsigned_long") \
 
 	/*
-	SUBTIPO(TK_CNST_FLT, float, "float")
+	SUBTIPO(TK_CNST_FLT, float, "float") \
+	SUBTIPO(TK_CNST_DBL, double, "double") \
+	SUBTIPO(TK_CNST_LDBL, ldouble, "double-long")
 	*/
 
 /// Tipos de constante.
@@ -47,11 +49,13 @@ size_t __constantes_quantidade = ARR_TAMANHO(__constantes);
 #define SUBTIPO(cod, nome, str) static int nome ## _init(afd_t *afd);
 SUBTIPOS
 #undef SUBTIPO
+static int number_init(afd_t *afd);
 
 /// Funções adicionar.
 static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void double_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Funções to_str
 static char *str_to_str(const void *dados, size_t comprimento);
@@ -80,6 +84,10 @@ int token_constante_init(afd_t *afd) {
 	SUBTIPOS
 	#undef SUBTIPO
 
+	if ((res = number_init(afd)) != 0) {
+		return 1;
+	}
+
 	// Inicializando a tabela de símbolos de identificador.
 	plist_create(tabela_simbolos[TK_CNST], __constantes_quantidade);
 	memset(tabela_simbolos[TK_CNST], 0, __constantes_quantidade * sizeof *tabela_simbolos[TK_CNST]);
@@ -90,31 +98,33 @@ static int str_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_str;
-	afd_init(&afd_str, 3);
+	afd_init(&afd_str, 4);
 
-	// Transição de ligação. Deve começar com aspas duplas.
-	afd_transicao_pattern_t transicao_inicial = {
-		"\"",
-		"\"",
-		NULL
-	};
-
-	// Estado 0.
+	// Estado inicial. Deve começar com aspas duplas.
 	afd_transicao_t transicoes_0[] = {
-		{0, {"[^\"\\\\\\n]", "[^\"\\\\\\n]", NULL}},
-		{1, {"\\", "\\\\", NULL}},
-		{2, {"\"", "\"", NULL}}
+		{1, {"\"", "\"", NULL}}
 	};
-	afd_str.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, str_incompleta);
+	afd_str.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
 	// Estado 1.
 	afd_transicao_t transicoes_1[] = {
-		{0, {".", "."}}
+		{1, {"[^\"\\\\\\n]", "[^\"\\\\\\n]", NULL}},
+		{2, {"\\", "\\\\", NULL}},
+		{3, {"\"", "\"", NULL}}
 	};
 	plist_append(
 		afd_str.estados,
 		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, str_incompleta)
-	)
+	);
+
+	// Estado 2.
+	afd_transicao_t transicoes_2[] = {
+		{1, {".", "."}}
+	};
+	plist_append(
+		afd_str.estados,
+		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, str_incompleta)
+	);
 
 	// Estado Final.
 	plist_append(
@@ -122,7 +132,7 @@ static int str_init(afd_t *afd) {
 		afd_criar_estado(NULL, 0, true, str_adicionar)
 	);
 
-	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_str)) != AFD_OK) {
+	if ((res = afd_mesclar_automatos(afd, &afd_str)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
 	}
 
@@ -132,39 +142,41 @@ static int char_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_char;
-	afd_init(&afd_char, 4);
+	afd_init(&afd_char, 5);
 
-	// Transição de ligação. Deve começar com aspas simples.
-	afd_transicao_pattern_t transicao_inicial = {
-		"'",
-		"'",
-		NULL
-	};
-
-	// Estado 0.
+	// Estado inicial. Deve começar com aspas simples.
 	afd_transicao_t transicoes_0[] = {
-		{1, {"[^'\\\\\\n]", "[^\'\\\\\n]", NULL}},
-		{2, {"\\", "\\\\", NULL}}
+		{1, {"'", "'", NULL}}
 	};
-	afd_char.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, char_incompleto);
+	afd_char.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
 	// Estado 1.
 	afd_transicao_t transicoes_1[] = {
-		{3, {"'", "'"}}
+		{2, {"[^'\\\\\\n]", "[^\'\\\\\n]", NULL}},
+		{3, {"\\", "\\\\", NULL}}
 	};
 	plist_append(
 		afd_char.estados,
 		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), false, char_incompleto)
-	)
+	);
 
 	// Estado 2.
 	afd_transicao_t transicoes_2[] = {
-		{2, {"[^'\\n]", "[^'\n]"}},
-		{3, {"'", "'"}}
+		{4, {"'", "'"}}
 	};
 	plist_append(
 		afd_char.estados,
 		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, char_incompleto)
+	);
+
+	// Estado 3.
+	afd_transicao_t transicoes_3[] = {
+		{3, {"[^'\\n]", "[^'\n]"}},
+		{4, {"'", "'"}}
+	};
+	plist_append(
+		afd_char.estados,
+		afd_criar_estado(transicoes_3, ARR_TAMANHO(transicoes_3), false, char_incompleto)
 	)
 
 	// Estado Final.
@@ -173,45 +185,14 @@ static int char_init(afd_t *afd) {
 		afd_criar_estado(NULL, 0, true, char_adicionar)
 	);
 
-	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_char)) != AFD_OK) {
+	if ((res = afd_mesclar_automatos(afd, &afd_char)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
 	}
 
 	return res;
 }
 static int int_init(afd_t *afd) {
-	int res;
-
-	afd_t afd_int;
-	afd_init(&afd_int, 2);
-
-	// Transição de ligação. Deve começar com número.
-	afd_transicao_pattern_t transicao_inicial = {"\\d", "\\d", NULL};
-
-	// Estado 0.
-	afd_transicao_t transicoes_0[] = {
-		{0, {"\\d", "\\d", NULL}},
-		{1, {"\\w", "[" regex_unicode_letter "]", NULL}}
-	};
-	afd_int.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), true, int_adicionar);
-
-	// Estado Final.
-	afd_transicao_t transicoes_1[] = {
-		{1, {"[\\d\\w\\.]", "[\\d\\." regex_unicode_letter "]", NULL}}
-	};
-	plist_append(
-		afd_int.estados,
-		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), true, int_adicionar)
-	)
-
-	puts("KAMIKAZE");
-	afd_print(&afd_int);
-
-	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_int)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
-	}
-
-	return res;
+	return 0;
 }
 static int uint_init(afd_t *afd) {
 	return 0;
@@ -221,6 +202,78 @@ static int lint_init(afd_t *afd) {
 }
 static int ulint_init(afd_t *afd) {
 	return 0;
+}
+static int float_init(afd_t *afd) {
+	return 0;
+}
+static int double_init(afd_t *afd) {
+	return 0;
+}
+static int ldouble_init(afd_t *afd) {
+	return 0;
+}
+static int number_init(afd_t *afd) {
+	int res = 0;
+
+	afd_t afd_number;
+	afd_init(&afd_number, 6);
+
+	// Estado 0.
+	afd_transicao_t transicoes_0[] = {
+		{1, {"\\d", "\\d", NULL}},
+		{3, {"\\.", "\\.", NULL}}
+	};
+	afd_number.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
+
+	// Estado 1. Int
+	afd_transicao_t transicoes_1[] = {
+		{1, {"\\d", "\\d", NULL}},
+		{5, {"[eE]", "[eE]", NULL}}, // É importante que esta transição venha antes da próxima.
+		{2, {"[" regex_unicode_letter "]", "[" regex_unicode_letter "]", NULL}},
+		{4, {"\\.", "\\.", NULL}},
+	};
+	plist_append(
+		afd_number.estados,
+		afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), true, int_adicionar)
+	);
+
+	// Estado 2. Unsigned e/ou Long
+	afd_transicao_t transicoes_2[] = {
+		{2, {"\\w", "[\\d" regex_unicode_letter "]", NULL}},
+	};
+	plist_append(
+		afd_number.estados,
+		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), true, int_adicionar)
+	);
+
+	// Estado 3. Vazio.
+	plist_append(afd_number.estados, afd_criar_estado(NULL, 0, false, NULL));
+
+	// Estado 4. Double
+	afd_transicao_t transicoes_4[] = {
+		{4, {"\\d", "\\d", NULL}},
+		{5, {"[" regex_unicode_letter "]", "[" regex_unicode_letter "]", NULL}},
+	};
+	plist_append(
+		afd_number.estados,
+		afd_criar_estado(transicoes_4, ARR_TAMANHO(transicoes_4), true, double_adicionar)
+	);
+
+	// Estado 5. Notação exponencial e/ou Float ou Long Double
+	afd_transicao_t transicoes_5[] = {
+		{4, {"\\d", "\\d", NULL}},
+		{5, {"[" regex_unicode_letter "]", "[" regex_unicode_letter "]", NULL}},
+	};
+	plist_append(
+		afd_number.estados,
+		afd_criar_estado(transicoes_5, ARR_TAMANHO(transicoes_5), true, double_adicionar)
+	);
+
+	if ((res = afd_mesclar_automatos(afd, &afd_number)) != AFD_OK) {
+		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+	}
+
+	return res;
 }
 
 /// adicionar
@@ -326,6 +379,9 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 	token.valor.to_str = int_to_str;
 
 	token_adicionar(&token);
+}
+static void double_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+
 }
 
 /// to_str

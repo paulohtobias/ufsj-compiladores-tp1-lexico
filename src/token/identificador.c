@@ -29,18 +29,19 @@ int token_identificador_init(afd_t *afd) {
 	afd_t afd_id;
 	afd_init(&afd_id, 1);
 
-	// Transição de ligação. Não pode haver números.
-	afd_transicao_pattern_t transicao_inicial = {
-		"[a-zA-Z_$]", "[" letra_pattern "]", NULL
+	// Estado inicial. Não pode haver números.
+	afd_transicao_t transicoes_0[] = {
+		{1, {"[a-zA-Z_$]", "[" letra_pattern "]", NULL}}
 	};
+	afd_id.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
 	// Transições.
-	afd_transicao_t transicoes[] = {
-		{0, {"[a-zA-Z0-9_$]", "[" letra_pattern "\\d]", NULL}}
+	afd_transicao_t transicoes_1[] = {
+		{1, {"[a-zA-Z0-9_$]", "[" letra_pattern "\\d]", NULL}}
 	};
-	afd_id.estados[0] = afd_criar_estado(transicoes, ARR_TAMANHO(transicoes), true, adicionar);
+	plist_append(afd_id.estados, afd_criar_estado(transicoes_1, ARR_TAMANHO(transicoes_1), true, adicionar));
 
-	if ((res = afd_add_subautomato(afd, &transicao_inicial, 1, &afd_id)) != AFD_OK) {
+	if ((res = afd_mesclar_automatos(afd, &afd_id)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
 	}
 
