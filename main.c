@@ -3,9 +3,9 @@
 #include "utils.h"
 #include "plist.h"
 
-#define ABRIR_SAIDA(out, nome) \
+#define ABRIR_SAIDA(out, nome, modo) \
 	do { \
-		out = fopen(nome, "wb"); \
+		out = fopen(nome, modo); \
 		if (out == NULL) { \
 			fprintf(stderr, "Erro ao abrir o arquivo de saída %s. ", nome); \
 			perror(""); \
@@ -32,21 +32,29 @@ int main(int argc, char const *argv[]) {
 	FILE *out = NULL;
 
 	// Exibindo a lista de tokens.
-	ABRIR_SAIDA(out, "saida/Token.txt");
+	ABRIR_SAIDA(out, "saida/Token.txt", "wb");
 	for (size_t i = 0; i < plist_len(lista_tokens); i++) {
 		token_print(out, lista_tokens + i);
 	}
 	fclose(out);
 
 	// Exibindo as tabelas de símbolos.
+	char arquivo_saida[300];
 	for (int i = 0; i < TK_COUNT; i++) {
-		char arquivo_saida[300];
-		sprintf(arquivo_saida, "saida/%s.txt", token_tipo_str(i));
-		ABRIR_SAIDA(out, arquivo_saida);
-		for (size_t j = 0; j < plist_len(tabela_simbolos[i]); j++) {
-			token_print(out, &lista_tokens[tabela_simbolos[i][j]]);
+		for (int j = 0; j < plist_cap(tabela_simbolos[i]); j++) {
+			for (int k = 0; k < plist_len(tabela_simbolos[i][j]); k++) {
+				const token_t *token = &lista_tokens[tabela_simbolos[i][j][k]];
+
+				const char *modo = j == 0 && k == 0 ? "wb" : "ab";
+
+				sprintf(arquivo_saida, "saida/%s-%s.txt", token_tipo_str(token), token_subtipo_str(token));
+				ABRIR_SAIDA(out, arquivo_saida, modo);
+
+				token_print(out, token);
+
+				fclose(out);
+			}
 		}
-		fclose(out);
 	}
 
 	// Exibe "Fim" na tela.

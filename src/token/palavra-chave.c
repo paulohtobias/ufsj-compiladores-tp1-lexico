@@ -7,8 +7,10 @@
  * paulohtobias@outlook.com
  */
 
+#include <string.h>
 #include "token/palavra-chave.h"
 #include "utils.h"
+#include "plist.h"
 
 // X-Macro pra cada palavra chave.
 #define SUBTIPOS \
@@ -61,6 +63,10 @@ const char __palavras_chave[][16] = {
 size_t __palavras_chave_quantidade = ARR_TAMANHO(__palavras_chave);
 
 int token_palavra_chave_init(afd_t *afd) {
+	// Inicializando a tabela de símbolos de palavra-chave.
+	plist_create(tabela_simbolos[TK_KW], __palavras_chave_quantidade);
+	memset(tabela_simbolos[TK_KW], 0, __palavras_chave_quantidade * sizeof *tabela_simbolos[TK_KW]);
+
 	return 0;
 }
 

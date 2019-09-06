@@ -24,16 +24,10 @@ const char __token_codigo_str[][64] = {
 token_t *lista_tokens = NULL;
 
 /// Tabela de símbolos.
-size_t *tabela_simbolos[TK_COUNT];
+size_t **tabela_simbolos[TK_COUNT];
 
 
 int token_init(afd_t *afd) {
-	// Inicializando a tabela de símbolos.
-	for (int i = 0; i < TK_COUNT; i++) {
-		tabela_simbolos[i] = NULL;
-	}
-
-
 	#define TOKEN_CODIGO(cod, nome, descricao) token_ ## nome ## _init(afd);
 	TOKEN_CODIGOS
 	#undef TOKEN_CODIGO
@@ -41,9 +35,17 @@ int token_init(afd_t *afd) {
 	return 0;
 }
 
-const char *token_tipo_str(uint32_t tipo) {
-	if (tipo < TK_COUNT) {
-		return __token_codigo_str[tipo];
+const char *token_tipo_str(const token_t *token) {
+	if (token->tipo < TK_COUNT) {
+		return __token_codigo_str[token->tipo];
+	}
+
+	return "";
+}
+
+const char *token_subtipo_str(const token_t *token) {
+	if (token->subtipo_to_str != NULL) {
+		return token->subtipo_to_str(token->subtipo);
 	}
 
 	return "";
@@ -80,13 +82,13 @@ void token_adicionar(const token_t *token) {
 	plist_append(lista_tokens, *token);
 
 	// Adiciona na tabela de símbolos correspondente.
-	plist_append(tabela_simbolos[token->tipo], plist_len(lista_tokens) - 1);
+	plist_append(tabela_simbolos[token->tipo][token->subtipo], plist_len(lista_tokens) - 1);
 }
 
 void token_print(FILE *out, const token_t *token) {
-	const char * subtipo = "N/A";
-	if (token->subtipo_to_str != NULL) {
-		subtipo = token->subtipo_to_str(token->subtipo);
+	const char * subtipo = token_subtipo_str(token);
+	if (*subtipo == '\0') {
+		subtipo = "N/A";
 	}
 
 	char *_valor = NULL;

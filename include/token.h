@@ -77,7 +77,7 @@ extern token_t *lista_tokens;
  * lista de tokens para evitar redundância e reduzir
  * o gasto de memória.
  */
-size_t *tabela_simbolos[TK_COUNT];
+size_t **tabela_simbolos[TK_COUNT];
 
 
 /**
@@ -90,7 +90,13 @@ int token_init(afd_t *afd);
  * Retorna a string correspondente ao tipo do token.
  * Se o tipo for inválido, retorna uma string vazia.
  */
-const char *token_tipo_str(uint32_t tipo);
+const char *token_tipo_str(const token_t *token);
+
+/**
+ * Retorna a string correspondente ao subtipo do token.
+ * Se o subtipo for inválido, retorna uma string vazia.
+ */
+const char *token_subtipo_str(const token_t *token);
 
 /**
  * Função genérica para criar um novo token.

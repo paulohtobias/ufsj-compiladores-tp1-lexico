@@ -71,6 +71,7 @@ static char *int_to_str(const void *dados, size_t comprimento);
 /// init
 int token_constante_init(afd_t *afd) {
 	int res;
+
 	#define SUBTIPO(cod, nome, str) \
 		if ((res = nome ## _init(afd)) != 0) { \
 			return 1; \
@@ -78,6 +79,10 @@ int token_constante_init(afd_t *afd) {
 
 	SUBTIPOS
 	#undef SUBTIPO
+
+	// Inicializando a tabela de símbolos de identificador.
+	plist_create(tabela_simbolos[TK_CNST], __constantes_quantidade);
+	memset(tabela_simbolos[TK_CNST], 0, __constantes_quantidade * sizeof *tabela_simbolos[TK_CNST]);
 
 	return 0;
 }
