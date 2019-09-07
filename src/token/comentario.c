@@ -87,12 +87,12 @@ fim:
 }
 
 static void comentario_adicionar(ACAO_PARAMETROS) {
-	token_t token = token_criar(TK_CMT, 0, lexema, comprimento, linha, coluna);
+	token_t token = token_criar(TK_CMT, 0, arquivo, lexema, comprimento, linha, coluna);
 
 	// Descomente a linha abaixo para salvar comentários.
 	token_adicionar(&token);
 }
 
 static void comentario_incompleto(ACAO_PARAMETROS) {
-	LOG_ERRO("main.c", linha, coluna, lexema, comprimento, "comentário incompleto.");
+	LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "comentário incompleto.");
 }

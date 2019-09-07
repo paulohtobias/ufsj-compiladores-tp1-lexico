@@ -42,6 +42,7 @@ TOKEN_CODIGOS
 #undef TOKEN_CODIGO
 
 typedef struct token_contexto_t {
+	char *arquivo;
 	char *lexema;
 	size_t comprimento;
 

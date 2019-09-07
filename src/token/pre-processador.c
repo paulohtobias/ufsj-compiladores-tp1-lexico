@@ -147,7 +147,7 @@ static void preprocessador_adicionar(ACAO_PARAMETROS) {
 	}
 
 	if (subtipo < __preprocessadores_quantidade) {
-		token_t token = token_criar(TK_PP, subtipo, lexema, comprimento, linha, coluna);
+		token_t token = token_criar(TK_PP, subtipo, arquivo, lexema, comprimento, linha, coluna);
 		token.subtipo_to_str = preprocessador_str;
 
 		// Copiando a # inicial.

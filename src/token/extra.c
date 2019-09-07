@@ -89,7 +89,7 @@ static void extra_adicionar(ACAO_PARAMETROS) {
 	int subtipo;
 	for (subtipo = 0; strncmp(__extras_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);
 
-	token_t token = token_criar(TK_EXT, subtipo, lexema, comprimento, linha, coluna);
+	token_t token = token_criar(TK_EXT, subtipo, arquivo, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = extra_str;
 
 	token_adicionar(&token);

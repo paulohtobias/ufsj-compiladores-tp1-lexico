@@ -50,7 +50,7 @@ typedef struct afd_transicao_t {
 } afd_transicao_t;
 
 /// Parâmetros para a função de ação.
-#define ACAO_PARAMETROS const char *lexema, size_t comprimento, int32_t linha, int32_t coluna
+#define ACAO_PARAMETROS const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna
 typedef struct afd_estado_t {
 	afd_transicao_t *transicoes;
 

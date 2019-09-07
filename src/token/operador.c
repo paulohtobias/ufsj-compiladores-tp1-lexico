@@ -314,7 +314,7 @@ static void operador_adicionar(ACAO_PARAMETROS) {
 	}
 
 	if (subtipo < __operadores_quantidade) {
-		token_t token = token_criar(TK_OP, subtipo, lexema, comprimento, linha, coluna);
+		token_t token = token_criar(TK_OP, subtipo, arquivo, lexema, comprimento, linha, coluna);
 		token.subtipo_to_str = operador_str;
 
 		token_adicionar(&token);

@@ -59,6 +59,9 @@ token_t token_criar(uint32_t tipo, uint32_t subtipo, ACAO_PARAMETROS) {
 	token.subtipo = subtipo;
 	token.subtipo_to_str = NULL;
 
+	// Arquivo.
+	token.contexto.arquivo = strdup(arquivo);
+
 	// Lexema.
 	token.contexto.comprimento = comprimento;
 	PMALLOC(token.contexto.lexema, token.contexto.comprimento + 1);
@@ -99,10 +102,12 @@ void token_print(FILE *out, const token_t *token) {
 	fprintf(out,
 		"TOKEN: %s\n"
 		"\tSubtipo: %s\n"
+		"\tArquivo: %s\n"
 		"\tLinha: %u | Coluna: %u\n"
 		"\tLexema: %s\n",
 		__token_codigo_str[token->tipo],
 		subtipo,
+		token->contexto.arquivo,
 		token->contexto.posicao.linha, token->contexto.posicao.coluna,
 		token->contexto.lexema
 	);

@@ -51,7 +51,7 @@ fim:
 }
 
 void adicionar(ACAO_PARAMETROS) {
-	token_t token = token_criar(TK_ID, 0, lexema, comprimento, linha, coluna);
+	token_t token = token_criar(TK_ID, 0, arquivo, lexema, comprimento, linha, coluna);
 
 	// Busca o lexema na tabela de palavras chave.
 	int palavra_chave_index = token_palavra_chave_buscar(&token);
