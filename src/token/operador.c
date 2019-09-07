@@ -76,7 +76,7 @@ const char __operadores_lexemas[][32] = {
 #undef SUBTIPO
 
 /// Função adicionar
-static void operador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void operador_adicionar(ACAO_PARAMETROS);
 
 /// Função to_str
 const char *operador_str(uint32_t subtipo);
@@ -300,7 +300,7 @@ fim:
 	return res;
 }
 
-static void operador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void operador_adicionar(ACAO_PARAMETROS) {
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
 	for (subtipo = 0; strncmp(__operadores_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);

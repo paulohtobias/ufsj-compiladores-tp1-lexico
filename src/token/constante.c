@@ -50,10 +50,10 @@ SUBTIPOS
 static int number_init(afd_t *afd);
 
 /// Funções adicionar.
-static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-static void double_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void str_adicionar(ACAO_PARAMETROS);
+static void char_adicionar(ACAO_PARAMETROS);
+static void int_adicionar(ACAO_PARAMETROS);
+static void double_adicionar(ACAO_PARAMETROS);
 
 /// Funções to_str
 static char *str_to_str(const void *dados, size_t comprimento);
@@ -62,8 +62,8 @@ static char *int_to_str(const void *dados, size_t comprimento);
 static char *double_to_str(const void *dados, size_t comprimento);
 
 /// Funções de erro.
-static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-static void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void str_incompleta(ACAO_PARAMETROS);
+static void char_incompleto(ACAO_PARAMETROS);
 
 /// Outras funções.
 static const char *subtipo_str(uint32_t subtipo);
@@ -282,7 +282,7 @@ static int number_init(afd_t *afd) {
 }
 
 /// adicionar
-static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void str_adicionar(ACAO_PARAMETROS) {
 	token_t token = token_criar(TK_CNST, TK_CNST_STR, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -311,7 +311,7 @@ static void str_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 
 	token_adicionar(&token);
 }
-static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void char_adicionar(ACAO_PARAMETROS) {
 	token_t token = token_criar(TK_CNST, TK_CNST_CHAR, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -334,7 +334,7 @@ static void char_adicionar(const char *lexema, size_t comprimento, int32_t linha
 
 	token_adicionar(&token);
 }
-static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void int_adicionar(ACAO_PARAMETROS) {
 	token_t token = token_criar(TK_CNST, TK_CNST_INT, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -387,7 +387,7 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 
 	token_adicionar(&token);
 }
-static void double_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void double_adicionar(ACAO_PARAMETROS) {
 	token_t token = token_criar(TK_CNST, TK_CNST_DBL, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = subtipo_str;
 
@@ -477,13 +477,13 @@ static char *double_to_str(const void *dados, size_t comprimento) {
 	return str;
 }
 
-static void incompleto(char simbolo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void incompleto(char simbolo, ACAO_PARAMETROS) {
 	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);
 }
-static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void str_incompleta(ACAO_PARAMETROS) {
 	incompleto('"', lexema, comprimento, linha, coluna);
 }
-static void char_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void char_incompleto(ACAO_PARAMETROS) {
 	incompleto('\'', lexema, comprimento, linha, coluna);
 }
 

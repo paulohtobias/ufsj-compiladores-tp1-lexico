@@ -100,7 +100,7 @@ const char *token_subtipo_str(const token_t *token);
 /**
  * Função genérica para criar um novo token.
  */
-token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+token_t token_criar(uint32_t tipo, uint32_t subtipo, ACAO_PARAMETROS);
 
 /**
  * Adiciona o token na lista de tokens bem como na
