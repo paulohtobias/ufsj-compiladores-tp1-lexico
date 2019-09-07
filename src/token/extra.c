@@ -21,7 +21,7 @@
 	SUBTIPO(TK_EXT_CHA_A, "{", "chave-abrir") \
 	SUBTIPO(TK_EXT_CHA_F, "}", "chave-fechar") \
 	SUBTIPO(TK_EXT_VIRGULA, ",", "virgula") \
-	SUBTIPO(TK_EXT_PT_VIRGULA, ";", "ponto-virgula") \
+	SUBTIPO(TK_EXT_PT_VIRGULA, ";", "ponto-virgula")
 
 /// Tipos de extra.
 #define SUBTIPO(cod, lex, str) cod,
