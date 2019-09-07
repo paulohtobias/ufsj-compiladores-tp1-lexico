@@ -36,7 +36,7 @@ enum {
 const char *afd_get_erro(int cod);
 
 
-/// Definindo structs.
+// Definindo structs.
 
 typedef struct afd_transicao_pattern_t {
 	char *name;
@@ -54,7 +54,7 @@ typedef struct afd_estado_t {
 
 	bool final;
 
-	void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+	void (*acao)(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 } afd_estado_t;
 
 typedef struct afd_t {
@@ -69,7 +69,7 @@ int afd_init(afd_t *afd, size_t quantidade_estados);
 /**
  * TODO
  */
-afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna));
+afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna));
 
 /**
  * TODO

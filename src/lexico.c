@@ -7,6 +7,7 @@
  * paulohtobias@outlook.com
  */
 
+#include <string.h>
 #include <ctype.h>
 #include "lexico.h"
 #include "utils.h"
@@ -84,6 +85,7 @@ int lexico_parse(const char *nome_arquivo) {
 
 	// Variáveis de contexto.
 	token_contexto_t contexto;
+	contexto.arquivo = strdup(nome_arquivo);
 	contexto.lexema = src;
 	contexto.comprimento = 0;
 	contexto.posicao.linha = linha;
@@ -113,6 +115,7 @@ int lexico_parse(const char *nome_arquivo) {
 			 */
 			if (estado_atual->acao != NULL) {
 				estado_atual->acao(
+					contexto.arquivo,
 					contexto.lexema, contexto.comprimento,
 					contexto.posicao.linha, contexto.posicao.coluna
 				);
@@ -148,11 +151,13 @@ int lexico_parse(const char *nome_arquivo) {
 	// Se existia alguma ação a ser executada.
 	if (estado_atual->acao != NULL) {
 		estado_atual->acao(
+			contexto.arquivo,
 			contexto.lexema, contexto.comprimento,
 			contexto.posicao.linha, contexto.posicao.coluna
 		);
 	}
 	free(codigo_fonte);
+	free(contexto.arquivo);
 
 	return 0;
 }

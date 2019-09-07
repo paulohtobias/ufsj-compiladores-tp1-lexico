@@ -15,22 +15,24 @@
 
 // X-Macro pra cada tipo de pre-processador.
 #define SUBTIPOS \
-	SUBTIPO(TK_PP_IF, if, "if") \
-	SUBTIPO(TK_PP_IFDEF, ifdef, "ifdef") \
-	SUBTIPO(TK_PP_IFNDEF, ifndef, "ifndef") \
-	SUBTIPO(TK_PP_ENDIF, endif, "endif") \
-	SUBTIPO(TK_PP_DEFINE, define, "define") \
-	SUBTIPO(TK_PP_INCLUDE, include, "include")
+	SUBTIPO(TK_PP_IF, if) \
+	SUBTIPO(TK_PP_IFDEF, ifdef) \
+	SUBTIPO(TK_PP_IFNDEF, ifndef) \
+	SUBTIPO(TK_PP_ELSE, else) \
+	SUBTIPO(TK_PP_ELIF, elif) \
+	SUBTIPO(TK_PP_ENDIF, endif) \
+	SUBTIPO(TK_PP_DEFINE, define) \
+	SUBTIPO(TK_PP_INCLUDE, include)
 
 /// Tipos de pre-processador.
-#define SUBTIPO(cod, nome, str) cod,
+#define SUBTIPO(cod, nome) cod,
 enum {
 	SUBTIPOS
 };
 #undef SUBTIPO
 
 /// Tipos de pre-processador em string.
-#define SUBTIPO(cod, nome, str) str,
+#define SUBTIPO(cod, nome) #nome,
 const char __preprocessadores[][32] = {
 	SUBTIPOS
 };
@@ -39,13 +41,16 @@ size_t __preprocessadores_quantidade = ARR_TAMANHO(__preprocessadores);
 
 
 /// Função adicionar
-static void preprocessador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void preprocessador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função de erro.
-static void preprocessador_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função subtipo_str.
 const char *preprocessador_str(uint32_t subtipo);
+
+/// Função to_str.
+char *preprocessador_to_str(const void *dados, size_t comprimento);
 
 /// Funções init.
 int token_preprocessador_init(afd_t *afd) {
@@ -73,6 +78,7 @@ int token_preprocessador_init(afd_t *afd) {
 	// Estado 2
 	afd_transicao_t transicoes_2[] = {
 		{2, {"[a-z]", "[a-z]", NULL}},
+		{5, {"\\n", "\\n", NULL}},
 		{3, {"[^a-z]", "[^a-z]", NULL}},
 	};
 	plist_append(
@@ -117,7 +123,7 @@ fim:
 	return res;
 }
 
-static void preprocessador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void preprocessador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// Pulando a # e possíveis espaços antes do nome da diretiva.
 	int32_t lexema_offset = 1;
 	while (isspace((unsigned char) lexema[lexema_offset])) {
@@ -141,7 +147,7 @@ static void preprocessador_adicionar(const char *lexema, size_t comprimento, int
 	}
 
 	if (subtipo < __preprocessadores_quantidade) {
-		token_t token = token_criar(TK_PP, subtipo, lexema, comprimento, linha, coluna);
+		token_t token = token_criar(TK_PP, subtipo, arquivo, lexema, comprimento, linha, coluna);
 		token.subtipo_to_str = preprocessador_str;
 
 		// Copiando a # inicial.
@@ -179,7 +185,7 @@ static void preprocessador_adicionar(const char *lexema, size_t comprimento, int
 			}
 		}
 		((char *) token.valor.dados)[token.valor.tamanho] = '\0';
-		token.valor.to_str = strdup;
+		token.valor.to_str = preprocessador_to_str;
 
 		token_adicionar(&token);
 	} else {
@@ -188,7 +194,7 @@ static void preprocessador_adicionar(const char *lexema, size_t comprimento, int
 	}
 }
 
-static void preprocessador_incompleto(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// TODO: warning
 	fprintf(stderr, "diretiva pre-processador incompleta na linha %d coluna %d\n", linha, coluna);
 }
@@ -200,4 +206,8 @@ const char *preprocessador_str(uint32_t subtipo) {
 
 	// TODO: warning
 	return "Erro: subtipo de preprocessador inválido";
+}
+
+char *preprocessador_to_str(const void *dados, size_t comprimento) {
+	return strdup(dados);
 }

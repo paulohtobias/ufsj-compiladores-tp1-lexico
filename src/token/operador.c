@@ -39,7 +39,6 @@
 	SUBTIPO(TK_OP_EL, "&&", "el") \
 	SUBTIPO(TK_OP_ORL, "||", "orl") \
 	SUBTIPO(TK_OP_TER_C, "?", "ter_c") \
-	SUBTIPO(TK_OP_TER_ELSE, ":", "ter_else") \
 	SUBTIPO(TK_OP_ATRIB, "=", "atrib") \
 	SUBTIPO(TK_OP_AUTO_INC, "+=", "auto_inc") \
 	SUBTIPO(TK_OP_AUTO_DEC, "-=", "auto_dec") \
@@ -76,7 +75,7 @@ const char __operadores_lexemas[][32] = {
 #undef SUBTIPO
 
 /// Função adicionar
-static void operador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void operador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função to_str
 const char *operador_str(uint32_t subtipo);
@@ -104,7 +103,6 @@ int token_operador_init(afd_t *afd) {
 		{32, {"\\|", "\\|", NULL}},
 		{35, {"~", "~", NULL}},
 		{36, {"\\?", "\\?", NULL}},
-		{37, {":", ":", NULL}},
 	};
 	afd_op.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
@@ -284,8 +282,6 @@ int token_operador_init(afd_t *afd) {
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 	// Estado 36
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
-	// Estado 37
-	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 
 	if ((res = afd_mesclar_automatos(afd, &afd_op)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
@@ -300,15 +296,32 @@ fim:
 	return res;
 }
 
-static void operador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void operador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
-	for (subtipo = 0; strncmp(__operadores_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);
+	for (subtipo = 0; subtipo < __operadores_quantidade; subtipo++) {
+		size_t i;
+		for (i = 0; __operadores_lexemas[subtipo][i] != '\0' && lexema[i] != '0'; i++) {
+			if (__operadores_lexemas[subtipo][i] != lexema[i]) {
+				break;
+			}
+		}
 
-	token_t token = token_criar(TK_OP, subtipo, lexema, comprimento, linha, coluna);
-	token.subtipo_to_str = operador_str;
+		// Houve casamento.
+		if (__operadores_lexemas[subtipo][i] == '\0') {
+			break;
+		}
+	}
 
-	token_adicionar(&token);
+	if (subtipo < __operadores_quantidade) {
+		token_t token = token_criar(TK_OP, subtipo, arquivo, lexema, comprimento, linha, coluna);
+		token.subtipo_to_str = operador_str;
+
+		token_adicionar(&token);
+	} else {
+		// TODO: erro
+		fprintf(stderr, "símbolo %.*s inválido\n", (int) comprimento, lexema);
+	}
 }
 
 const char *operador_str(uint32_t subtipo) {

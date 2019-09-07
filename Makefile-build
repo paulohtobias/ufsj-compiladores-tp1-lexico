@@ -17,14 +17,14 @@ LIB_NAME :=
 
 # OS-dependent variables
 ifeq ($(OS),Windows_NT)
-	BIN := main-$(TARGET).exe
+	BIN := pcc-$(TARGET).exe
 	DLE := dll
 	ODIR := obj/windows
 
 	CFLAGS+= -mno-ms-bitfields
 #	LOADLIBES := -municode
 else
-	BIN := main-$(TARGET).out
+	BIN := pcc-$(TARGET).out
 	DLE := so
 	ODIR := obj/linux
 endif

@@ -46,7 +46,7 @@ int afd_init(afd_t *afd, size_t quantidade_estados) {
 	return AFD_OK;
 }
 
-afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna)) {
+afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna)) {
 	afd_estado_t estado;
 
 	estado.final = final;

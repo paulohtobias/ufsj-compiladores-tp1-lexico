@@ -21,6 +21,7 @@
 	SUBTIPO(TK_EXT_CHA_A, "{", "chave-abrir") \
 	SUBTIPO(TK_EXT_CHA_F, "}", "chave-fechar") \
 	SUBTIPO(TK_EXT_VIRGULA, ",", "virgula") \
+	SUBTIPO(TK_EXT_DOIS_PONTOS, ":", "dois-pontos") \
 	SUBTIPO(TK_EXT_PT_VIRGULA, ";", "ponto-virgula")
 
 /// Tipos de extra.
@@ -46,7 +47,7 @@ const char __extras_lexemas[][32] = {
 #undef SUBTIPO
 
 /// Função adicionar
-static void extra_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+static void extra_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função to_str
 const char *extra_str(uint32_t subtipo);
@@ -83,12 +84,12 @@ fim:
 	return res;
 }
 
-static void extra_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+static void extra_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
 	for (subtipo = 0; strncmp(__extras_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);
 
-	token_t token = token_criar(TK_EXT, subtipo, lexema, comprimento, linha, coluna);
+	token_t token = token_criar(TK_EXT, subtipo, arquivo, lexema, comprimento, linha, coluna);
 	token.subtipo_to_str = extra_str;
 
 	token_adicionar(&token);

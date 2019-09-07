@@ -51,13 +51,16 @@ const char *token_subtipo_str(const token_t *token) {
 	return "";
 }
 
-token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	token_t token;
 
 	// Tipo e sub-tipo.
 	token.tipo = tipo;
 	token.subtipo = subtipo;
 	token.subtipo_to_str = NULL;
+
+	// Arquivo.
+	token.contexto.arquivo = strdup(arquivo);
 
 	// Lexema.
 	token.contexto.comprimento = comprimento;
@@ -99,15 +102,20 @@ void token_print(FILE *out, const token_t *token) {
 	fprintf(out,
 		"TOKEN: %s\n"
 		"\tSubtipo: %s\n"
+		"\tArquivo: %s\n"
 		"\tLinha: %u | Coluna: %u\n"
-		"\tLexema: %s\n"
-		"\tValor: %s\n\n",
+		"\tLexema: %s\n",
 		__token_codigo_str[token->tipo],
 		subtipo,
+		token->contexto.arquivo,
 		token->contexto.posicao.linha, token->contexto.posicao.coluna,
-		token->contexto.lexema,
-		_valor != NULL ? _valor : ""
+		token->contexto.lexema
 	);
+	if (_valor != NULL) {
+		fprintf(out, "\tValor: %s\n\n", _valor);
+	} else {
+		fprintf(out, "\n");
+	}
 
 	free(_valor);
 }
