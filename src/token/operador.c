@@ -303,12 +303,29 @@ fim:
 static void operador_adicionar(ACAO_PARAMETROS) {
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
-	for (subtipo = 0; strncmp(__operadores_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);
+	for (subtipo = 0; subtipo < __operadores_quantidade; subtipo++) {
+		size_t i;
+		for (i = 0; __operadores_lexemas[subtipo][i] != '\0' && lexema[i] != '0'; i++) {
+			if (__operadores_lexemas[subtipo][i] != lexema[i]) {
+				break;
+			}
+		}
 
-	token_t token = token_criar(TK_OP, subtipo, lexema, comprimento, linha, coluna);
-	token.subtipo_to_str = operador_str;
+		// Houve casamento.
+		if (__operadores_lexemas[subtipo][i] == '\0') {
+			break;
+		}
+	}
 
-	token_adicionar(&token);
+	if (subtipo < __operadores_quantidade) {
+		token_t token = token_criar(TK_OP, subtipo, lexema, comprimento, linha, coluna);
+		token.subtipo_to_str = operador_str;
+
+		token_adicionar(&token);
+	} else {
+		// TODO: erro
+		fprintf(stderr, "símbolo %.*s inválido\n", (int) comprimento, lexema);
+	}
 }
 
 const char *operador_str(uint32_t subtipo) {

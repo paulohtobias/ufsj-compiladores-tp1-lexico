@@ -15,22 +15,24 @@
 
 // X-Macro pra cada tipo de pre-processador.
 #define SUBTIPOS \
-	SUBTIPO(TK_PP_IF, if, "if") \
-	SUBTIPO(TK_PP_IFDEF, ifdef, "ifdef") \
-	SUBTIPO(TK_PP_IFNDEF, ifndef, "ifndef") \
-	SUBTIPO(TK_PP_ENDIF, endif, "endif") \
-	SUBTIPO(TK_PP_DEFINE, define, "define") \
-	SUBTIPO(TK_PP_INCLUDE, include, "include")
+	SUBTIPO(TK_PP_IF, if) \
+	SUBTIPO(TK_PP_IFDEF, ifdef) \
+	SUBTIPO(TK_PP_IFNDEF, ifndef) \
+	SUBTIPO(TK_PP_ELSE, else) \
+	SUBTIPO(TK_PP_ELIF, elif) \
+	SUBTIPO(TK_PP_ENDIF, endif) \
+	SUBTIPO(TK_PP_DEFINE, define) \
+	SUBTIPO(TK_PP_INCLUDE, include)
 
 /// Tipos de pre-processador.
-#define SUBTIPO(cod, nome, str) cod,
+#define SUBTIPO(cod, nome) cod,
 enum {
 	SUBTIPOS
 };
 #undef SUBTIPO
 
 /// Tipos de pre-processador em string.
-#define SUBTIPO(cod, nome, str) str,
+#define SUBTIPO(cod, nome) #nome,
 const char __preprocessadores[][32] = {
 	SUBTIPOS
 };
@@ -46,6 +48,9 @@ static void preprocessador_incompleto(ACAO_PARAMETROS);
 
 /// Função subtipo_str.
 const char *preprocessador_str(uint32_t subtipo);
+
+/// Função to_str.
+char *preprocessador_to_str(const void *dados, size_t comprimento);
 
 /// Funções init.
 int token_preprocessador_init(afd_t *afd) {
@@ -73,6 +78,7 @@ int token_preprocessador_init(afd_t *afd) {
 	// Estado 2
 	afd_transicao_t transicoes_2[] = {
 		{2, {"[a-z]", "[a-z]", NULL}},
+		{5, {"\\n", "\\n", NULL}},
 		{3, {"[^a-z]", "[^a-z]", NULL}},
 	};
 	plist_append(
@@ -179,7 +185,7 @@ static void preprocessador_adicionar(ACAO_PARAMETROS) {
 			}
 		}
 		((char *) token.valor.dados)[token.valor.tamanho] = '\0';
-		token.valor.to_str = strdup;
+		token.valor.to_str = preprocessador_to_str;
 
 		token_adicionar(&token);
 	} else {
@@ -200,4 +206,8 @@ const char *preprocessador_str(uint32_t subtipo) {
 
 	// TODO: warning
 	return "Erro: subtipo de preprocessador inválido";
+}
+
+char *preprocessador_to_str(const void *dados, size_t comprimento) {
+	return strdup(dados);
 }
