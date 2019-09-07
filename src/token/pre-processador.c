@@ -41,10 +41,10 @@ size_t __preprocessadores_quantidade = ARR_TAMANHO(__preprocessadores);
 
 
 /// Função adicionar
-static void preprocessador_adicionar(ACAO_PARAMETROS);
+static void preprocessador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função de erro.
-static void preprocessador_incompleto(ACAO_PARAMETROS);
+static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função subtipo_str.
 const char *preprocessador_str(uint32_t subtipo);
@@ -123,7 +123,7 @@ fim:
 	return res;
 }
 
-static void preprocessador_adicionar(ACAO_PARAMETROS) {
+static void preprocessador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// Pulando a # e possíveis espaços antes do nome da diretiva.
 	int32_t lexema_offset = 1;
 	while (isspace((unsigned char) lexema[lexema_offset])) {
@@ -194,7 +194,7 @@ static void preprocessador_adicionar(ACAO_PARAMETROS) {
 	}
 }
 
-static void preprocessador_incompleto(ACAO_PARAMETROS) {
+static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// TODO: warning
 	fprintf(stderr, "diretiva pre-processador incompleta na linha %d coluna %d\n", linha, coluna);
 }

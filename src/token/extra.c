@@ -47,7 +47,7 @@ const char __extras_lexemas[][32] = {
 #undef SUBTIPO
 
 /// Função adicionar
-static void extra_adicionar(ACAO_PARAMETROS);
+static void extra_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
 /// Função to_str
 const char *extra_str(uint32_t subtipo);
@@ -84,7 +84,7 @@ fim:
 	return res;
 }
 
-static void extra_adicionar(ACAO_PARAMETROS) {
+static void extra_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
 	for (subtipo = 0; strncmp(__extras_lexemas[subtipo], lexema, comprimento) != 0; subtipo++);
