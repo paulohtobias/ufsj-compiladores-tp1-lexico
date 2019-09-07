@@ -12,7 +12,7 @@
 #include "utils.h"
 #include "plist.h"
 
-// X-Macro pra cada tipo de constante.
+// X-Macro pra cada tipo de operador.
 #define SUBTIPOS \
 	SUBTIPO(TK_OP_SETA, "->", "seta") \
 	SUBTIPO(TK_OP_PONTO, ".", "ponto") \
@@ -108,7 +108,7 @@ int token_operador_init(afd_t *afd) {
 	};
 	afd_op.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
-	// Estado x
+	// Estado 1
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 
 	// Estado 2
@@ -286,9 +286,6 @@ int token_operador_init(afd_t *afd) {
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 	// Estado 37
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
-
-
-	//afd_print(&afd_op);
 
 	if ((res = afd_mesclar_automatos(afd, &afd_op)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
