@@ -7,7 +7,7 @@
 	do { \
 		out = fopen(nome, modo); \
 		if (out == NULL) { \
-			fprintf(stderr, "Erro ao abrir o arquivo de saída %s. ", nome); \
+			fprintf(stderr, "Erro ao abrir o arquivo de saída %s: ", nome); \
 			perror(""); \
 			retval = EXIT_FAILURE; \
 			goto fim; \
@@ -20,7 +20,6 @@ int main(int argc, char const *argv[]) {
 	if (argc >= 2) {
 		filename = argv[1];
 	}
-
 
 	// Inicializando o módulo léxico.
 	lexico_init();
@@ -65,6 +64,5 @@ int main(int argc, char const *argv[]) {
 
 fim:
 	// TODO: lexico_finalizar();
-
 	return retval;
 }

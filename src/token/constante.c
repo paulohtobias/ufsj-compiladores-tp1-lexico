@@ -245,8 +245,14 @@ static int number_init(afd_t *afd) {
 		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), true, int_adicionar)
 	);
 
-	// Estado 3. Vazio.
-	plist_append(afd_number.estados, afd_criar_estado(NULL, 0, false, NULL));
+	// Estado 3. Operador . para membro de struct.
+	afd_transicao_t transicoes_3[] = {
+		{4, {"\\d", "\\d", NULL}},
+	};
+	plist_append(
+		afd_number.estados,
+		afd_criar_estado(transicoes_3, ARR_TAMANHO(transicoes_3), false, NULL)
+	);
 
 	// Estado 4. Double
 	afd_transicao_t transicoes_4[] = {
