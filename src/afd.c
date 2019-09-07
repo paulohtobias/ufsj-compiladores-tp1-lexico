@@ -108,74 +108,114 @@ afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char
 	return NULL;
 }
 
-int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_t *sub) {
+int afd_mesclar_automatos(afd_t *afd, const afd_t *afd_novo) {
 	int res = AFD_OK;
 
-	afd_transicao_t *transicao = NULL;
+	size_t afd_tamanho_original = plist_len(afd->estados);
 
-	// Estado inicial.
-	afd_estado_t *estado_atual = afd->estados;
+	// Lista com os novos índices para cada estado do no AFD.
+	int32_t *afd_novo_indices = NULL;
+	PMALLOC(afd_novo_indices, plist_len(afd_novo->estados));
+	memset(afd_novo_indices, -1, plist_len(afd_novo->estados) * sizeof *afd_novo_indices);
+	afd_novo_indices[0] = 0; // Estados iniciais são iguais.
 
-	int32_t i = 0;
-	for (i = 0; i < transicoes_quantidade - 1; i++) {
-		size_t estado_atual_indice = estado_atual - afd->estados;
-		transicao = afd_estado_get_transicao(estado_atual, transicoes[i].name);
+	// Filas de índices
+	int32_t afd_estado_atual_fila_indice = 0;
+	int32_t *afd_estado_atual_fila = NULL;
+	plist_create(afd_estado_atual_fila, 1);
+	plist_append(afd_estado_atual_fila, 0);
 
-		// Se a transição intermediária não existir, então criamos um novo estado.
-		if (transicao == NULL) {
-			afd_t novo_sub;
-			afd_init(&novo_sub, 1);
-			plist_create(novo_sub.estados[0].transicoes, 1);
-			memset(novo_sub.estados[0].transicoes, 0, sizeof *novo_sub.estados[0].transicoes);
+	int32_t afd_novo_estado_atual_fila_indice = 0;
+	int32_t *afd_novo_estado_atual_fila = NULL;
+	plist_create(afd_novo_estado_atual_fila, 1);
+	plist_append(afd_novo_estado_atual_fila, 0);
 
-			res = afd_add_subautomato(afd, transicoes, i + 1, &novo_sub);
+	// Encontrando os novos índices dos estados do novo AFD.
+	for (int32_t i = 0; i < plist_len(afd_novo->estados); i++) {
+		int32_t afd_estado_atual_indice = afd_estado_atual_fila[afd_estado_atual_fila_indice++];
+		int32_t afd_novo_estado_atual_indice = afd_novo_estado_atual_fila[afd_novo_estado_atual_fila_indice++];
 
-			// Um realloc pode ocorrer em afd_add_subautomato que fará com que o ponteiro
-			// estado_atual esteja desatualizado.
-			estado_atual = &afd->estados[estado_atual_indice];
+		//printf("Estados atuais:\n\tDEST: %d\n\tNOV: %d\n", afd_estado_atual_indice + 1, afd_novo_estado_atual_indice + 1);
 
-			// Agora procuramos novamente a transição. Dessa vez não deve ser NULL.
-			transicao = afd_estado_get_transicao(estado_atual, transicoes[i].name);
+		afd_estado_t *afd_estado_atual = &afd->estados[afd_estado_atual_indice];
+		const afd_estado_t *afd_novo_estado_atual = &afd_novo->estados[afd_novo_estado_atual_indice];
+
+		for (int32_t j = 0; j < plist_len(afd_novo_estado_atual->transicoes); j++) {
+			const afd_transicao_t *afd_novo_transicao = &afd_novo_estado_atual->transicoes[j];
+
+			int32_t novo_indice = afd_novo_indices[afd_novo_transicao->estado_indice];
+			// Procura pela transição do AFD novo nas transições do estado atual.
+			if (novo_indice == -1) {
+				// Primeiro verifica se já existe uma transição igual no AFD destino.
+				// Se houver, o índice usado será esse.
+				afd_transicao_t *afd_transicao = afd_estado_get_transicao(afd_estado_atual, afd_novo_transicao->pattern.name);
+
+				if (afd_transicao == NULL) {
+					// Seta o índice do estado.
+					afd_novo_indices[afd_novo_transicao->estado_indice] = plist_len(afd->estados);
+					novo_indice = afd_novo_indices[afd_novo_transicao->estado_indice];
+
+					// Adiciona um novo estado no AFD destino.
+					plist_append(afd->estados, afd_criar_estado(NULL, 0, false, NULL));
+
+					// A inserção na lista pode ter causado um realloc.
+					// Isso abre a possibilidade do endereço mudar. Portanto,
+					// é necessário redefinir o valor de afd_estado_atual.
+					afd_estado_atual = &afd->estados[afd_estado_atual_indice];
+
+					//printf("AFD destino NÃO possui transição %s\n\tNovo índice: %d\n", afd_novo_transicao->pattern.name, novo_indice + 1);
+				} else {
+					// Seta o índice do estado.
+					novo_indice = afd_transicao->estado_indice;
+					afd_novo_indices[afd_novo_transicao->estado_indice] = novo_indice;
+
+					//printf("AFD destino possui transição %s\n", afd_novo_transicao->pattern.name);
+				}
+
+				plist_append(afd_estado_atual_fila, novo_indice);
+				plist_append(afd_novo_estado_atual_fila, afd_novo_transicao->estado_indice);
+			}
+		}
+	}
+
+	for (int i = 0; i < plist_len(afd_novo->estados); i++) {
+		//printf("%d => %d\n", i + 1, afd_novo_indices[i] + 1);
+		afd_estado_t *afd_estado_atual = &afd->estados[afd_novo_indices[i]];
+		const afd_estado_t *afd_novo_estado_atual = &afd_novo->estados[i];
+
+		// Tenta mesclar os dois estados. A única restrição é que pelo
+		// menos um dos dois não deve ser final.
+		if (afd_estado_atual->final && afd_novo_estado_atual->final) {
+			res = AFD_EEXISTE;
+			goto fim;
 		}
 
-		estado_atual = &afd->estados[transicao->estado_indice];
-	}
-
-	transicao = afd_estado_get_transicao(estado_atual, transicoes[i].name);
-
-	if (transicao != NULL) {
-		// TODO: tentar fundir.
-		res = AFD_EEXISTE;
-		goto fim;
-	}
-
-	// Efim é criada uma transição do estado atual para o novo estado.
-	// transicoes[i] se refere à ultima instrução do vetor.
-	PCALLOC(transicao, 1);
-	transicao->pattern.name = strdup(transicoes[i].name);
-	transicao->pattern.compiled = regex_compile(transicoes[i].str, PCRE2_ZERO_TERMINATED);
-	transicao->estado_indice = plist_len(afd->estados);
-
-	// Adicionamos a nova transição no último estado.
-	plist_append(estado_atual->transicoes, *transicao);
-
-	// Os novos estados são adicionados enquanto o índice de
-	// suas transições é consertado.
-	for (i = 0; i < plist_len(sub->estados); i++) {
-		for (int32_t j = 0; j < plist_len(sub->estados[i].transicoes); j++) {
-			sub->estados[i].transicoes[j].estado_indice += transicao->estado_indice;
+		// Se o estado do AFD novo for final, então o do destino também
+		// será final.
+		if (afd_novo_estado_atual->final) {
+			afd_estado_atual->final = true;
+			afd_estado_atual->acao = afd_novo_estado_atual->acao;
+		} else if (afd_estado_atual->acao == NULL) {
+			afd_estado_atual->acao = afd_novo_estado_atual->acao;
 		}
 
-		plist_insert(afd->estados, sub->estados[i], transicao->estado_indice + i);
+		// Adiciona as transições para o novo estado.
+		for (int j = 0; j < plist_len(afd_novo_estado_atual->transicoes); j++) {
+			const afd_transicao_t *afd_novo_transicao = &afd_novo_estado_atual->transicoes[j];
+
+			afd_transicao_t *afd_transicao = afd_estado_get_transicao(afd_estado_atual, afd_novo_transicao->pattern.name);
+			if (afd_transicao == NULL) {
+				afd_transicao_t afd_transicao_nova = *afd_novo_transicao;
+				afd_transicao_nova.estado_indice = afd_novo_indices[afd_novo_transicao->estado_indice];
+
+				plist_append(afd_estado_atual->transicoes, afd_transicao_nova);
+			}
+		}
 	}
 
-	// Como o valor da nova transição foi copiado para o vetor do estado,
-	// podemos librerar a memória.
-	free(transicao);
-
+	//printf("DEST\n");
+	//afd_print(afd);
 fim:
-	afd_print(afd);
-
 	return res;
 }
 

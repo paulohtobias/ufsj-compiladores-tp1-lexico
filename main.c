@@ -45,7 +45,7 @@ int main(int argc, char const *argv[]) {
 			for (int k = 0; k < plist_len(tabela_simbolos[i][j]); k++) {
 				const token_t *token = &lista_tokens[tabela_simbolos[i][j][k]];
 
-				const char *modo = j == 0 && k == 0 ? "wb" : "ab";
+				const char *modo = k == 0 ? "wb" : "ab";
 
 				sprintf(arquivo_saida, "saida/%s-%s.txt", token_tipo_str(token), token_subtipo_str(token));
 				ABRIR_SAIDA(out, arquivo_saida, modo);

@@ -98,7 +98,7 @@ afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char
 /**
  * TODO
  */
-int afd_add_subautomato(afd_t *afd, const afd_transicao_pattern_t *transicoes, int32_t transicoes_quantidade, afd_t *sub);
+int afd_mesclar_automatos(afd_t *afd, const afd_t *afd_novo);
 
 void afd_print(const afd_t *afd);
 
