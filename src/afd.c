@@ -111,8 +111,6 @@ afd_transicao_t *afd_estado_get_transicao(const afd_estado_t *estado, const char
 int afd_mesclar_automatos(afd_t *afd, const afd_t *afd_novo) {
 	int res = AFD_OK;
 
-	size_t afd_tamanho_original = plist_len(afd->estados);
-
 	// Lista com os novos índices para cada estado do no AFD.
 	int32_t *afd_novo_indices = NULL;
 	PMALLOC(afd_novo_indices, plist_len(afd_novo->estados));
@@ -220,18 +218,18 @@ fim:
 }
 
 void afd_print(const afd_t *afd) {
-	printf("============ AFD ===========\n");
+	printf("============ AFD (%zu estados) ===========\n", plist_len(afd->estados));
 	for (int i = 0; i < plist_len(afd->estados); i++) {
 		const afd_estado_t *estado = &afd->estados[i];
 
-		printf("ESTADO %d/%zu (%zu transições) %s\n",
-			i + 1, plist_len(afd->estados), plist_len(estado->transicoes),
+		printf("ESTADO %d (%zu transições) %s\n",
+			i, plist_len(estado->transicoes),
 			estado->final ? "FINAL" : "");
 
 		for (int j = 0; j < plist_len(estado->transicoes); j++) {
 			const afd_transicao_t *transicao = &estado->transicoes[j];
 
-			printf("\t%d/%zu \t %d => %d \t %s\n", j + 1, plist_len(estado->transicoes), i + 1, transicao->estado_indice + 1, transicao->pattern.name);
+			printf("\ttr %d \t %d => %d \t %s\n", j, i, transicao->estado_indice, transicao->pattern.name);
 		}
 
 		printf("\n");
