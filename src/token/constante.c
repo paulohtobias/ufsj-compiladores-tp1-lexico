@@ -10,6 +10,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <inttypes.h>
+#include <float.h>
 #include <errno.h>
 #include "token.h"
 #include "utils.h"
@@ -23,12 +24,9 @@
 	SUBTIPO(TK_CNST_UINT, uint, "inteiro-unsigned") \
 	SUBTIPO(TK_CNST_LINT, lint, "inteiro-long") \
 	SUBTIPO(TK_CNST_ULINT, ulint, "inteiro-unsigned_long") \
-
-	/*
 	SUBTIPO(TK_CNST_FLT, float, "float") \
 	SUBTIPO(TK_CNST_DBL, double, "double") \
 	SUBTIPO(TK_CNST_LDBL, ldouble, "double-long")
-	*/
 
 /// Tipos de constante.
 #define SUBTIPO(cod, nome, str) cod,
@@ -61,6 +59,7 @@ static void double_adicionar(const char *lexema, size_t comprimento, int32_t lin
 static char *str_to_str(const void *dados, size_t comprimento);
 static char *char_to_str(const void *dados, size_t comprimento);
 static char *int_to_str(const void *dados, size_t comprimento);
+static char *double_to_str(const void *dados, size_t comprimento);
 
 /// Funções de erro.
 static void str_incompleta(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
@@ -373,6 +372,8 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 		fprintf(stderr, "constante inteira é grande demais.\n");
 	}
 
+	// TODO: verificar se cabe em um int para reduzir tamanho.
+
 	token.valor.tamanho = tamanho;
 	PMALLOC(token.valor.dados, token.valor.tamanho);
 	memcpy(token.valor.dados, &valor, sizeof valor);
@@ -381,7 +382,60 @@ static void int_adicionar(const char *lexema, size_t comprimento, int32_t linha,
 	token_adicionar(&token);
 }
 static void double_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+	token_t token = token_criar(TK_CNST, TK_CNST_DBL, lexema, comprimento, linha, coluna);
+	token.subtipo_to_str = subtipo_str;
 
+	// Convertendo o lexema para double.
+	errno = 0;
+	char *fim = NULL;
+	long double valor = strtold(token.contexto.lexema, &fim);
+	size_t tamanho = sizeof valor;
+
+	// Verificando se o sufixo é válido.
+	bool f = false, l = false;
+	bool sufixo_valido = false;
+	while (*fim != '\0') {
+		char sufixo = tolower((unsigned char) *fim);
+
+		sufixo_valido = false;
+		if (!f && sufixo == 'f') {
+			fim++;
+			f = sufixo_valido = true;
+
+			// Alterando o subtipo.
+			token.subtipo = TK_CNST_FLT;
+		}
+		if (!l && sufixo == 'l') {
+			fim++;
+			l = sufixo_valido = true;
+
+			// Alterando o subtipo.
+			token.subtipo = TK_CNST_LDBL;
+		}
+
+		if (!sufixo_valido || (f && l)) {
+			// TODO: warning: também melhorar mensagem.
+			fprintf(stderr, "sufixo %s inválido (%d, %d)\n%s\n", fim, linha, coluna, token.contexto.lexema);
+			break;
+		}
+	}
+
+	// Verificando se houve overflow.
+	if (errno == ERANGE) {
+		// TODO: warning
+		if (valor == 0) {
+			fprintf(stderr, "constante double é pequena demais.\n");
+		} else {
+			fprintf(stderr, "constante double é grande demais.\n");
+		}
+	}
+
+	token.valor.tamanho = tamanho;
+	PMALLOC(token.valor.dados, token.valor.tamanho);
+	memcpy(token.valor.dados, &valor, sizeof valor);
+	token.valor.to_str = double_to_str;
+
+	token_adicionar(&token);
 }
 
 /// to_str
@@ -399,14 +453,23 @@ static char *char_to_str(const void *dados, size_t comprimento) {
 static char *int_to_str(const void *dados, size_t comprimento) {
 	char *str = malloc(64);
 
-	long valor;
+	uintmax_t valor;
 	memcpy(&valor, dados, sizeof valor);
 
 	sprintf(str, "%"PRIuMAX, valor);
 
 	return str;
 }
+static char *double_to_str(const void *dados, size_t comprimento) {
+	char *str = malloc(64);
 
+	long double valor;
+	memcpy(&valor, dados, sizeof valor);
+
+	sprintf(str, "%Lf", valor);
+
+	return str;
+}
 
 static void incompleto(char simbolo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);
