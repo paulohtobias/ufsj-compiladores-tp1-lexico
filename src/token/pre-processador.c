@@ -62,8 +62,8 @@ int token_preprocessador_init(afd_t *afd) {
 
 	// Estado 1
 	afd_transicao_t transicoes_1[] = {
-		{1, {"[a-z]", "[a-z]", NULL}},
-		{2, {"[^a-z]", "[^a-z]", NULL}},
+		{1, {"[ \t]", "[ \t]", NULL}},
+		{2, {"[a-z]", "[a-z]", NULL}},
 	};
 	plist_append(
 		afd_pp.estados,
@@ -72,9 +72,8 @@ int token_preprocessador_init(afd_t *afd) {
 
 	// Estado 2
 	afd_transicao_t transicoes_2[] = {
-		{2, {"[^\\\\\\n]", "[^\\\\\\n]", NULL}},
-		{3, {"\\\\", "\\\\", NULL}},
-		{4, {"\\n", "\\n", NULL}},
+		{2, {"[a-z]", "[a-z]", NULL}},
+		{3, {"[^a-z]", "[^a-z]", NULL}},
 	};
 	plist_append(
 		afd_pp.estados,
@@ -83,12 +82,23 @@ int token_preprocessador_init(afd_t *afd) {
 
 	// Estado 3
 	afd_transicao_t transicoes_3[] = {
-		{2, {"[\\S\\n]", "[\\S\\n]", NULL}},
-		{3, {"\\s", "\\s", NULL}},
+		{3, {"[^\\\\\\n]", "[^\\\\\\n]", NULL}},
+		{4, {"\\\\", "\\\\", NULL}},
+		{5, {"\\n", "\\n", NULL}},
 	};
 	plist_append(
 		afd_pp.estados,
 		afd_criar_estado(transicoes_3, ARR_TAMANHO(transicoes_3), false, NULL)
+	);
+
+	// Estado 4
+	afd_transicao_t transicoes_4[] = {
+		{3, {"[\\S\\n]", "[\\S\\n]", NULL}},
+		{4, {"\\s", "\\s", NULL}},
+	};
+	plist_append(
+		afd_pp.estados,
+		afd_criar_estado(transicoes_4, ARR_TAMANHO(transicoes_4), false, NULL)
 	);
 
 	// Estado Final
@@ -108,12 +118,18 @@ fim:
 }
 
 static void preprocessador_adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
+	// Pulando a # e possíveis espaços antes do nome da diretiva.
+	int32_t lexema_offset = 1;
+	while (isspace((unsigned char) lexema[lexema_offset])) {
+		lexema_offset++;
+	}
+
 	// subtipo é o índice do lexema na tabela.
 	int subtipo;
 	for (subtipo = 0; subtipo < __preprocessadores_quantidade; subtipo++) {
 		size_t i;
-		for (i = 0; __preprocessadores[subtipo][i] != '\0' && lexema[i + 1] != '0'; i++) {
-			if (__preprocessadores[subtipo][i] != lexema[i + 1]) {
+		for (i = 0; __preprocessadores[subtipo][i] != '\0' && lexema[i + lexema_offset] != '0'; i++) {
+			if (__preprocessadores[subtipo][i] != lexema[i + lexema_offset]) {
 				break;
 			}
 		}
@@ -128,9 +144,14 @@ static void preprocessador_adicionar(const char *lexema, size_t comprimento, int
 		token_t token = token_criar(TK_PP, subtipo, lexema, comprimento, linha, coluna);
 		token.subtipo_to_str = preprocessador_str;
 
+		// Copiando a # inicial.
+		token.valor.tamanho = 1;
+		PMALLOC(token.valor.dados, token.valor.tamanho);
+		((char *) token.valor.dados)[0] = '#';
+
 		// Convertendo o lexema para uma única linha.
-		int32_t posicao_inicial = 0;
-		int32_t posicao_final = 0;
+		int32_t posicao_inicial = lexema_offset;
+		int32_t posicao_final = lexema_offset;
 		int32_t posicao_barra = -1;
 
 		for (int32_t i = 0; i < token.contexto.comprimento; i++) {
