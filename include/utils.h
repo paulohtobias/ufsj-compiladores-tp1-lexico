@@ -24,6 +24,19 @@
 #define regex_unicode_letter "\\p{Ll}\\p{Lu}\\p{Lo}_$"
 #define REGEX_OPTIONS PCRE2_UTF | PCRE2_ANCHORED | PCRE2_NO_AUTO_CAPTURE
 
+/// Cores
+#define _COR(codigo, negrito) "\033[" #negrito codigo "m"
+#define COR(codigo) _COR(codigo, 0)
+#define COR_NEGRITO(codigo) _COR(codigo, 1)
+#define _VERMELHO ";31"
+#define _VERDE    ";32"
+#define _AMARELO  ";33"
+#define _AZUL     ";34"
+#define _MAGENTA  ";35"
+#define _CIANO    ";36"
+#define _RESET    ""
+
+
 char *file_to_str(const char *filename, size_t *len);
 
 int8_t utf8_simbolo_comprimento(const char *str);

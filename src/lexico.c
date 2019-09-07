@@ -29,7 +29,7 @@ int lexico_init() {
 	}
 
 	// DELETE-ME
-	afd_print(afd_lexico);
+	//afd_print(afd_lexico);
 	//exit(0);
 
 	return 0;

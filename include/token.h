@@ -14,6 +14,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "afd.h"
+#include "log.h"
 
 // X-macro para gerar os códigos de token.
 #define TOKEN_CODIGOS \
