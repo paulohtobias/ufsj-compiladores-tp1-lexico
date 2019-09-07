@@ -21,10 +21,6 @@ void adicionar(const char *lexema, size_t comprimento, int32_t linha, int32_t co
 int token_identificador_init(afd_t *afd) {
 	int res;
 
-	// Inicializando a tabela de símbolos de identificador.
-	plist_create(tabela_simbolos[TK_ID], 1);
-	tabela_simbolos[TK_ID][0] = NULL;
-
 	// Construindo o AFD.
 	afd_t afd_id;
 	afd_init(&afd_id, 1);
@@ -43,8 +39,14 @@ int token_identificador_init(afd_t *afd) {
 
 	if ((res = afd_mesclar_automatos(afd, &afd_id)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		goto fim;
 	}
 
+	// Inicializando a tabela de símbolos de identificador.
+	plist_create(tabela_simbolos[TK_ID], 1);
+	tabela_simbolos[TK_ID][0] = NULL;
+
+fim:
 	return res;
 }
 

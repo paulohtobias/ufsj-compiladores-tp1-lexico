@@ -144,6 +144,14 @@ int lexico_parse(const char *nome_arquivo) {
 			moveu = false;
 		}
 	}
+
+	// Se existia alguma ação a ser executada.
+	if (estado_atual->acao != NULL) {
+		estado_atual->acao(
+			contexto.lexema, contexto.comprimento,
+			contexto.posicao.linha, contexto.posicao.coluna
+		);
+	}
 	free(codigo_fonte);
 
 	return 0;

@@ -22,10 +22,11 @@
 	TOKEN_CODIGO(TK_CNST, constante, "Constante") \
 	TOKEN_CODIGO(TK_OP, operador, "Operador") \
 	TOKEN_CODIGO(TK_EXT, extra, "Extra") \
+	TOKEN_CODIGO(TK_CMT, comentario, "Comentário") \
 
 	/*\
 	TOKEN_CODIGO(TK_PP, preprocessador, "Pré-processador") \
-	TOKEN_CODIGO(TK_CMT, comentario, "Comentário")*/
+	*/
 
 
 /// Tipos básicos de token.
