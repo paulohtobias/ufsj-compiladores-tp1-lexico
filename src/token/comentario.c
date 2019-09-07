@@ -74,7 +74,7 @@ int token_comentario_init(afd_t *afd) {
 	plist_append(afd_cmt.estados, afd_criar_estado(NULL, 0, true, comentario_adicionar));
 
 	if ((res = afd_mesclar_automatos(afd, &afd_cmt)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 		goto fim;
 	}
 

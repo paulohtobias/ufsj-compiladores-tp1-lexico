@@ -111,7 +111,7 @@ int token_preprocessador_init(afd_t *afd) {
 	plist_append(afd_pp.estados, afd_criar_estado(NULL, 0, true, preprocessador_adicionar));
 
 	if ((res = afd_mesclar_automatos(afd, &afd_pp)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 		goto fim;
 	}
 
@@ -166,8 +166,10 @@ static void preprocessador_adicionar(const char *arquivo, const char *lexema, si
 			} else if (token.contexto.lexema[i] == '\n') {
 				if (posicao_barra != -1) {
 					if (posicao_barra + 1 < i) {
-						// TODO: warning
-						fprintf(stderr, "warning: backslash and newline separated by space linha %d coluna %d\n", linha, coluna);
+						LOG_WARNING(
+							arquivo, linha, coluna, lexema, comprimento,
+							"espaços antes da barra invertida (\\) antes da quebra de linha"
+						);
 					}
 
 					posicao_final = posicao_barra;
@@ -189,8 +191,10 @@ static void preprocessador_adicionar(const char *arquivo, const char *lexema, si
 
 		token_adicionar(&token);
 	} else {
-		// TODO: erro
-		fprintf(stderr, "invalid preprocessing directive linha %d coluna %d\n", linha, coluna);
+		LOG_ERRO(
+			arquivo, linha, coluna, lexema, comprimento,
+			"diretiva de pré-processamento inválida"
+		);
 	}
 }
 

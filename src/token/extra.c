@@ -72,7 +72,7 @@ int token_extra_init(afd_t *afd) {
 	}
 
 	if ((res = afd_mesclar_automatos(afd, &afd_ext)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 		goto fim;
 	}
 

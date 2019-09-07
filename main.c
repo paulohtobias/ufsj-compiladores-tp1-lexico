@@ -7,10 +7,7 @@
 	do { \
 		out = fopen(nome, modo); \
 		if (out == NULL) { \
-			fprintf(stderr, "Erro ao abrir o arquivo de saída %s: ", nome); \
-			perror(""); \
-			retval = EXIT_FAILURE; \
-			goto fim; \
+			LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); \
 		} \
 	} while(0);
 
@@ -27,10 +24,8 @@ int main(int argc, char const *argv[]) {
 	// Fazendo a análise do código.
 	lexico_parse(filename);
 
-	int retval = EXIT_SUCCESS;
-	FILE *out = NULL;
-
 	// Exibindo a lista de tokens.
+	FILE *out = NULL;
 	ABRIR_SAIDA(out, "saida/Token.txt", "wb");
 	for (size_t i = 0; i < plist_len(lista_tokens); i++) {
 		token_print(out, lista_tokens + i);
@@ -65,7 +60,6 @@ int main(int argc, char const *argv[]) {
 	printf("Warnings: %u\n", _log_warnings);
 	printf("Erros: %u\n", _log_erros);
 
-fim:
 	// TODO: lexico_finalizar();
-	return retval;
+	return 0;
 }

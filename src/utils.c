@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "utils.h"
+#include "log.h"
 
 char *file_to_str(const char *filename, size_t *len) {
 	*len = 0;
@@ -57,7 +58,7 @@ pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
 		tamanho = PCRE2_ZERO_TERMINATED;
 	}
 
-	return pcre2_compile(
+	pcre2_code *re = pcre2_compile(
 		(PCRE2_SPTR) pattern, /* the pattern */
 		tamanho,              /* indicates pattern is zero-terminated */
 		REGEX_OPTIONS,        /* default flags */
@@ -65,6 +66,17 @@ pcre2_code *regex_compile(const char *pattern, PCRE2_SIZE tamanho) {
 		&erroroffset,         /* for error offset */
 		NULL                  /* use default compile context */
 	);
+
+	if (re == NULL) {
+		PCRE2_UCHAR buffer[256];
+		pcre2_get_error_message(errornumber, buffer, sizeof(buffer));
+		LOG_PCC_ERRO(1, NULL, "PCRE2 compilation failed at offset %d: %s\n",
+			(int) erroroffset, buffer
+		);
+		exit(1);
+	}
+
+	return re;
 }
 
 size_t regex_match(const char *str, pcre2_code *re, size_t subject_length) {
@@ -83,7 +95,6 @@ size_t regex_match(const char *str, pcre2_code *re, size_t subject_length) {
 
 	/* As subject is char argument, it can be straightforwardly
 	cast to PCRE2_SPTR as we are working in 8-bit code units. */
-
 	subject = (PCRE2_SPTR)str;
 	if (subject_length == PCRE2_ZERO_TERMINATED) {
 		subject_length = strlen((char *)subject);
@@ -99,7 +110,6 @@ size_t regex_match(const char *str, pcre2_code *re, size_t subject_length) {
 
 	/* Using this function ensures that the block is exactly the right size for
 	the number of capturing parentheses in the pattern. */
-
 	match_data = pcre2_match_data_create_from_pattern(re, NULL);
 
 	rc = pcre2_match(
@@ -112,15 +122,13 @@ size_t regex_match(const char *str, pcre2_code *re, size_t subject_length) {
 		NULL                  /* use default match context */
 	);
 
-	/* Matching failed: handle error cases */
-
+	/* Matching failed */
 	if (rc <= 0) {
 		goto exit;
 	}
 
 	/* Match succeded. Get a pointer to the offset vector, where string offsets are
 	stored. */
-
 	PCRE2_SIZE *ovector = pcre2_get_ovector_pointer(match_data);
 	offset = ovector[1];
 

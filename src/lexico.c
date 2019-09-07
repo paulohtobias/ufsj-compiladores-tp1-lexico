@@ -20,7 +20,7 @@ int lexico_init() {
 	PMALLOC(afd_lexico, 1);
 
 	if ((res = afd_init(afd_lexico, 1)) != AFD_OK) {
-		fprintf(stderr, "Erro ao inicializar o AFD: %s\n", afd_get_erro(res));
+		LOG_PCC_ERRO(res, NULL, "Erro ao inicializar o AFD: %s\n", afd_get_erro(res));
 		return res;
 	}
 
@@ -69,8 +69,7 @@ int lexico_parse(const char *nome_arquivo) {
 	size_t comprimento;
 	char *codigo_fonte = file_to_str(nome_arquivo, &comprimento);
 	if (codigo_fonte == NULL) {
-		fprintf(stderr, "Não foi possível abrir o arquivo '%s': ", nome_arquivo);
-		perror("");
+		LOG_PCC_ERRO(0, "", "Não foi possível abrir o arquivo '%s': ", nome_arquivo);
 		return 1;
 	}
 
@@ -121,7 +120,7 @@ int lexico_parse(const char *nome_arquivo) {
 				);
 			} else {
 				if (!moveu) {
-					fprintf(stderr, "Símbolo '%.*s' inválido na linha %d coluna %d.\n", simbolo_comprimento, contexto.lexema, contexto.posicao.linha, contexto.posicao.coluna);
+					LOG_ERRO(contexto.arquivo, contexto.posicao.linha, contexto.posicao.coluna, contexto.lexema, contexto.comprimento, "símbolo '%.*s' inválido", simbolo_comprimento, contexto.lexema);
 				}
 			}
 

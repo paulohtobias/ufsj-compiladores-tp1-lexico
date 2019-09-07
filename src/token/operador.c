@@ -284,7 +284,7 @@ int token_operador_init(afd_t *afd) {
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 
 	if ((res = afd_mesclar_automatos(afd, &afd_op)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 		goto fim;
 	}
 
@@ -313,14 +313,14 @@ static void operador_adicionar(const char *arquivo, const char *lexema, size_t c
 		}
 	}
 
+	// Deve ser sempre verdadeiro.
 	if (subtipo < __operadores_quantidade) {
 		token_t token = token_criar(TK_OP, subtipo, arquivo, lexema, comprimento, linha, coluna);
 		token.subtipo_to_str = operador_str;
 
 		token_adicionar(&token);
 	} else {
-		// TODO: erro
-		fprintf(stderr, "símbolo %.*s inválido\n", (int) comprimento, lexema);
+		LOG_PCC_ERRO(0, NULL, "%s: operador \"%.*s\" não reconhecido\n", __FUNCTION__, (int) comprimento, lexema);
 	}
 }
 

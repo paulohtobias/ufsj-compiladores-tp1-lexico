@@ -67,7 +67,7 @@ static void char_incompleto(const char *arquivo, const char *lexema, size_t comp
 
 /// Outras funções.
 static const char *subtipo_str(uint32_t subtipo);
-static char parse_escape_sequence(const char **src);
+static char parse_escape_sequence(const token_t *token, const char **src);
 static char *int_to_str(const void *dados, size_t comprimento);
 
 
@@ -132,7 +132,7 @@ static int str_init(afd_t *afd) {
 	);
 
 	if ((res = afd_mesclar_automatos(afd, &afd_str)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 	}
 
 	return res;
@@ -275,7 +275,7 @@ static int number_init(afd_t *afd) {
 	);
 
 	if ((res = afd_mesclar_automatos(afd, &afd_number)) != AFD_OK) {
-		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
+		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 	}
 
 	return res;
@@ -295,7 +295,7 @@ static void str_adicionar(const char *arquivo, const char *lexema, size_t compri
 	size_t i;
 	for (i = 0; *lexema != '\"'; i++) {
 		if (*lexema == '\\') {
-			((char *) token.valor.dados)[i] = parse_escape_sequence(&lexema);
+			((char *) token.valor.dados)[i] = parse_escape_sequence(&token, &lexema);
 		} else {
 			((char *) token.valor.dados)[i] = *lexema;
 		}
@@ -322,14 +322,15 @@ static void char_adicionar(const char *arquivo, const char *lexema, size_t compr
 	// Ignorando as aspas iniciais.
 	lexema++;
 	if (*lexema == '\\') {
-		*((char *) token.valor.dados) = parse_escape_sequence(&lexema);
+		*((char *) token.valor.dados) = parse_escape_sequence(&token, &lexema);
 	} else {
 		*((char *) token.valor.dados) = *lexema;
 	}
 	lexema++;
 
+	// Checa se não existem mais caracteres.
 	if (*lexema != '\'') {
-		// TODO: warning: 'multi-character constant'.
+		LOG_WARNING(arquivo, linha, coluna, lexema, comprimento, "char com mais de um caractere")
 	}
 
 	token_adicionar(&token);
@@ -366,16 +367,14 @@ static void int_adicionar(const char *arquivo, const char *lexema, size_t compri
 		}
 
 		if (!sufixo_valido) {
-			// TODO: warning: também melhorar mensagem.
-			fprintf(stderr, "sufixo %s inválido (%d, %d)\n%s\n", fim, linha, coluna, token.contexto.lexema);
+			LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "sufixo \"%s\" inválido em constante inteiro", fim);
 			break;
 		}
 	}
 
 	// Verificando se houve overflow.
 	if (valor == UINTMAX_MAX && errno == ERANGE) {
-		// TODO: warning
-		fprintf(stderr, "constante inteira é grande demais.\n");
+		LOG_WARNING(arquivo, linha, coluna, lexema, comprimento, "constante inteira é grande demais");
 	}
 
 	// TODO: verificar se cabe em um int para reduzir tamanho.
@@ -420,19 +419,17 @@ static void double_adicionar(const char *arquivo, const char *lexema, size_t com
 		}
 
 		if (!sufixo_valido || (f && l)) {
-			// TODO: warning: também melhorar mensagem.
-			fprintf(stderr, "sufixo %s inválido (%d, %d)\n%s\n", fim, linha, coluna, token.contexto.lexema);
+			LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "sufixo \"%s\" inválido em constante de ponto flutuante", fim);
 			break;
 		}
 	}
 
 	// Verificando se houve overflow.
 	if (errno == ERANGE) {
-		// TODO: warning
 		if (valor == 0) {
-			fprintf(stderr, "constante double é pequena demais.\n");
+			LOG_WARNING(arquivo, linha, coluna, lexema, comprimento, "constante de ponto flutuante truncada para 0");
 		} else {
-			fprintf(stderr, "constante double é grande demais.\n");
+			LOG_WARNING(arquivo, linha, coluna, lexema, comprimento, "constante de ponto flutuante excede o alcance de '%s'", subtipo_str(token.subtipo));
 		}
 	}
 
@@ -497,7 +494,7 @@ static const char *subtipo_str(uint32_t subtipo) {
 	return "Erro: subtipo de constante inválido";
 }
 
-static char parse_escape_sequence(const char **src) {
+static char parse_escape_sequence(const token_t *token, const char **src) {
 	static char escape_table[][2] = {
 		{'n', '\n'},
 		{'t', '\t'},
@@ -531,16 +528,24 @@ static char parse_escape_sequence(const char **src) {
 	}
 
 	if (base == -1) {
-		// TODO: warning ou erro.
+		LOG_WARNING(
+			token->contexto.arquivo, token->contexto.posicao.linha, token->contexto.posicao.coluna, token->contexto.lexema, token->contexto.comprimento,
+			"sequência de escape desconhecida: '\\%c'", **src
+		);
 		return **src;
 	}
 
 	char *end = NULL;
-	char c = strtol(*src, &end, base);
+	long c = strtol(*src, &end, base);
 
-	// TODO: checar por overflow e dar warnings.
+	if (c > UCHAR_MAX) {
+		LOG_WARNING(
+			token->contexto.arquivo, token->contexto.posicao.linha, token->contexto.posicao.coluna, token->contexto.lexema, token->contexto.comprimento,
+			"sequência de escape %s fora de alcance", base == 8 ? "octal": "hexadecimal"
+		);
+	}
 
 	*src = end - 1;
 
-	return c;
+	return (char) c;
 }
