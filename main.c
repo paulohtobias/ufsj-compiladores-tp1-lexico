@@ -62,6 +62,9 @@ int main(int argc, char const *argv[]) {
 	putchar('m');
 	putchar('\n');
 
+	printf("Warnings: %u\n", _log_warnings);
+	printf("Erros: %u\n", _log_erros);
+
 fim:
 	// TODO: lexico_finalizar();
 	return retval;
