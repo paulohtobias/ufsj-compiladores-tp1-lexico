@@ -39,7 +39,6 @@
 	SUBTIPO(TK_OP_EL, "&&", "el") \
 	SUBTIPO(TK_OP_ORL, "||", "orl") \
 	SUBTIPO(TK_OP_TER_C, "?", "ter_c") \
-	SUBTIPO(TK_OP_TER_ELSE, ":", "ter_else") \
 	SUBTIPO(TK_OP_ATRIB, "=", "atrib") \
 	SUBTIPO(TK_OP_AUTO_INC, "+=", "auto_inc") \
 	SUBTIPO(TK_OP_AUTO_DEC, "-=", "auto_dec") \
@@ -104,7 +103,6 @@ int token_operador_init(afd_t *afd) {
 		{32, {"\\|", "\\|", NULL}},
 		{35, {"~", "~", NULL}},
 		{36, {"\\?", "\\?", NULL}},
-		{37, {":", ":", NULL}},
 	};
 	afd_op.estados[0] = afd_criar_estado(transicoes_0, ARR_TAMANHO(transicoes_0), false, NULL);
 
@@ -283,8 +281,6 @@ int token_operador_init(afd_t *afd) {
 	// Estado 35
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 	// Estado 36
-	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
-	// Estado 37
 	plist_append(afd_op.estados, afd_criar_estado(NULL, 0, true, operador_adicionar));
 
 	if ((res = afd_mesclar_automatos(afd, &afd_op)) != AFD_OK) {
