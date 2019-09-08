@@ -226,6 +226,11 @@ int afd_mesclar_automatos(afd_t *afd, const afd_t *afd_novo) {
 	//printf("DEST\n");
 	//afd_print(afd);
 fim:
+	// Liberando a memória.
+	free(afd_novo_indices);
+	plist_free(afd_estado_atual_fila);
+	plist_free(afd_novo_estado_atual_fila);
+
 	return res;
 }
 

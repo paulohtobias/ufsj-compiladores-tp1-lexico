@@ -222,5 +222,7 @@ int parse_args(int argc, char * const argv[], opcao_t *opcoes, int qtd_opcoes) {
 		exit(1);
 	}
 
+	free(optstring);
+
 	return optind;
 }

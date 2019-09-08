@@ -39,6 +39,7 @@ void token_finalizar() {
 	for (size_t i = 0; i < plist_len(lista_tokens); i++) {
 		token_liberar(lista_tokens + i);
 	}
+	plist_free(lista_tokens);
 
 	for (size_t i = 0; i < TK_COUNT; i++) {
 		for (int j = 0; j < plist_cap(tabela_simbolos[i]); j++) {
