@@ -1,0 +1,98 @@
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 28 | Coluna: 21
+	Lexema: 300
+	Valor: 300
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 32 | Coluna: 28
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 40 | Coluna: 16
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 44 | Coluna: 43
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 46 | Coluna: 29
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 52 | Coluna: 27
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 52 | Coluna: 60
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 53 | Coluna: 24
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 67 | Coluna: 18
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 74 | Coluna: 16
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 75 | Coluna: 17
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 76 | Coluna: 18
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 79 | Coluna: 30
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 106 | Coluna: 9
+	Lexema: 0
+	Valor: 0
+

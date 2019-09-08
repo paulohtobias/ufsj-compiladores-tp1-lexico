@@ -14,7 +14,6 @@
 
 afd_t *afd_lexico = NULL;
 int lexico_init() {
-	// TODO: liberar o afd caso aconteça algum erro.
 	int res = 0;
 
 	PMALLOC(afd_lexico, 1);

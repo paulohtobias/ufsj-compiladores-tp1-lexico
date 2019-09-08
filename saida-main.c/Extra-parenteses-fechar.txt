@@ -1,0 +1,264 @@
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 23 | Coluna: 39
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 31 | Coluna: 118
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 32 | Coluna: 29
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 35 | Coluna: 3
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 63
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 64
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 65
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 74
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 40 | Coluna: 55
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 44 | Coluna: 38
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 44 | Coluna: 44
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 39
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 47 | Coluna: 23
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 51 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 70
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 58 | Coluna: 14
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 61 | Coluna: 23
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 63 | Coluna: 29
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 65 | Coluna: 56
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 66 | Coluna: 38
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 67 | Coluna: 47
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 67 | Coluna: 53
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 68 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 70 | Coluna: 18
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 72 | Coluna: 19
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 74 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 52
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 58
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 56
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 62
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 82
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 108
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 109
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 81 | Coluna: 42
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 83 | Coluna: 28
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 85 | Coluna: 22
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 93 | Coluna: 16
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 94 | Coluna: 16
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 95 | Coluna: 13
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 96 | Coluna: 14
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 98 | Coluna: 40
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 99 | Coluna: 34
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 102 | Coluna: 19
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 104 | Coluna: 22
+	Lexema: )
+

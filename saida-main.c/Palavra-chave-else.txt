@@ -1,0 +1,12 @@
+TOKEN: Palavra-chave
+	Subtipo: else
+	Arquivo: main.c
+	Linha: 46 | Coluna: 4
+	Lexema: else
+
+TOKEN: Palavra-chave
+	Subtipo: else
+	Arquivo: main.c
+	Linha: 49 | Coluna: 4
+	Lexema: else
+

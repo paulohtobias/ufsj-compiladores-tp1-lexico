@@ -1,0 +1,6 @@
+TOKEN: Palavra-chave
+	Subtipo: return
+	Arquivo: main.c
+	Linha: 106 | Coluna: 2
+	Lexema: return
+

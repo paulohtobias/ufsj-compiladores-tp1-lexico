@@ -1,0 +1,71 @@
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 31 | Coluna: 14
+	Lexema: 'C'
+	Valor: C
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 32 | Coluna: 14
+	Lexema: 'O'
+	Valor: O
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 46 | Coluna: 35
+	Lexema: '\0'
+	Valor: 
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 52 | Coluna: 33
+	Lexema: '/'
+	Valor: /
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 52 | Coluna: 66
+	Lexema: '\\'
+	Valor: \
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 53 | Coluna: 29
+	Lexema: '\0'
+	Valor: 
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 93 | Coluna: 10
+	Lexema: '\x46'
+	Valor: F
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 94 | Coluna: 10
+	Lexema: '\151'
+	Valor: i
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 95 | Coluna: 10
+	Lexema: 'm'
+	Valor: m
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 96 | Coluna: 10
+	Lexema: '\n'
+	Valor: 
+
+

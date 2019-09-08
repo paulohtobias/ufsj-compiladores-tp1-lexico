@@ -1,0 +1,780 @@
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 5
+	Lexema: main
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 14
+	Lexema: argc
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 33
+	Lexema: argv
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 25 | Coluna: 9
+	Lexema: bool
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 25 | Coluna: 14
+	Lexema: salvar_comentarios
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 2
+	Lexema: FILE
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 8
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 14
+	Lexema: NULL
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 27 | Coluna: 8
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 27 | Coluna: 26
+	Lexema: NULL
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 28 | Coluna: 7
+	Lexema: arquivo_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 30 | Coluna: 2
+	Lexema: opcao_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 30 | Coluna: 10
+	Lexema: opcoes
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 3
+	Lexema: OPCAO_INIT
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 19
+	Lexema: tipo_bool
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 31
+	Lexema: salvar_comentarios
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 3
+	Lexema: OPCAO_INIT
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 19
+	Lexema: tipo_str
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 33
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 38 | Coluna: 6
+	Lexema: argi
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 7
+	Lexema: argi
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 14
+	Lexema: parse_args
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 25
+	Lexema: argc
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 31
+	Lexema: argv
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 37
+	Lexema: opcoes
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 45
+	Lexema: ARR_TAMANHO
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 57
+	Lexema: opcoes
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 70
+	Lexema: argc
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 40 | Coluna: 3
+	Lexema: LOG_PCC_ERRO
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 40 | Coluna: 19
+	Lexema: NULL
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 14
+	Lexema: filename
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 25
+	Lexema: argv
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 30
+	Lexema: argi
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 44 | Coluna: 6
+	Lexema: strcmp
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 44 | Coluna: 13
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 45 | Coluna: 3
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 45 | Coluna: 9
+	Lexema: stdout
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 46 | Coluna: 13
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 47 | Coluna: 3
+	Lexema: free
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 47 | Coluna: 8
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 48 | Coluna: 3
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 48 | Coluna: 21
+	Lexema: NULL
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 3
+	Lexema: size_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 10
+	Lexema: c
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 14
+	Lexema: strlen
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 21
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 7
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 23
+	Lexema: c
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 40
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 56
+	Lexema: c
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 53 | Coluna: 4
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 53 | Coluna: 20
+	Lexema: c
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 58 | Coluna: 2
+	Lexema: lexico_init
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 61 | Coluna: 2
+	Lexema: lexico_parse
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 61 | Coluna: 15
+	Lexema: filename
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 63 | Coluna: 6
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 63 | Coluna: 25
+	Lexema: NULL
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 2
+	Lexema: sprintf
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 10
+	Lexema: arquivo_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 41
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 2
+	Lexema: ABRIR_SAIDA
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 14
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 19
+	Lexema: arquivo_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 7
+	Lexema: size_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 14
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 21
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 25
+	Lexema: plist_len
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 35
+	Lexema: lista_tokens
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 50
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 3
+	Lexema: token_print
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 15
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 20
+	Lexema: lista_tokens
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 35
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 70 | Coluna: 2
+	Lexema: FECHAR_SAIDA
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 70 | Coluna: 15
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 72 | Coluna: 6
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 72 | Coluna: 13
+	Lexema: stdout
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 12
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 19
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 23
+	Lexema: TK_COUNT
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 33
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 13
+	Lexema: j
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 20
+	Lexema: j
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 24
+	Lexema: plist_cap
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 34
+	Lexema: tabela_simbolos
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 50
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 55
+	Lexema: j
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 14
+	Lexema: k
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 21
+	Lexema: k
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 25
+	Lexema: plist_len
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 35
+	Lexema: tabela_simbolos
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 51
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 54
+	Lexema: j
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 59
+	Lexema: k
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 12
+	Lexema: token_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 21
+	Lexema: token
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 30
+	Lexema: lista_tokens
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 43
+	Lexema: tabela_simbolos
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 59
+	Lexema: i
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 62
+	Lexema: j
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 65
+	Lexema: k
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 79 | Coluna: 18
+	Lexema: modo
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 79 | Coluna: 25
+	Lexema: k
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 6
+	Lexema: sprintf
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 14
+	Lexema: arquivo_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 45
+	Lexema: diretorio_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 62
+	Lexema: token_tipo_str
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 77
+	Lexema: token
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 85
+	Lexema: token_subtipo_str
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 103
+	Lexema: token
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 6
+	Lexema: ABRIR_SAIDA
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 18
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 23
+	Lexema: arquivo_saida
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 38
+	Lexema: modo
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 6
+	Lexema: token_print
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 18
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 23
+	Lexema: token
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 85 | Coluna: 6
+	Lexema: FECHAR_SAIDA
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 85 | Coluna: 19
+	Lexema: out
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 93 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 94 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 95 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 96 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 98 | Coluna: 2
+	Lexema: printf
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 98 | Coluna: 27
+	Lexema: _log_warnings
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 99 | Coluna: 2
+	Lexema: printf
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 99 | Coluna: 24
+	Lexema: _log_erros
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 102 | Coluna: 2
+	Lexema: lexico_finalizar
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 104 | Coluna: 2
+	Lexema: free
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 104 | Coluna: 7
+	Lexema: diretorio_saida
+

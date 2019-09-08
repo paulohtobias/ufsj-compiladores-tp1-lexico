@@ -1,0 +1,90 @@
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 23 | Coluna: 38
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 28 | Coluna: 24
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 30 | Coluna: 17
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 43 | Coluna: 34
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 30
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 28
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 61
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 53 | Coluna: 25
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 51
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 52
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 55
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 60
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 63
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 66
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 67
+	Lexema: ]
+

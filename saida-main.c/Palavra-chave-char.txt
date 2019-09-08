@@ -1,0 +1,30 @@
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 23 | Coluna: 20
+	Lexema: char
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 27 | Coluna: 2
+	Lexema: char
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 28 | Coluna: 2
+	Lexema: char
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 43 | Coluna: 8
+	Lexema: char
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 79 | Coluna: 12
+	Lexema: char
+

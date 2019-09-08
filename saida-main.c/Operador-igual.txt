@@ -1,0 +1,30 @@
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 44 | Coluna: 40
+	Lexema: ==
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 46 | Coluna: 32
+	Lexema: ==
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 52 | Coluna: 30
+	Lexema: ==
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 52 | Coluna: 63
+	Lexema: ==
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 79 | Coluna: 27
+	Lexema: ==
+

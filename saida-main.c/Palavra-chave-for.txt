@@ -1,0 +1,24 @@
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 67 | Coluna: 2
+	Lexema: for
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 74 | Coluna: 3
+	Lexema: for
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 75 | Coluna: 4
+	Lexema: for
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 76 | Coluna: 5
+	Lexema: for
+

@@ -43,9 +43,6 @@ size_t __preprocessadores_quantidade = ARR_TAMANHO(__preprocessadores);
 /// Função adicionar
 static void preprocessador_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
-/// Função de erro.
-static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
-
 /// Função subtipo_str.
 const char *preprocessador_str(uint32_t subtipo);
 
@@ -200,17 +197,11 @@ static void preprocessador_adicionar(const char *arquivo, const char *lexema, si
 	}
 }
 
-static void preprocessador_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
-	// TODO: warning
-	fprintf(stderr, "diretiva pre-processador incompleta na linha %d coluna %d\n", linha, coluna);
-}
-
 const char *preprocessador_str(uint32_t subtipo) {
 	if (subtipo < __preprocessadores_quantidade) {
 		return __preprocessadores[subtipo];
 	}
 
-	// TODO: warning
 	return "Erro: subtipo de preprocessador inválido";
 }
 

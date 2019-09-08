@@ -1,0 +1,6 @@
+TOKEN: Operador
+	Subtipo: ter_c
+	Arquivo: main.c
+	Linha: 79 | Coluna: 32
+	Lexema: ?
+

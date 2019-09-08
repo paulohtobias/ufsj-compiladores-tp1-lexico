@@ -1,0 +1,12 @@
+TOKEN: Operador
+	Subtipo: notl
+	Arquivo: main.c
+	Linha: 63 | Coluna: 22
+	Lexema: !=
+
+TOKEN: Operador
+	Subtipo: notl
+	Arquivo: main.c
+	Linha: 72 | Coluna: 10
+	Lexema: !=
+

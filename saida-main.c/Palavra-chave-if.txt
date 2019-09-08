@@ -1,0 +1,36 @@
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 39 | Coluna: 2
+	Lexema: if
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 44 | Coluna: 2
+	Lexema: if
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 46 | Coluna: 9
+	Lexema: if
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 52 | Coluna: 3
+	Lexema: if
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 63 | Coluna: 2
+	Lexema: if
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 72 | Coluna: 2
+	Lexema: if
+

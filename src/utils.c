@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <inttypes.h>
 #include "utils.h"
 #include "log.h"
 
@@ -25,7 +26,15 @@ char *file_to_str(const char *filename, size_t *len) {
 	fseek(in, 0, SEEK_SET);
 
 	char *str = malloc(*len + 1);
-	fread(str, *len, 1, in);
+	size_t lidos = fread(str, 1, *len, in);
+
+	if (lidos != *len) {
+		LOG_PCC(
+			"warning", _AZUL, 0, NULL,
+			"fread: quantidade de bytes lidos (%"PRIu64") é diferente do tamanho do arquivo (%"PRIu64")",
+			lidos, *len
+		);
+	}
 	str[*len] = '\0';
 
 	fclose(in);

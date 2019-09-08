@@ -1,0 +1,56 @@
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 24 | Coluna: 2
+	Lexema: // Opções.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 50 | Coluna: 3
+	Lexema: // Removendo uma possível barra ao final do nome do diretório
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 57 | Coluna: 2
+	Lexema: // Inicializando o módulo léxico.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 60 | Coluna: 2
+	Lexema: // Fazendo a análise do código.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 64 | Coluna: 2
+	Lexema: // Exibindo a lista de tokens.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 73 | Coluna: 3
+	Lexema: // Exibindo as tabelas de símbolos.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 92 | Coluna: 2
+	Lexema: // Exibe "Fim" na tela.
+
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 101 | Coluna: 2
+	Lexema: // Finalizando o módulo léxico.
+
+

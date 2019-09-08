@@ -1,0 +1,27 @@
+TOKEN: Pré-processador
+	Subtipo: define
+	Arquivo: main.c
+	Linha: 8 | Coluna: 1
+	Lexema: #define ABRIR_SAIDA(out, nome, modo) \
+	if (out != stdout) { \
+		do { \
+			out = fopen(nome, modo); \
+			if (out == NULL) { \
+				LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); \
+			} \
+		} while(0); \
+	}
+
+	Valor: #define ABRIR_SAIDA(out, nome, modo) 	if (out != stdout) { 		do { 			out = fopen(nome, modo); 			if (out == NULL) { 				LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); 			} 		} while(0); 	}
+
+TOKEN: Pré-processador
+	Subtipo: define
+	Arquivo: main.c
+	Linha: 18 | Coluna: 1
+	Lexema: #define FECHAR_SAIDA(out) \
+	if (out != stdout) { \
+		fclose(out); \
+	}
+
+	Valor: #define FECHAR_SAIDA(out) 	if (out != stdout) { 		fclose(out); 	}
+

@@ -1,0 +1,24 @@
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 67 | Coluna: 23
+	Lexema: <
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 74 | Coluna: 21
+	Lexema: <
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 75 | Coluna: 22
+	Lexema: <
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 76 | Coluna: 23
+	Lexema: <
+

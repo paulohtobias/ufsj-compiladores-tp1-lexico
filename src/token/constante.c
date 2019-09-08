@@ -496,7 +496,6 @@ static const char *subtipo_str(uint32_t subtipo) {
 		return __constantes[subtipo];
 	}
 
-	// TODO: warning
 	return "Erro: subtipo de constante inválido";
 }
 

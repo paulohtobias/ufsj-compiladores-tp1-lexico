@@ -1,0 +1,6 @@
+TOKEN: Operador
+	Subtipo: orb
+	Arquivo: main.c
+	Linha: 52 | Coluna: 37
+	Lexema: ||
+

@@ -1,0 +1,2938 @@
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 1 | Coluna: 1
+	Lexema: #include <stdio.h>
+
+	Valor: #include <stdio.h>
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 2 | Coluna: 1
+	Lexema: #include <string.h>
+
+	Valor: #include <string.h>
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 3 | Coluna: 1
+	Lexema: #include "lexico.h"
+
+	Valor: #include "lexico.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 4 | Coluna: 1
+	Lexema: #include "utils.h"
+
+	Valor: #include "utils.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 5 | Coluna: 1
+	Lexema: #include "plist.h"
+
+	Valor: #include "plist.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 6 | Coluna: 1
+	Lexema: #include "opcoes.h"
+
+	Valor: #include "opcoes.h"
+
+TOKEN: Pré-processador
+	Subtipo: define
+	Arquivo: main.c
+	Linha: 8 | Coluna: 1
+	Lexema: #define ABRIR_SAIDA(out, nome, modo) \
+	if (out != stdout) { \
+		do { \
+			out = fopen(nome, modo); \
+			if (out == NULL) { \
+				LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); \
+			} \
+		} while(0); \
+	}
+
+	Valor: #define ABRIR_SAIDA(out, nome, modo) 	if (out != stdout) { 		do { 			out = fopen(nome, modo); 			if (out == NULL) { 				LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); 			} 		} while(0); 	}
+
+TOKEN: Pré-processador
+	Subtipo: define
+	Arquivo: main.c
+	Linha: 18 | Coluna: 1
+	Lexema: #define FECHAR_SAIDA(out) \
+	if (out != stdout) { \
+		fclose(out); \
+	}
+
+	Valor: #define FECHAR_SAIDA(out) 	if (out != stdout) { 		fclose(out); 	}
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 23 | Coluna: 1
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 5
+	Lexema: main
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 23 | Coluna: 9
+	Lexema: (
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 23 | Coluna: 10
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 14
+	Lexema: argc
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 23 | Coluna: 18
+	Lexema: ,
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 23 | Coluna: 20
+	Lexema: char
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 23 | Coluna: 25
+	Lexema: *
+
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: main.c
+	Linha: 23 | Coluna: 27
+	Lexema: const
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 23 | Coluna: 33
+	Lexema: argv
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 23 | Coluna: 37
+	Lexema: [
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 23 | Coluna: 38
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 23 | Coluna: 39
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 23 | Coluna: 41
+	Lexema: {
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 24 | Coluna: 2
+	Lexema: // Opções.
+
+
+TOKEN: Palavra-chave
+	Subtipo: extern
+	Arquivo: main.c
+	Linha: 25 | Coluna: 2
+	Lexema: extern
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 25 | Coluna: 9
+	Lexema: bool
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 25 | Coluna: 14
+	Lexema: salvar_comentarios
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 25 | Coluna: 32
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 2
+	Lexema: FILE
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 26 | Coluna: 7
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 8
+	Lexema: out
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 26 | Coluna: 12
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 26 | Coluna: 14
+	Lexema: NULL
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 26 | Coluna: 18
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 27 | Coluna: 2
+	Lexema: char
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 27 | Coluna: 7
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 27 | Coluna: 8
+	Lexema: diretorio_saida
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 27 | Coluna: 24
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 27 | Coluna: 26
+	Lexema: NULL
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 27 | Coluna: 30
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 28 | Coluna: 2
+	Lexema: char
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 28 | Coluna: 7
+	Lexema: arquivo_saida
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 28 | Coluna: 20
+	Lexema: [
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 28 | Coluna: 21
+	Lexema: 300
+	Valor: 300
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 28 | Coluna: 24
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 28 | Coluna: 25
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 30 | Coluna: 2
+	Lexema: opcao_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 30 | Coluna: 10
+	Lexema: opcoes
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 30 | Coluna: 16
+	Lexema: [
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 30 | Coluna: 17
+	Lexema: ]
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 30 | Coluna: 19
+	Lexema: =
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 30 | Coluna: 21
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 3
+	Lexema: OPCAO_INIT
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 31 | Coluna: 13
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 31 | Coluna: 14
+	Lexema: 'C'
+	Valor: C
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 31 | Coluna: 17
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 19
+	Lexema: tipo_bool
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 31 | Coluna: 28
+	Lexema: ,
+
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 31 | Coluna: 30
+	Lexema: &
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 31 | Coluna: 31
+	Lexema: salvar_comentarios
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 31 | Coluna: 49
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 31 | Coluna: 51
+	Lexema: "0"
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 31 | Coluna: 54
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 31 | Coluna: 56
+	Lexema: "Se ativado, os comentários serão salvos na lista de tokens"
+	Valor: Se ativado, os comentários serão salvos na lista de tokens
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 31 | Coluna: 118
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 31 | Coluna: 119
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 3
+	Lexema: OPCAO_INIT
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 32 | Coluna: 13
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 32 | Coluna: 14
+	Lexema: 'O'
+	Valor: O
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 32 | Coluna: 17
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 19
+	Lexema: tipo_str
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 32 | Coluna: 27
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 32 | Coluna: 28
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 32 | Coluna: 29
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 32 | Coluna: 30
+	Lexema: ,
+
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 32 | Coluna: 32
+	Lexema: &
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 32 | Coluna: 33
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 32 | Coluna: 48
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 32 | Coluna: 50
+	Lexema: "FILE="
+	Valor: FILE=
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 32 | Coluna: 57
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 33 | Coluna: 4
+	Lexema: "Diretório de saída para os arquivos. \"stdout\" para exibir na tela. "
+	Valor: Diretório de saída para os arquivos. "stdout" para exibir na tela. 
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 34 | Coluna: 4
+	Lexema: "Se a opção não for usada, serão exibidos somente warnings e erros"
+	Valor: Se a opção não for usada, serão exibidos somente warnings e erros
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 35 | Coluna: 3
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 35 | Coluna: 4
+	Lexema: ,
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 36 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 36 | Coluna: 3
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 38 | Coluna: 2
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 38 | Coluna: 6
+	Lexema: argi
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 38 | Coluna: 10
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 39 | Coluna: 2
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 5
+	Lexema: (
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 6
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 7
+	Lexema: argi
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 39 | Coluna: 12
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 14
+	Lexema: parse_args
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 24
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 25
+	Lexema: argc
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 39 | Coluna: 29
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 31
+	Lexema: argv
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 39 | Coluna: 35
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 37
+	Lexema: opcoes
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 39 | Coluna: 43
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 45
+	Lexema: ARR_TAMANHO
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 56
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 57
+	Lexema: opcoes
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 63
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 64
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 65
+	Lexema: )
+
+TOKEN: Operador
+	Subtipo: maior
+	Arquivo: main.c
+	Linha: 39 | Coluna: 67
+	Lexema: >=
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 39 | Coluna: 70
+	Lexema: argc
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 39 | Coluna: 74
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 76
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 40 | Coluna: 3
+	Lexema: LOG_PCC_ERRO
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 40 | Coluna: 15
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 40 | Coluna: 16
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 40 | Coluna: 17
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 40 | Coluna: 19
+	Lexema: NULL
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 40 | Coluna: 23
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 40 | Coluna: 25
+	Lexema: "Código fonte não informado"
+	Valor: Código fonte não informado
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 40 | Coluna: 55
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 40 | Coluna: 56
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 41 | Coluna: 2
+	Lexema: }
+
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: main.c
+	Linha: 43 | Coluna: 2
+	Lexema: const
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 43 | Coluna: 8
+	Lexema: char
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 43 | Coluna: 13
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 14
+	Lexema: filename
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 43 | Coluna: 23
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 25
+	Lexema: argv
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 43 | Coluna: 29
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 43 | Coluna: 30
+	Lexema: argi
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 43 | Coluna: 34
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 43 | Coluna: 35
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 44 | Coluna: 2
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 44 | Coluna: 5
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 44 | Coluna: 6
+	Lexema: strcmp
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 44 | Coluna: 12
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 44 | Coluna: 13
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 44 | Coluna: 28
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 44 | Coluna: 30
+	Lexema: "stdout"
+	Valor: stdout
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 44 | Coluna: 38
+	Lexema: )
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 44 | Coluna: 40
+	Lexema: ==
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 44 | Coluna: 43
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 44 | Coluna: 44
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 44 | Coluna: 46
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 45 | Coluna: 3
+	Lexema: out
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 45 | Coluna: 7
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 45 | Coluna: 9
+	Lexema: stdout
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 45 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 2
+	Lexema: }
+
+TOKEN: Palavra-chave
+	Subtipo: else
+	Arquivo: main.c
+	Linha: 46 | Coluna: 4
+	Lexema: else
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 46 | Coluna: 9
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 46 | Coluna: 12
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 46 | Coluna: 13
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 46 | Coluna: 28
+	Lexema: [
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 46 | Coluna: 29
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 30
+	Lexema: ]
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 46 | Coluna: 32
+	Lexema: ==
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 46 | Coluna: 35
+	Lexema: '\0'
+	Valor: 
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 39
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 46 | Coluna: 41
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 47 | Coluna: 3
+	Lexema: free
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 47 | Coluna: 7
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 47 | Coluna: 8
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 47 | Coluna: 23
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 47 | Coluna: 24
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 48 | Coluna: 3
+	Lexema: diretorio_saida
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 48 | Coluna: 19
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 48 | Coluna: 21
+	Lexema: NULL
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 48 | Coluna: 25
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 49 | Coluna: 2
+	Lexema: }
+
+TOKEN: Palavra-chave
+	Subtipo: else
+	Arquivo: main.c
+	Linha: 49 | Coluna: 4
+	Lexema: else
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 49 | Coluna: 9
+	Lexema: {
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 50 | Coluna: 3
+	Lexema: // Removendo uma possível barra ao final do nome do diretório
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 3
+	Lexema: size_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 10
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 51 | Coluna: 12
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 14
+	Lexema: strlen
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 51 | Coluna: 20
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 51 | Coluna: 21
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 51 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 51 | Coluna: 37
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 52 | Coluna: 3
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 52 | Coluna: 6
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 7
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 52 | Coluna: 22
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 23
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: menos
+	Arquivo: main.c
+	Linha: 52 | Coluna: 25
+	Lexema: -
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 52 | Coluna: 27
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 28
+	Lexema: ]
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 52 | Coluna: 30
+	Lexema: ==
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 52 | Coluna: 33
+	Lexema: '/'
+	Valor: /
+
+TOKEN: Operador
+	Subtipo: orb
+	Arquivo: main.c
+	Linha: 52 | Coluna: 37
+	Lexema: ||
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 40
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 52 | Coluna: 55
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 52 | Coluna: 56
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: menos
+	Arquivo: main.c
+	Linha: 52 | Coluna: 58
+	Lexema: -
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 52 | Coluna: 60
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 61
+	Lexema: ]
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 52 | Coluna: 63
+	Lexema: ==
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 52 | Coluna: 66
+	Lexema: '\\'
+	Valor: \
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 52 | Coluna: 70
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 52 | Coluna: 72
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 53 | Coluna: 4
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 53 | Coluna: 19
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 53 | Coluna: 20
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: menos
+	Arquivo: main.c
+	Linha: 53 | Coluna: 22
+	Lexema: -
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 53 | Coluna: 24
+	Lexema: 1
+	Valor: 1
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 53 | Coluna: 25
+	Lexema: ]
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 53 | Coluna: 27
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 53 | Coluna: 29
+	Lexema: '\0'
+	Valor: 
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 53 | Coluna: 33
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 54 | Coluna: 3
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 55 | Coluna: 2
+	Lexema: }
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 57 | Coluna: 2
+	Lexema: // Inicializando o módulo léxico.
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 58 | Coluna: 2
+	Lexema: lexico_init
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 58 | Coluna: 13
+	Lexema: (
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 58 | Coluna: 14
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 58 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 60 | Coluna: 2
+	Lexema: // Fazendo a análise do código.
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 61 | Coluna: 2
+	Lexema: lexico_parse
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 61 | Coluna: 14
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 61 | Coluna: 15
+	Lexema: filename
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 61 | Coluna: 23
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 61 | Coluna: 24
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 63 | Coluna: 2
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 63 | Coluna: 5
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 63 | Coluna: 6
+	Lexema: diretorio_saida
+
+TOKEN: Operador
+	Subtipo: notl
+	Arquivo: main.c
+	Linha: 63 | Coluna: 22
+	Lexema: !=
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 63 | Coluna: 25
+	Lexema: NULL
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 63 | Coluna: 29
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 63 | Coluna: 31
+	Lexema: {
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 64 | Coluna: 2
+	Lexema: // Exibindo a lista de tokens.
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 2
+	Lexema: sprintf
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 65 | Coluna: 9
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 10
+	Lexema: arquivo_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 65 | Coluna: 23
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 65 | Coluna: 25
+	Lexema: "%s/Token.txt"
+	Valor: %s/Token.txt
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 65 | Coluna: 39
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 65 | Coluna: 41
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 65 | Coluna: 56
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 65 | Coluna: 57
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 2
+	Lexema: ABRIR_SAIDA
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 66 | Coluna: 13
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 14
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 66 | Coluna: 17
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 66 | Coluna: 19
+	Lexema: arquivo_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 66 | Coluna: 32
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 66 | Coluna: 34
+	Lexema: "wb"
+	Valor: wb
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 66 | Coluna: 38
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 66 | Coluna: 39
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 67 | Coluna: 2
+	Lexema: for
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 67 | Coluna: 6
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 7
+	Lexema: size_t
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 14
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 67 | Coluna: 16
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 67 | Coluna: 18
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 67 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 21
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 67 | Coluna: 23
+	Lexema: <
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 25
+	Lexema: plist_len
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 67 | Coluna: 34
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 35
+	Lexema: lista_tokens
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 67 | Coluna: 47
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 67 | Coluna: 48
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 67 | Coluna: 50
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: inc
+	Arquivo: main.c
+	Linha: 67 | Coluna: 51
+	Lexema: ++
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 67 | Coluna: 53
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 67 | Coluna: 55
+	Lexema: {
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 3
+	Lexema: token_print
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 68 | Coluna: 14
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 15
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 68 | Coluna: 18
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 20
+	Lexema: lista_tokens
+
+TOKEN: Operador
+	Subtipo: mais
+	Arquivo: main.c
+	Linha: 68 | Coluna: 33
+	Lexema: +
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 68 | Coluna: 35
+	Lexema: i
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 68 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 68 | Coluna: 37
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 69 | Coluna: 2
+	Lexema: }
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 70 | Coluna: 2
+	Lexema: FECHAR_SAIDA
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 70 | Coluna: 14
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 70 | Coluna: 15
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 70 | Coluna: 18
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 70 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: if
+	Arquivo: main.c
+	Linha: 72 | Coluna: 2
+	Lexema: if
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 72 | Coluna: 5
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 72 | Coluna: 6
+	Lexema: out
+
+TOKEN: Operador
+	Subtipo: notl
+	Arquivo: main.c
+	Linha: 72 | Coluna: 10
+	Lexema: !=
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 72 | Coluna: 13
+	Lexema: stdout
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 72 | Coluna: 19
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 72 | Coluna: 21
+	Lexema: {
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 73 | Coluna: 3
+	Lexema: // Exibindo as tabelas de símbolos.
+
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 74 | Coluna: 3
+	Lexema: for
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 74 | Coluna: 7
+	Lexema: (
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 74 | Coluna: 8
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 12
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 74 | Coluna: 14
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 74 | Coluna: 16
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 74 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 19
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 74 | Coluna: 21
+	Lexema: <
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 23
+	Lexema: TK_COUNT
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 74 | Coluna: 31
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 74 | Coluna: 33
+	Lexema: i
+
+TOKEN: Operador
+	Subtipo: inc
+	Arquivo: main.c
+	Linha: 74 | Coluna: 34
+	Lexema: ++
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 74 | Coluna: 36
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 74 | Coluna: 38
+	Lexema: {
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 75 | Coluna: 4
+	Lexema: for
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 75 | Coluna: 8
+	Lexema: (
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 75 | Coluna: 9
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 13
+	Lexema: j
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 75 | Coluna: 15
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 75 | Coluna: 17
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 75 | Coluna: 18
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 20
+	Lexema: j
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 75 | Coluna: 22
+	Lexema: <
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 24
+	Lexema: plist_cap
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 75 | Coluna: 33
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 34
+	Lexema: tabela_simbolos
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 75 | Coluna: 49
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 50
+	Lexema: i
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 51
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 52
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 75 | Coluna: 53
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 75 | Coluna: 55
+	Lexema: j
+
+TOKEN: Operador
+	Subtipo: inc
+	Arquivo: main.c
+	Linha: 75 | Coluna: 56
+	Lexema: ++
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 75 | Coluna: 58
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 75 | Coluna: 60
+	Lexema: {
+
+TOKEN: Palavra-chave
+	Subtipo: for
+	Arquivo: main.c
+	Linha: 76 | Coluna: 5
+	Lexema: for
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 9
+	Lexema: (
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 76 | Coluna: 10
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 14
+	Lexema: k
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 76 | Coluna: 16
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 76 | Coluna: 18
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 76 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 21
+	Lexema: k
+
+TOKEN: Operador
+	Subtipo: menor
+	Arquivo: main.c
+	Linha: 76 | Coluna: 23
+	Lexema: <
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 25
+	Lexema: plist_len
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 34
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 35
+	Lexema: tabela_simbolos
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 50
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 51
+	Lexema: i
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 52
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 53
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 54
+	Lexema: j
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 55
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 56
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 76 | Coluna: 57
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 76 | Coluna: 59
+	Lexema: k
+
+TOKEN: Operador
+	Subtipo: inc
+	Arquivo: main.c
+	Linha: 76 | Coluna: 60
+	Lexema: ++
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 76 | Coluna: 62
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 64
+	Lexema: {
+
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: main.c
+	Linha: 77 | Coluna: 6
+	Lexema: const
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 12
+	Lexema: token_t
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 77 | Coluna: 20
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 21
+	Lexema: token
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 77 | Coluna: 27
+	Lexema: =
+
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 77 | Coluna: 29
+	Lexema: &
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 30
+	Lexema: lista_tokens
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 77 | Coluna: 42
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 43
+	Lexema: tabela_simbolos
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 77 | Coluna: 58
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 59
+	Lexema: i
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 60
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 77 | Coluna: 61
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 62
+	Lexema: j
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 63
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 77 | Coluna: 64
+	Lexema: [
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 77 | Coluna: 65
+	Lexema: k
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 66
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 77 | Coluna: 67
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 77 | Coluna: 68
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: main.c
+	Linha: 79 | Coluna: 6
+	Lexema: const
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 79 | Coluna: 12
+	Lexema: char
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 79 | Coluna: 17
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 79 | Coluna: 18
+	Lexema: modo
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 79 | Coluna: 23
+	Lexema: =
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 79 | Coluna: 25
+	Lexema: k
+
+TOKEN: Operador
+	Subtipo: igual
+	Arquivo: main.c
+	Linha: 79 | Coluna: 27
+	Lexema: ==
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 79 | Coluna: 30
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Operador
+	Subtipo: ter_c
+	Arquivo: main.c
+	Linha: 79 | Coluna: 32
+	Lexema: ?
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 79 | Coluna: 34
+	Lexema: "wb"
+	Valor: wb
+
+TOKEN: Extra
+	Subtipo: dois-pontos
+	Arquivo: main.c
+	Linha: 79 | Coluna: 39
+	Lexema: :
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 79 | Coluna: 41
+	Lexema: "ab"
+	Valor: ab
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 79 | Coluna: 45
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 6
+	Lexema: sprintf
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 80 | Coluna: 13
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 14
+	Lexema: arquivo_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 27
+	Lexema: ,
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 80 | Coluna: 29
+	Lexema: "%s/%s-%s.txt"
+	Valor: %s/%s-%s.txt
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 43
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 45
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 60
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 62
+	Lexema: token_tipo_str
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 80 | Coluna: 76
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 77
+	Lexema: token
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 82
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 83
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 85
+	Lexema: token_subtipo_str
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 80 | Coluna: 102
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 80 | Coluna: 103
+	Lexema: token
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 108
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 80 | Coluna: 109
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 110
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 6
+	Lexema: ABRIR_SAIDA
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 81 | Coluna: 17
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 18
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 81 | Coluna: 21
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 23
+	Lexema: arquivo_saida
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 81 | Coluna: 36
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 81 | Coluna: 38
+	Lexema: modo
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 81 | Coluna: 42
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 81 | Coluna: 43
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 6
+	Lexema: token_print
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 83 | Coluna: 17
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 18
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 83 | Coluna: 21
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 83 | Coluna: 23
+	Lexema: token
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 83 | Coluna: 28
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 83 | Coluna: 29
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 85 | Coluna: 6
+	Lexema: FECHAR_SAIDA
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 85 | Coluna: 18
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 85 | Coluna: 19
+	Lexema: out
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 85 | Coluna: 22
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 85 | Coluna: 23
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 86 | Coluna: 5
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 87 | Coluna: 4
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 88 | Coluna: 3
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 89 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 90 | Coluna: 2
+	Lexema: }
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 92 | Coluna: 2
+	Lexema: // Exibe "Fim" na tela.
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 93 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 93 | Coluna: 9
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 93 | Coluna: 10
+	Lexema: '\x46'
+	Valor: F
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 93 | Coluna: 16
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 93 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 94 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 94 | Coluna: 9
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 94 | Coluna: 10
+	Lexema: '\151'
+	Valor: i
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 94 | Coluna: 16
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 94 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 95 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 95 | Coluna: 9
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 95 | Coluna: 10
+	Lexema: 'm'
+	Valor: m
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 95 | Coluna: 13
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 95 | Coluna: 14
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 96 | Coluna: 2
+	Lexema: putchar
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 96 | Coluna: 9
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 96 | Coluna: 10
+	Lexema: '\n'
+	Valor: 
+
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 96 | Coluna: 14
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 96 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 98 | Coluna: 2
+	Lexema: printf
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 98 | Coluna: 8
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 98 | Coluna: 9
+	Lexema: "Warnings: %u\n"
+	Valor: Warnings: %u
+
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 98 | Coluna: 25
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 98 | Coluna: 27
+	Lexema: _log_warnings
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 98 | Coluna: 40
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 98 | Coluna: 41
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 99 | Coluna: 2
+	Lexema: printf
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 99 | Coluna: 8
+	Lexema: (
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 99 | Coluna: 9
+	Lexema: "Erros: %u\n"
+	Valor: Erros: %u
+
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 99 | Coluna: 22
+	Lexema: ,
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 99 | Coluna: 24
+	Lexema: _log_erros
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 99 | Coluna: 34
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 99 | Coluna: 35
+	Lexema: ;
+
+TOKEN: Comentário
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 101 | Coluna: 2
+	Lexema: // Finalizando o módulo léxico.
+
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 102 | Coluna: 2
+	Lexema: lexico_finalizar
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 102 | Coluna: 18
+	Lexema: (
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 102 | Coluna: 19
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 102 | Coluna: 20
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 104 | Coluna: 2
+	Lexema: free
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 104 | Coluna: 6
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 104 | Coluna: 7
+	Lexema: diretorio_saida
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 104 | Coluna: 22
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 104 | Coluna: 23
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: return
+	Arquivo: main.c
+	Linha: 106 | Coluna: 2
+	Lexema: return
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 106 | Coluna: 9
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 106 | Coluna: 10
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 107 | Coluna: 1
+	Lexema: }
+

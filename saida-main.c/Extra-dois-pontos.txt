@@ -1,0 +1,6 @@
+TOKEN: Extra
+	Subtipo: dois-pontos
+	Arquivo: main.c
+	Linha: 79 | Coluna: 39
+	Lexema: :
+

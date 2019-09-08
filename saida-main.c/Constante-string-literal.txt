@@ -1,0 +1,100 @@
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 31 | Coluna: 51
+	Lexema: "0"
+	Valor: 0
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 31 | Coluna: 56
+	Lexema: "Se ativado, os comentários serão salvos na lista de tokens"
+	Valor: Se ativado, os comentários serão salvos na lista de tokens
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 32 | Coluna: 50
+	Lexema: "FILE="
+	Valor: FILE=
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 33 | Coluna: 4
+	Lexema: "Diretório de saída para os arquivos. \"stdout\" para exibir na tela. "
+	Valor: Diretório de saída para os arquivos. "stdout" para exibir na tela. 
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 34 | Coluna: 4
+	Lexema: "Se a opção não for usada, serão exibidos somente warnings e erros"
+	Valor: Se a opção não for usada, serão exibidos somente warnings e erros
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 40 | Coluna: 25
+	Lexema: "Código fonte não informado"
+	Valor: Código fonte não informado
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 44 | Coluna: 30
+	Lexema: "stdout"
+	Valor: stdout
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 65 | Coluna: 25
+	Lexema: "%s/Token.txt"
+	Valor: %s/Token.txt
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 66 | Coluna: 34
+	Lexema: "wb"
+	Valor: wb
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 79 | Coluna: 34
+	Lexema: "wb"
+	Valor: wb
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 79 | Coluna: 41
+	Lexema: "ab"
+	Valor: ab
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 80 | Coluna: 29
+	Lexema: "%s/%s-%s.txt"
+	Valor: %s/%s-%s.txt
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 98 | Coluna: 9
+	Lexema: "Warnings: %u\n"
+	Valor: Warnings: %u
+
+
+TOKEN: Constante
+	Subtipo: string-literal
+	Arquivo: main.c
+	Linha: 99 | Coluna: 9
+	Lexema: "Erros: %u\n"
+	Valor: Erros: %u
+
+

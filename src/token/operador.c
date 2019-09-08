@@ -331,6 +331,5 @@ const char *operador_str(uint32_t subtipo) {
 		return __operadores[subtipo];
 	}
 
-	// TODO: warning
 	return "Erro: subtipo de operador inválido";
 }

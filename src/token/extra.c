@@ -102,6 +102,5 @@ const char *extra_str(uint32_t subtipo) {
 		return __extras[subtipo];
 	}
 
-	// TODO: warning
 	return "Erro: subtipo de extra inválido";
 }

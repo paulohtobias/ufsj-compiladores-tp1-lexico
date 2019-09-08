@@ -1,0 +1,6 @@
+TOKEN: Palavra-chave
+	Subtipo: extern
+	Arquivo: main.c
+	Linha: 25 | Coluna: 2
+	Lexema: extern
+

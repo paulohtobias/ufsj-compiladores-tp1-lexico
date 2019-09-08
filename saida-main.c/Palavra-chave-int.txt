@@ -1,0 +1,36 @@
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 23 | Coluna: 1
+	Lexema: int
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 23 | Coluna: 10
+	Lexema: int
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 38 | Coluna: 2
+	Lexema: int
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 74 | Coluna: 8
+	Lexema: int
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 75 | Coluna: 9
+	Lexema: int
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 76 | Coluna: 10
+	Lexema: int
+

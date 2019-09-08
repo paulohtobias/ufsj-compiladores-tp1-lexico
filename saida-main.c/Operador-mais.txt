@@ -1,0 +1,6 @@
+TOKEN: Operador
+	Subtipo: mais
+	Arquivo: main.c
+	Linha: 68 | Coluna: 33
+	Lexema: +
+

@@ -1,0 +1,252 @@
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 25 | Coluna: 32
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 26 | Coluna: 18
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 27 | Coluna: 30
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 28 | Coluna: 25
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 36 | Coluna: 3
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 38 | Coluna: 10
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 40 | Coluna: 56
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 43 | Coluna: 35
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 45 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 47 | Coluna: 24
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 48 | Coluna: 25
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 51 | Coluna: 37
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 53 | Coluna: 33
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 58 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 61 | Coluna: 24
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 65 | Coluna: 57
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 66 | Coluna: 39
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 67 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 67 | Coluna: 48
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 68 | Coluna: 37
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 70 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 74 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 74 | Coluna: 31
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 75 | Coluna: 18
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 75 | Coluna: 53
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 76 | Coluna: 19
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 76 | Coluna: 57
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 77 | Coluna: 68
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 79 | Coluna: 45
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 80 | Coluna: 110
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 81 | Coluna: 43
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 83 | Coluna: 29
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 85 | Coluna: 23
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 93 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 94 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 95 | Coluna: 14
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 96 | Coluna: 15
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 98 | Coluna: 41
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 99 | Coluna: 35
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 102 | Coluna: 20
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 104 | Coluna: 23
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 106 | Coluna: 10
+	Lexema: ;
+

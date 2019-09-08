@@ -1,0 +1,48 @@
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 1 | Coluna: 1
+	Lexema: #include <stdio.h>
+
+	Valor: #include <stdio.h>
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 2 | Coluna: 1
+	Lexema: #include <string.h>
+
+	Valor: #include <string.h>
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 3 | Coluna: 1
+	Lexema: #include "lexico.h"
+
+	Valor: #include "lexico.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 4 | Coluna: 1
+	Lexema: #include "utils.h"
+
+	Valor: #include "utils.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 5 | Coluna: 1
+	Lexema: #include "plist.h"
+
+	Valor: #include "plist.h"
+
+TOKEN: Pré-processador
+	Subtipo: include
+	Arquivo: main.c
+	Linha: 6 | Coluna: 1
+	Lexema: #include "opcoes.h"
+
+	Valor: #include "opcoes.h"
+

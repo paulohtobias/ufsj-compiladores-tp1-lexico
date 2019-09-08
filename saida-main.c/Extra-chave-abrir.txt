@@ -1,0 +1,78 @@
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 23 | Coluna: 41
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 30 | Coluna: 21
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 39 | Coluna: 76
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 44 | Coluna: 46
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 46 | Coluna: 41
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 49 | Coluna: 9
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 52 | Coluna: 72
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 63 | Coluna: 31
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 67 | Coluna: 55
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 72 | Coluna: 21
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 74 | Coluna: 38
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 75 | Coluna: 60
+	Lexema: {
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 76 | Coluna: 64
+	Lexema: {
+

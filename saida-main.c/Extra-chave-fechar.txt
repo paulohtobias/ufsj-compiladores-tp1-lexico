@@ -1,0 +1,78 @@
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 36 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 41 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 46 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 49 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 54 | Coluna: 3
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 55 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 69 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 86 | Coluna: 5
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 87 | Coluna: 4
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 88 | Coluna: 3
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 89 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 90 | Coluna: 2
+	Lexema: }
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 107 | Coluna: 1
+	Lexema: }
+

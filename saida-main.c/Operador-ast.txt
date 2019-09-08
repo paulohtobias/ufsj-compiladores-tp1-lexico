@@ -1,0 +1,36 @@
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 23 | Coluna: 25
+	Lexema: *
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 26 | Coluna: 7
+	Lexema: *
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 27 | Coluna: 7
+	Lexema: *
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 43 | Coluna: 13
+	Lexema: *
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 77 | Coluna: 20
+	Lexema: *
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 79 | Coluna: 17
+	Lexema: *
+

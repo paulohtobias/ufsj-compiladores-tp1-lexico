@@ -1,0 +1,18 @@
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 31 | Coluna: 30
+	Lexema: &
+
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 32 | Coluna: 32
+	Lexema: &
+
+TOKEN: Operador
+	Subtipo: ec
+	Arquivo: main.c
+	Linha: 77 | Coluna: 29
+	Lexema: &
+
