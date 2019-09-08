@@ -105,6 +105,5 @@ const char *token_palavra_chave_subtipo_str(uint32_t subtipo) {
 		return __palavras_chave[subtipo];
 	}
 
-	// TODO: warning
 	return "Erro: subtipo de palavra-chave inválido";
 }
