@@ -15,7 +15,7 @@ Este analisador almeja fornecer 100% de suporte a caracteres UTF-8. Sendo assim,
 
 ## Dependências
 
-libpcre2-8 - PCRE2 - Perl compatible regular expressions C library (2nd API) with 8 bit character support.
+[libpcre2-8 - PCRE2 - Perl compatible regular expressions C library (2nd API) with 8 bit character support.](https://www.pcre.org/)
 
 ---
 ## Compilação
