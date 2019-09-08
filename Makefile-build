@@ -3,7 +3,7 @@ CC := gcc
 CFLAGS := -Wall -MMD
 
 # Default target
-TARGET := debug
+TARGET := release
 
 # Check for debug/release build
 ifeq ($(TARGET), debug)
@@ -17,14 +17,14 @@ LIB_NAME :=
 
 # OS-dependent variables
 ifeq ($(OS),Windows_NT)
-	BIN := pcc-$(TARGET).exe
+	BIN := pcc.exe
 	DLE := dll
 	ODIR := obj/windows
 
 	CFLAGS+= -mno-ms-bitfields
 #	LOADLIBES := -municode
 else
-	BIN := pcc-$(TARGET).out
+	BIN := pcc
 	DLE := so
 	ODIR := obj/linux
 endif
