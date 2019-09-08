@@ -46,6 +46,13 @@ int afd_init(afd_t *afd, size_t quantidade_estados) {
 	return AFD_OK;
 }
 
+void afd_liberar(afd_t *afd) {
+	for (size_t i = 0; i < plist_len(afd->estados); i++) {
+		afd_liberar_estado(afd->estados + i);
+	}
+	plist_free(afd->estados);
+}
+
 afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_quantidade, bool final, void (*acao)(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna)) {
 	afd_estado_t estado;
 
@@ -62,6 +69,7 @@ afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_qua
 
 			transicao.estado_indice = transicoes[i].estado_indice;
 			transicao.pattern.name = strdup(transicoes[i].pattern.name);
+			transicao.pattern.str = strdup(transicoes[i].pattern.str);
 			transicao.pattern.compiled = regex_compile(transicoes[i].pattern.str, PCRE2_ZERO_TERMINATED);
 
 			plist_insert(estado.transicoes, transicao, i);
@@ -74,9 +82,10 @@ afd_estado_t afd_criar_estado(afd_transicao_t *transicoes, size_t transicoes_qua
 void afd_liberar_estado(afd_estado_t *estado) {
 	for (size_t i = 0; i < plist_len(estado->transicoes); i++) {
 		free(estado->transicoes[i].pattern.name);
+		free(estado->transicoes[i].pattern.str);
 		pcre2_code_free(estado->transicoes[i].pattern.compiled);
 	}
-	free(estado->transicoes);
+	plist_free(estado->transicoes);
 }
 
 int32_t afd_estado_get_proximo_estado(const afd_estado_t *estado, const char *simbolo, int8_t simbolo_comprimento) {
@@ -203,7 +212,10 @@ int afd_mesclar_automatos(afd_t *afd, const afd_t *afd_novo) {
 
 			afd_transicao_t *afd_transicao = afd_estado_get_transicao(afd_estado_atual, afd_novo_transicao->pattern.name);
 			if (afd_transicao == NULL) {
-				afd_transicao_t afd_transicao_nova = *afd_novo_transicao;
+				afd_transicao_t afd_transicao_nova;
+				afd_transicao_nova.pattern.name = strdup(afd_novo_transicao->pattern.name);
+				afd_transicao_nova.pattern.str = strdup(afd_novo_transicao->pattern.str);
+				afd_transicao_nova.pattern.compiled = regex_compile(afd_transicao_nova.pattern.str, PCRE2_ZERO_TERMINATED);
 				afd_transicao_nova.estado_indice = afd_novo_indices[afd_novo_transicao->estado_indice];
 
 				plist_append(afd_estado_atual->transicoes, afd_transicao_nova);

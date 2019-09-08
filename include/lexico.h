@@ -14,6 +14,8 @@
 
 int lexico_init();
 
+void lexico_finalizar();
+
 int lexico_parse(const char *src);
 
 #endif // LEXICO_H

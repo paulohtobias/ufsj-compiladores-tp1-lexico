@@ -84,6 +84,8 @@ int token_comentario_init(afd_t *afd) {
 		goto fim;
 	}
 
+	afd_liberar(&afd_cmt);
+
 	// Inicializando a tabela de símbolos de comentario.
 	plist_create(tabela_simbolos[TK_CMT], 1);
 	tabela_simbolos[TK_CMT][0] = NULL;

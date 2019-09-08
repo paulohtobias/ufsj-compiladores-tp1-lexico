@@ -135,6 +135,8 @@ static int str_init(afd_t *afd) {
 		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 	}
 
+	afd_liberar(&afd_str);
+
 	return res;
 }
 static int char_init(afd_t *afd) {
@@ -187,6 +189,8 @@ static int char_init(afd_t *afd) {
 	if ((res = afd_mesclar_automatos(afd, &afd_char)) != AFD_OK) {
 		fprintf(stderr, "%s: %s.\n Não foi possível iniciar.\n", __FUNCTION__, afd_get_erro(res));
 	}
+
+	afd_liberar(&afd_char);
 
 	return res;
 }
@@ -277,6 +281,8 @@ static int number_init(afd_t *afd) {
 	if ((res = afd_mesclar_automatos(afd, &afd_number)) != AFD_OK) {
 		LOG_PCC_ERRO(0, NULL, "%s: Não foi possível iniciar: %s\n", __FUNCTION__, afd_get_erro(res));
 	}
+
+	afd_liberar(&afd_number);
 
 	return res;
 }

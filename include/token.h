@@ -87,6 +87,12 @@ size_t **tabela_simbolos[TK_COUNT];
 int token_init(afd_t *afd);
 
 /**
+ * Libera memória de todos os tokens na lista de tokens
+ * e tabela de símbolos.
+ */
+void token_finalizar();
+
+/**
  * Retorna a string correspondente ao tipo do token.
  * Se o tipo for inválido, retorna uma string vazia.
  */
@@ -102,6 +108,13 @@ const char *token_subtipo_str(const token_t *token);
  * Função genérica para criar um novo token.
  */
 token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
+
+/**
+ * Libera os dados do token que foram alocado dinâmicamente.
+ * Se o próprio token foi alocado dinâmicamente, este não será
+ * liberado.
+ */
+void token_liberar(token_t *token);
 
 /**
  * Adiciona o token na lista de tokens bem como na

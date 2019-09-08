@@ -76,6 +76,8 @@ int token_extra_init(afd_t *afd) {
 		goto fim;
 	}
 
+	afd_liberar(&afd_ext);
+
 	// Inicializando a tabela de símbolos de extra.
 	plist_create(tabela_simbolos[TK_EXT], __extras_quantidade);
 	memset(tabela_simbolos[TK_EXT], 0, __extras_quantidade * sizeof *tabela_simbolos[TK_EXT]);

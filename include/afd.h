@@ -40,7 +40,7 @@ const char *afd_get_erro(int cod);
 
 typedef struct afd_transicao_pattern_t {
 	char *name;
-	const char *str;
+	char *str;
 	pcre2_code *compiled;
 } afd_transicao_pattern_t;
 
@@ -65,6 +65,11 @@ typedef struct afd_t {
  * TODO
  */
 int afd_init(afd_t *afd, size_t quantidade_estados);
+
+/**
+ * TODO
+ */
+void afd_liberar(afd_t *afd);
 
 /**
  * TODO

@@ -35,6 +35,19 @@ int token_init(afd_t *afd) {
 	return 0;
 }
 
+void token_finalizar() {
+	for (size_t i = 0; i < plist_len(lista_tokens); i++) {
+		token_liberar(lista_tokens + i);
+	}
+
+	for (size_t i = 0; i < TK_COUNT; i++) {
+		for (int j = 0; j < plist_cap(tabela_simbolos[i]); j++) {
+			plist_free(tabela_simbolos[i][j]);
+		}
+		plist_free(tabela_simbolos[i]);
+	}
+}
+
 const char *token_tipo_str(const token_t *token) {
 	if (token->tipo < TK_COUNT) {
 		return __token_codigo_str[token->tipo];
@@ -78,6 +91,12 @@ token_t token_criar(uint32_t tipo, uint32_t subtipo, const char *arquivo, const 
 	token.valor.to_str = NULL;
 
 	return token;
+}
+
+void token_liberar(token_t *token) {
+	free(token->contexto.arquivo);
+	free(token->contexto.lexema);
+	free(token->valor.dados);
 }
 
 void token_adicionar(const token_t *token) {

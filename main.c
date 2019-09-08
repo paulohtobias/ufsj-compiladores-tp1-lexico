@@ -7,11 +7,11 @@
 
 #define ABRIR_SAIDA(out, nome, modo) \
 	if (out != stdout) { \
-	do { \
-		out = fopen(nome, modo); \
-		if (out == NULL) { \
-			LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); \
-		} \
+		do { \
+			out = fopen(nome, modo); \
+			if (out == NULL) { \
+				LOG_PCC_ERRO(EXIT_FAILURE, "", "Erro ao abrir o arquivo de saída %s: ", nome); \
+			} \
 		} while(0); \
 	}
 
@@ -57,17 +57,17 @@ int main(int argc, char * const argv[]) {
 	FECHAR_SAIDA(out);
 
 	if (out != stdout) {
-	// Exibindo as tabelas de símbolos.
-	for (int i = 0; i < TK_COUNT; i++) {
-		for (int j = 0; j < plist_cap(tabela_simbolos[i]); j++) {
-			for (int k = 0; k < plist_len(tabela_simbolos[i][j]); k++) {
-				const token_t *token = &lista_tokens[tabela_simbolos[i][j][k]];
+		// Exibindo as tabelas de símbolos.
+		for (int i = 0; i < TK_COUNT; i++) {
+			for (int j = 0; j < plist_cap(tabela_simbolos[i]); j++) {
+				for (int k = 0; k < plist_len(tabela_simbolos[i][j]); k++) {
+					const token_t *token = &lista_tokens[tabela_simbolos[i][j][k]];
 
-				const char *modo = k == 0 ? "wb" : "ab";
-				sprintf(arquivo_saida, "saida/%s-%s.txt", token_tipo_str(token), token_subtipo_str(token));
-				ABRIR_SAIDA(out, arquivo_saida, modo);
+					const char *modo = k == 0 ? "wb" : "ab";
+					sprintf(arquivo_saida, "saida/%s-%s.txt", token_tipo_str(token), token_subtipo_str(token));
+					ABRIR_SAIDA(out, arquivo_saida, modo);
 
-				token_print(out, token);
+					token_print(out, token);
 
 					FECHAR_SAIDA(out);
 				}
@@ -84,6 +84,10 @@ int main(int argc, char * const argv[]) {
 	printf("Warnings: %u\n", _log_warnings);
 	printf("Erros: %u\n", _log_erros);
 
-	// TODO: lexico_finalizar();
+	// Finalizando o módulo léxico.
+	lexico_finalizar();
+
+	free(pasta_saida);
+
 	return 0;
 }

@@ -73,7 +73,7 @@ int token_palavra_chave_init(afd_t *afd) {
 int token_palavra_chave_buscar(const token_t *token) {
 	int inicio = 0;
 	int fim = __palavras_chave_quantidade;
-	int index;
+	int index = -1;
 
 	while (1) {
 		int novo_index = (int) ((inicio + fim) / 2);

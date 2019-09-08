@@ -36,6 +36,13 @@ int lexico_init() {
 	return 0;
 }
 
+void lexico_finalizar() {
+	token_finalizar();
+
+	afd_liberar(afd_lexico);
+	free(afd_lexico);
+}
+
 /// Avança no código fonte.
 static int avancar_cursor(char **src, int8_t comprimento, int32_t *linha, int32_t *coluna, token_contexto_t *contexto) {
 	if (comprimento <= 0) {

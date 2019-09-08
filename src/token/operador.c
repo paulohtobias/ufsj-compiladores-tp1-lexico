@@ -288,6 +288,8 @@ int token_operador_init(afd_t *afd) {
 		goto fim;
 	}
 
+	afd_liberar(&afd_op);
+
 	// Inicializando a tabela de símbolos de operador.
 	plist_create(tabela_simbolos[TK_OP], __operadores_quantidade);
 	memset(tabela_simbolos[TK_OP], 0, __operadores_quantidade * sizeof *tabela_simbolos[TK_OP]);

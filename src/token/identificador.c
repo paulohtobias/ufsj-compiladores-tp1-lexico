@@ -42,6 +42,8 @@ int token_identificador_init(afd_t *afd) {
 		goto fim;
 	}
 
+	afd_liberar(&afd_id);
+
 	// Inicializando a tabela de símbolos de identificador.
 	plist_create(tabela_simbolos[TK_ID], 1);
 	tabela_simbolos[TK_ID][0] = NULL;

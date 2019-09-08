@@ -115,6 +115,8 @@ int token_preprocessador_init(afd_t *afd) {
 		goto fim;
 	}
 
+	afd_liberar(&afd_pp);
+
 	// Inicializando a tabela de símbolos de preprocessador.
 	plist_create(tabela_simbolos[TK_PP], __preprocessadores_quantidade);
 	memset(tabela_simbolos[TK_PP], 0, __preprocessadores_quantidade * sizeof *tabela_simbolos[TK_PP]);
