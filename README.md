@@ -9,6 +9,8 @@
 
 **Apresentado em:** 12/09/2019
 
+Este analisador almeja fornecer 100% de suporte a caracteres UTF-8. Sendo assim, símbolos como `ç`, `à`, `と`, `俺` e `🤙` são todos considerados válidos para compor um identificador.
+
 ---
 
 ## Dependências
@@ -238,7 +240,8 @@ Entrada: `main.c`
 #include <stdio.h>
 
 int main(int argc, char const *argv[]) {
-	printf("Hello, world!\n");
+	const char *✋🗺 = "Hello, world!\n";
+	printf(✋🗺);
 
 	return 0;
 }
@@ -248,7 +251,7 @@ Saída: `./pcc -O stdout main.c`
 ```
 TOKEN: Pré-processador
 	Subtipo: include
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 1 | Coluna: 1
 	Lexema: #include <stdio.h>
 
@@ -256,143 +259,185 @@ TOKEN: Pré-processador
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 1
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 5
 	Lexema: main
 
 TOKEN: Extra
 	Subtipo: parenteses-abrir
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 9
 	Lexema: (
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 10
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 14
 	Lexema: argc
 
 TOKEN: Extra
 	Subtipo: virgula
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 18
 	Lexema: ,
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 20
 	Lexema: char
 
 TOKEN: Palavra-chave
 	Subtipo: const
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 25
 	Lexema: const
 
 TOKEN: Operador
 	Subtipo: ast
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 31
 	Lexema: *
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 32
 	Lexema: argv
 
 TOKEN: Extra
 	Subtipo: colchete-abrir
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 36
 	Lexema: [
 
 TOKEN: Extra
 	Subtipo: colchete-fechar
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 37
 	Lexema: ]
 
 TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 38
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: chave-abrir
-	Arquivo: main.c
+	Arquivo: hw.c
 	Linha: 3 | Coluna: 40
 	Lexema: {
 
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 2
+	Lexema: const
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 8
+	Lexema: char
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 13
+	Lexema: *
+
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: main.c
-	Linha: 4 | Coluna: 2
-	Lexema: printf
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 14
+	Lexema: ✋🗺
 
-TOKEN: Extra
-	Subtipo: parenteses-abrir
-	Arquivo: main.c
-	Linha: 4 | Coluna: 8
-	Lexema: (
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 22
+	Lexema: =
 
 TOKEN: Constante
 	Subtipo: string-literal
-	Arquivo: main.c
-	Linha: 4 | Coluna: 9
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 24
 	Lexema: "Hello, world!\n"
 	Valor: Hello, world!
 
 
 TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: hw.c
+	Linha: 4 | Coluna: 41
+	Lexema: ;
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: hw.c
+	Linha: 5 | Coluna: 2
+	Lexema: printf
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: hw.c
+	Linha: 5 | Coluna: 8
+	Lexema: (
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: hw.c
+	Linha: 5 | Coluna: 9
+	Lexema: ✋🗺
+
+TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: main.c
-	Linha: 4 | Coluna: 26
+	Arquivo: hw.c
+	Linha: 5 | Coluna: 16
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: main.c
-	Linha: 4 | Coluna: 27
+	Arquivo: hw.c
+	Linha: 5 | Coluna: 17
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: return
-	Arquivo: main.c
-	Linha: 6 | Coluna: 2
+	Arquivo: hw.c
+	Linha: 7 | Coluna: 2
 	Lexema: return
 
 TOKEN: Constante
 	Subtipo: inteiro
-	Arquivo: main.c
-	Linha: 6 | Coluna: 9
+	Arquivo: hw.c
+	Linha: 7 | Coluna: 9
 	Lexema: 0
 	Valor: 0
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: main.c
-	Linha: 6 | Coluna: 10
+	Arquivo: hw.c
+	Linha: 7 | Coluna: 10
 	Lexema: ;
 
 TOKEN: Extra
 	Subtipo: chave-fechar
-	Arquivo: main.c
-	Linha: 7 | Coluna: 1
+	Arquivo: hw.c
+	Linha: 8 | Coluna: 1
 	Lexema: }
 
 Fim
