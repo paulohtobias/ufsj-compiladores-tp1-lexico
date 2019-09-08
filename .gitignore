@@ -39,6 +39,8 @@ obj
 # Project folders and files
 nbproject/
 .vscode/
+testes/
 arquivos/
+scripts/
 saida/
 pcc
