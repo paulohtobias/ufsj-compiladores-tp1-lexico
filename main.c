@@ -29,7 +29,10 @@ int main(int argc, char * const argv[]) {
 
 	opcao_t opcoes[] = {
 		OPCAO_INIT('C', tipo_bool, &salvar_comentarios, "0", "Controla se os comentários serão salvos na lista de tokens ou se serão descartados"),
-		OPCAO_INIT('O', tipo_str(0), &pasta_saida, "FILE=stdout", "Diretório de saída para os arquivos"),
+		OPCAO_INIT('O', tipo_str(0), &pasta_saida, "FILE=",
+			"Diretório de saída para os arquivos. \"stdout\" para exibir na tela. "
+			"Se a opção não for usada, serão exibidos somente warnings e erros"
+		),
 	};
 
 	int argi;
@@ -40,6 +43,9 @@ int main(int argc, char * const argv[]) {
 	const char *filename = argv[argi];
 	if (strcmp(pasta_saida, "stdout") == 0) {
 		out = stdout;
+	} else if (pasta_saida[0] == '\0') {
+		free(pasta_saida);
+		pasta_saida = NULL;
 	}
 
 	// Inicializando o módulo léxico.
@@ -48,6 +54,7 @@ int main(int argc, char * const argv[]) {
 	// Fazendo a análise do código.
 	lexico_parse(filename);
 
+	if (pasta_saida != NULL) {
 	// Exibindo a lista de tokens.
 	sprintf(arquivo_saida, "%s/Token.txt", pasta_saida);
 	ABRIR_SAIDA(out, arquivo_saida, "wb");
@@ -73,6 +80,7 @@ int main(int argc, char * const argv[]) {
 				}
 			}
 		}
+	}
 	}
 
 	// Exibe "Fim" na tela.
