@@ -79,7 +79,6 @@ Representação em string do tipo do token. Possíveis valores podem ser conferi
 | TK_EXT  | 4     | Extra           |
 | TK_CMT  | 5     | Comentário      |
 | TK_PP   | 6     | Pré-Processador |
-|         |       |                 |
 
 ### `subtipo`
 Representação em string do subtipo do token. Possíveis valores podem ser conferidos nas tabelas abaixo:
@@ -88,7 +87,6 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 |--------	|---------------	|--------	|
 | Código 	| Valor         	| String 	|
 | --     	| 0             	| N/A    	|
-|           |                   |           |
 
 |                	| Palavra-chave 	|          	|
 |----------------	|---------------	|----------	|
@@ -125,7 +123,6 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 | TK_KW_VOID     	| 29            	| void     	|
 | TK_KW_VOLATILE 	| 30            	| volatile 	|
 | TK_KW_WHILE    	| 31            	| while    	|
-|                   |                   |           |
 
 |               	| Constante 	|                       	|
 |---------------	|-----------	|-----------------------	|
@@ -139,7 +136,6 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 | TK_CNST_FLT   	| 6         	| float                 	|
 | TK_CNST_DBL   	| 7         	| double                	|
 | TK_CNST_LDBL  	| 8         	| double-long           	|
-|                   |               |                           |
 
 |                   	| Operador 	|             	|
 |-------------------	|----------	|-------------	|
@@ -180,7 +176,6 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 | TK_OP_AUTO_ORB    	| 33       	| auto_orb    	|
 | TK_OP_AUTO_SHL    	| 34       	| auto_shl    	|
 | TK_OP_AUTO_SHR    	| 35       	| auto_shr    	|
-|                       |           |               |
 
 |                    	| Extra 	|                   	|
 |--------------------	|-------	|-------------------	|
@@ -194,13 +189,11 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 | TK_EXT_VIRGULA     	| 6     	| virgula           	|
 | TK_EXT_DOIS_PONTOS 	| 7     	| dois-pontos       	|
 | TK_EXT_PT_VIRGULA  	| 8     	| ponto-virgula     	|
-|                       |           |                       |
 
 |        	| Comentário 	|        	|
 |--------	|------------	|--------	|
 | Código 	| Valor      	| String 	|
 | --     	| 0          	| N/A    	|
-|           |               |           |
 
 |               	| Pré-Processador 	|         	|
 |---------------	|-----------------	|---------	|
@@ -213,7 +206,6 @@ Representação em string do subtipo do token. Possíveis valores podem ser conf
 | TK_PP_ENDIF   	| 5               	| endif   	|
 | TK_PP_DEFINE  	| 6               	| define  	|
 | TK_PP_INCLUDE 	| 7               	| include 	|
-|                   |                   |           |
 
 ### `arquivo`
 Nome do arquivo onde o token foi encontrado. Até o momento, é usado apenas nas mensagens de erro e warning.
