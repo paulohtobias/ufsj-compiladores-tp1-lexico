@@ -69,6 +69,7 @@ TOKEN: {tipo}
 
 ### `tipo`
 Representação em string do tipo do token. Possíveis valores podem ser conferidos na tabela abaixo:
+
 | Código  | Valor | String          |
 |---------|-------|-----------------|
 | TK_ID   | 0     | Identificador   |
