@@ -481,7 +481,7 @@ static char *double_to_str(const void *dados, size_t comprimento) {
 }
 
 static void incompleto(char simbolo, const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
-	fprintf(stderr, "Faltando '%c' na linha %d coluna %d\n", simbolo, linha, coluna);
+	LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "caractere %c final ausente", simbolo);
 }
 static void str_incompleta(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
 	incompleto('"', arquivo, lexema, comprimento, linha, coluna);
