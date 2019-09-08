@@ -1,5 +1,5 @@
 TOKEN: Operador
-	Subtipo: orb
+	Subtipo: orl
 	Arquivo: main.c
 	Linha: 52 | Coluna: 37
 	Lexema: ||

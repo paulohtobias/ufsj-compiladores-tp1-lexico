@@ -133,14 +133,14 @@ static void preprocessador_adicionar(const char *arquivo, const char *lexema, si
 	int subtipo;
 	for (subtipo = 0; subtipo < __preprocessadores_quantidade; subtipo++) {
 		size_t i;
-		for (i = 0; __preprocessadores[subtipo][i] != '\0' && lexema[i + lexema_offset] != '0'; i++) {
+		for (i = 0; __preprocessadores[subtipo][i] != '\0' && islower((unsigned char) lexema[i + lexema_offset]); i++) {
 			if (__preprocessadores[subtipo][i] != lexema[i + lexema_offset]) {
 				break;
 			}
 		}
 
 		// Houve casamento.
-		if (__preprocessadores[subtipo][i] == '\0') {
+		if (__preprocessadores[subtipo][i] == '\0' && !islower((unsigned char) lexema[i + lexema_offset])) {
 			break;
 		}
 	}

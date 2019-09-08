@@ -303,14 +303,14 @@ static void operador_adicionar(const char *arquivo, const char *lexema, size_t c
 	int subtipo;
 	for (subtipo = 0; subtipo < __operadores_quantidade; subtipo++) {
 		size_t i;
-		for (i = 0; __operadores_lexemas[subtipo][i] != '\0' && lexema[i] != '0'; i++) {
+		for (i = 0; __operadores_lexemas[subtipo][i] != '\0' && i < comprimento; i++) {
 			if (__operadores_lexemas[subtipo][i] != lexema[i]) {
 				break;
 			}
 		}
 
 		// Houve casamento.
-		if (__operadores_lexemas[subtipo][i] == '\0') {
+		if (__operadores_lexemas[subtipo][i] == '\0' && i == comprimento) {
 			break;
 		}
 	}

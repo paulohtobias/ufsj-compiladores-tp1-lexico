@@ -678,7 +678,7 @@ TOKEN: Extra
 	Lexema: )
 
 TOKEN: Operador
-	Subtipo: maior
+	Subtipo: maior_igual
 	Arquivo: main.c
 	Linha: 39 | Coluna: 67
 	Lexema: >=
@@ -1185,7 +1185,7 @@ TOKEN: Constante
 	Valor: /
 
 TOKEN: Operador
-	Subtipo: orb
+	Subtipo: orl
 	Arquivo: main.c
 	Linha: 52 | Coluna: 37
 	Lexema: ||
@@ -1407,7 +1407,7 @@ TOKEN: Identificador
 	Lexema: diretorio_saida
 
 TOKEN: Operador
-	Subtipo: notl
+	Subtipo: dif
 	Arquivo: main.c
 	Linha: 63 | Coluna: 22
 	Lexema: !=
@@ -1765,7 +1765,7 @@ TOKEN: Identificador
 	Lexema: out
 
 TOKEN: Operador
-	Subtipo: notl
+	Subtipo: dif
 	Arquivo: main.c
 	Linha: 72 | Coluna: 10
 	Lexema: !=

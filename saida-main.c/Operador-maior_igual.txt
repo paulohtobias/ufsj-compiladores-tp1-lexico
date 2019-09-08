@@ -1,5 +1,5 @@
 TOKEN: Operador
-	Subtipo: maior
+	Subtipo: maior_igual
 	Arquivo: main.c
 	Linha: 39 | Coluna: 67
 	Lexema: >=
