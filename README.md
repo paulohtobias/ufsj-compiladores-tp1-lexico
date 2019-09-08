@@ -231,6 +231,8 @@ A tabela de símbolos foi dividida em várias sub-tabelas, sendo uma para cada s
 ---
 ## Exemplos
 
+### Sucesso
+
 Entrada: `main.c`
 ```C
 #include <stdio.h>
@@ -242,11 +244,11 @@ int main(int argc, char const *argv[]) {
 }
 ```
 
-Saída: `Token.txt`
+Saída: `./pcc -O stdout main.c`
 ```
 TOKEN: Pré-processador
 	Subtipo: include
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 1 | Coluna: 1
 	Lexema: #include <stdio.h>
 
@@ -254,103 +256,103 @@ TOKEN: Pré-processador
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 1
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 5
 	Lexema: main
 
 TOKEN: Extra
 	Subtipo: parenteses-abrir
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 9
 	Lexema: (
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 10
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 14
 	Lexema: argc
 
 TOKEN: Extra
 	Subtipo: virgula
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 18
 	Lexema: ,
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 20
 	Lexema: char
 
 TOKEN: Palavra-chave
 	Subtipo: const
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 25
 	Lexema: const
 
 TOKEN: Operador
 	Subtipo: ast
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 31
 	Lexema: *
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 32
 	Lexema: argv
 
 TOKEN: Extra
 	Subtipo: colchete-abrir
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 36
 	Lexema: [
 
 TOKEN: Extra
 	Subtipo: colchete-fechar
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 37
 	Lexema: ]
 
 TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 38
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: chave-abrir
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 3 | Coluna: 40
 	Lexema: {
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 4 | Coluna: 2
 	Lexema: printf
 
 TOKEN: Extra
 	Subtipo: parenteses-abrir
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 4 | Coluna: 8
 	Lexema: (
 
 TOKEN: Constante
 	Subtipo: string-literal
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 4 | Coluna: 9
 	Lexema: "Hello, world!\n"
 	Valor: Hello, world!
@@ -358,42 +360,207 @@ TOKEN: Constante
 
 TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 4 | Coluna: 26
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 4 | Coluna: 27
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: return
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 6 | Coluna: 2
 	Lexema: return
 
 TOKEN: Constante
 	Subtipo: inteiro
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 6 | Coluna: 9
 	Lexema: 0
 	Valor: 0
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 6 | Coluna: 10
 	Lexema: ;
 
 TOKEN: Extra
 	Subtipo: chave-fechar
-	Arquivo: hw.c
+	Arquivo: main.c
 	Linha: 7 | Coluna: 1
 	Lexema: }
 
 Fim
 Warnings: 0
 Erros: 0
+```
+---
+
+### Erros e warnings
+
+Entrada: `main.c`
+```C
+int main(int argc, char const *argv[]) {
+	char c = '\777';
+
+	@
+
+	return 0;
+}
+```
+
+Saída: `./pcc -O stdout main.c`
+```
+main.c:2:11: warning: sequência de escape octal fora de alcance
+'\777'
+main.c:4:2: erro: símbolo '@' inválido
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 1 | Coluna: 1
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 1 | Coluna: 5
+	Lexema: main
+
+TOKEN: Extra
+	Subtipo: parenteses-abrir
+	Arquivo: main.c
+	Linha: 1 | Coluna: 9
+	Lexema: (
+
+TOKEN: Palavra-chave
+	Subtipo: int
+	Arquivo: main.c
+	Linha: 1 | Coluna: 10
+	Lexema: int
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 1 | Coluna: 14
+	Lexema: argc
+
+TOKEN: Extra
+	Subtipo: virgula
+	Arquivo: main.c
+	Linha: 1 | Coluna: 18
+	Lexema: ,
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 1 | Coluna: 20
+	Lexema: char
+
+TOKEN: Palavra-chave
+	Subtipo: const
+	Arquivo: main.c
+	Linha: 1 | Coluna: 25
+	Lexema: const
+
+TOKEN: Operador
+	Subtipo: ast
+	Arquivo: main.c
+	Linha: 1 | Coluna: 31
+	Lexema: *
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 1 | Coluna: 32
+	Lexema: argv
+
+TOKEN: Extra
+	Subtipo: colchete-abrir
+	Arquivo: main.c
+	Linha: 1 | Coluna: 36
+	Lexema: [
+
+TOKEN: Extra
+	Subtipo: colchete-fechar
+	Arquivo: main.c
+	Linha: 1 | Coluna: 37
+	Lexema: ]
+
+TOKEN: Extra
+	Subtipo: parenteses-fechar
+	Arquivo: main.c
+	Linha: 1 | Coluna: 38
+	Lexema: )
+
+TOKEN: Extra
+	Subtipo: chave-abrir
+	Arquivo: main.c
+	Linha: 1 | Coluna: 40
+	Lexema: {
+
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 2 | Coluna: 2
+	Lexema: char
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: main.c
+	Linha: 2 | Coluna: 7
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: main.c
+	Linha: 2 | Coluna: 9
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: main.c
+	Linha: 2 | Coluna: 11
+	Lexema: '\777'
+	Valor: �
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 2 | Coluna: 17
+	Lexema: ;
+
+TOKEN: Palavra-chave
+	Subtipo: return
+	Arquivo: main.c
+	Linha: 6 | Coluna: 2
+	Lexema: return
+
+TOKEN: Constante
+	Subtipo: inteiro
+	Arquivo: main.c
+	Linha: 6 | Coluna: 9
+	Lexema: 0
+	Valor: 0
+
+TOKEN: Extra
+	Subtipo: ponto-virgula
+	Arquivo: main.c
+	Linha: 6 | Coluna: 10
+	Lexema: ;
+
+TOKEN: Extra
+	Subtipo: chave-fechar
+	Arquivo: main.c
+	Linha: 7 | Coluna: 1
+	Lexema: }
+
+Fim
+Warnings: 1
+Erros: 1
 ```
