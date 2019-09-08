@@ -12,6 +12,12 @@
 #include "utils.h"
 #include "plist.h"
 
+/**
+ * Controla se os comentários serão salvos na lista de tokens
+ * ou se serão descartados.
+ */
+bool salvar_comentarios = false;
+
 /// Função adicionar
 static void comentario_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna);
 
@@ -87,10 +93,11 @@ fim:
 }
 
 static void comentario_adicionar(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
-	token_t token = token_criar(TK_CMT, 0, arquivo, lexema, comprimento, linha, coluna);
+	if (salvar_comentarios) {
+		token_t token = token_criar(TK_CMT, 0, arquivo, lexema, comprimento, linha, coluna);
 
-	// Descomente a linha abaixo para salvar comentários.
-	token_adicionar(&token);
+		token_adicionar(&token);
+	}
 }
 
 static void comentario_incompleto(const char *arquivo, const char *lexema, size_t comprimento, int32_t linha, int32_t coluna) {
