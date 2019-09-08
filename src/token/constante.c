@@ -374,7 +374,8 @@ static void int_adicionar(const char *arquivo, const char *lexema, size_t compri
 
 		if (!sufixo_valido) {
 			LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "sufixo \"%s\" inválido em constante inteiro", fim);
-			break;
+			token_liberar(&token);
+			return;
 		}
 	}
 
@@ -426,7 +427,8 @@ static void double_adicionar(const char *arquivo, const char *lexema, size_t com
 
 		if (!sufixo_valido || (f && l)) {
 			LOG_ERRO(arquivo, linha, coluna, lexema, comprimento, "sufixo \"%s\" inválido em constante de ponto flutuante", fim);
-			break;
+			token_liberar(&token);
+			return;
 		}
 	}
 

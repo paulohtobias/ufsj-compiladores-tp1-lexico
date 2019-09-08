@@ -508,13 +508,6 @@ TOKEN: Operador
 	Linha: 3 | Coluna: 7
 	Lexema: =
 
-TOKEN: Constante
-	Subtipo: inteiro
-	Arquivo: teste.c
-	Linha: 3 | Coluna: 9
-	Lexema: 10ww2_$w
-	Valor: 10
-
 TOKEN: Extra
 	Subtipo: ponto-virgula
 	Arquivo: teste.c
