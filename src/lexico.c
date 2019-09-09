@@ -52,7 +52,7 @@ static int avancar_cursor(char **src, int8_t comprimento, int32_t *linha, int32_
 		(*linha)++;
 		(*coluna) = 1;
 	} else {
-		(*coluna) += comprimento;
+		(*coluna)++;
 	}
 
 	(*src) += comprimento;

@@ -31,7 +31,7 @@ TOKEN: Extra
 TOKEN: Extra
 	Subtipo: virgula
 	Arquivo: main.c
-	Linha: 31 | Coluna: 119
+	Linha: 31 | Coluna: 117
 	Lexema: ,
 
 TOKEN: Extra

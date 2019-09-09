@@ -37,7 +37,7 @@ TOKEN: Extra
 TOKEN: Extra
 	Subtipo: ponto-virgula
 	Arquivo: main.c
-	Linha: 40 | Coluna: 56
+	Linha: 40 | Coluna: 54
 	Lexema: ;
 
 TOKEN: Extra

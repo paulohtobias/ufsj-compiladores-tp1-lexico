@@ -411,13 +411,13 @@ TOKEN: Constante
 TOKEN: Extra
 	Subtipo: parenteses-fechar
 	Arquivo: main.c
-	Linha: 31 | Coluna: 118
+	Linha: 31 | Coluna: 116
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: virgula
 	Arquivo: main.c
-	Linha: 31 | Coluna: 119
+	Linha: 31 | Coluna: 117
 	Lexema: ,
 
 TOKEN: Identificador
@@ -748,13 +748,13 @@ TOKEN: Constante
 TOKEN: Extra
 	Subtipo: parenteses-fechar
 	Arquivo: main.c
-	Linha: 40 | Coluna: 55
+	Linha: 40 | Coluna: 53
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
 	Arquivo: main.c
-	Linha: 40 | Coluna: 56
+	Linha: 40 | Coluna: 54
 	Lexema: ;
 
 TOKEN: Extra

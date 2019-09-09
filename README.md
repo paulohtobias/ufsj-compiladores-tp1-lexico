@@ -237,7 +237,7 @@ Os arquivos gerados pela execução do programa no arquivo [main.c](https://gith
 
 ### Sucesso
 
-Entrada: `teste.c`
+Entrada: [teste-sucesso.c](https://github.com/paulohtobias/ufsj-compiladores-tp1-lexico/blob/master/teste-sucesso.c)
 ```C
 #include <stdio.h>
 
@@ -249,11 +249,11 @@ int main(int argc, char const *argv[]) {
 }
 ```
 
-Saída: `./pcc -O stdout teste.c`
+Saída: `./pcc -O stdout teste-sucesso.c`
 ```
 TOKEN: Pré-processador
 	Subtipo: include
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 1 | Coluna: 1
 	Lexema: #include <stdio.h>
 
@@ -261,184 +261,184 @@ TOKEN: Pré-processador
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 1
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 5
 	Lexema: main
 
 TOKEN: Extra
 	Subtipo: parenteses-abrir
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 9
 	Lexema: (
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 10
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 14
 	Lexema: argc
 
 TOKEN: Extra
 	Subtipo: virgula
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 18
 	Lexema: ,
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 20
 	Lexema: char
 
 TOKEN: Palavra-chave
 	Subtipo: const
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 25
 	Lexema: const
 
 TOKEN: Operador
 	Subtipo: ast
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 31
 	Lexema: *
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 32
 	Lexema: argv
 
 TOKEN: Extra
 	Subtipo: colchete-abrir
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 36
 	Lexema: [
 
 TOKEN: Extra
 	Subtipo: colchete-fechar
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 37
 	Lexema: ]
 
 TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 38
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: chave-abrir
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 3 | Coluna: 40
 	Lexema: {
 
 TOKEN: Palavra-chave
 	Subtipo: const
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 4 | Coluna: 2
 	Lexema: const
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 4 | Coluna: 8
 	Lexema: char
 
 TOKEN: Operador
 	Subtipo: ast
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 4 | Coluna: 13
 	Lexema: *
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 4 | Coluna: 14
 	Lexema: ✋🗺
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
-	Linha: 4 | Coluna: 22
+	Arquivo: teste-sucesso.c
+	Linha: 4 | Coluna: 17
 	Lexema: =
 
 TOKEN: Constante
 	Subtipo: string-literal
-	Arquivo: teste.c
-	Linha: 4 | Coluna: 24
+	Arquivo: teste-sucesso.c
+	Linha: 4 | Coluna: 19
 	Lexema: "Hello, world!\n"
 	Valor: Hello, world!
 
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
-	Linha: 4 | Coluna: 41
+	Arquivo: teste-sucesso.c
+	Linha: 4 | Coluna: 36
 	Lexema: ;
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 5 | Coluna: 2
 	Lexema: printf
 
 TOKEN: Extra
 	Subtipo: parenteses-abrir
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 5 | Coluna: 8
 	Lexema: (
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 5 | Coluna: 9
 	Lexema: ✋🗺
 
 TOKEN: Extra
 	Subtipo: parenteses-fechar
-	Arquivo: teste.c
-	Linha: 5 | Coluna: 16
+	Arquivo: teste-sucesso.c
+	Linha: 5 | Coluna: 11
 	Lexema: )
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
-	Linha: 5 | Coluna: 17
+	Arquivo: teste-sucesso.c
+	Linha: 5 | Coluna: 12
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: return
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 7 | Coluna: 2
 	Lexema: return
 
 TOKEN: Constante
 	Subtipo: inteiro
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 7 | Coluna: 9
 	Lexema: 0
 	Valor: 0
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 7 | Coluna: 10
 	Lexema: ;
 
 TOKEN: Extra
 	Subtipo: chave-fechar
-	Arquivo: teste.c
+	Arquivo: teste-sucesso.c
 	Linha: 8 | Coluna: 1
 	Lexema: }
 
@@ -450,7 +450,7 @@ Erros: 0
 
 ### Erros e warnings
 
-Entrada: `teste.c`
+Entrada: [teste-erros.c](https://github.com/paulohtobias/ufsj-compiladores-tp1-lexico/blob/master/teste-erros.c)
 ```C
 #paulo
 
@@ -468,171 +468,171 @@ char c = 'a
 
 ```
 
-Saída: `./pcc -O stdout teste.c`
+Saída: `./pcc -O stdout teste-erros.c`
 ```
-teste.c:1:1: erro: diretiva de pré-processamento inválida
+teste-erros.c:1:1: erro: diretiva de pré-processamento inválida
 #paulo
 
-teste.c:3:9: erro: sufixo "ww2_$w" inválido em constante inteiro
+teste-erros.c:3:9: erro: sufixo "ww2_$w" inválido em constante inteiro
 10ww2_$w
-teste.c:4:9: warning: constante inteira é grande demais
+teste-erros.c:4:9: warning: constante inteira é grande demais
 99999999999999999999
-teste.c:6:17: erro: caractere " final ausente
+teste-erros.c:6:17: erro: caractere " final ausente
 "uma string em
-teste.c:7:12: erro: caractere " final ausente
+teste-erros.c:7:12: erro: caractere " final ausente
 ";
-teste.c:8:10: warning: sequência de escape octal fora de alcance
+teste-erros.c:8:10: warning: sequência de escape octal fora de alcance
 '\777'
-teste.c:10:10: erro: caractere ' final ausente
+teste-erros.c:10:10: erro: caractere ' final ausente
 'a
-teste.c:11:1: erro: caractere ' final ausente
+teste-erros.c:11:1: erro: caractere ' final ausente
 ';
-teste.c:13:1: erro: comentário incompleto.
+teste-erros.c:13:1: erro: comentário incompleto.
 /* comentario multi-linha não finalizado
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 3 | Coluna: 1
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 3 | Coluna: 5
 	Lexema: a
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 3 | Coluna: 7
 	Lexema: =
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 3 | Coluna: 17
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: int
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 4 | Coluna: 1
 	Lexema: int
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 4 | Coluna: 5
 	Lexema: b
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 4 | Coluna: 7
 	Lexema: =
 
 TOKEN: Constante
 	Subtipo: inteiro
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 4 | Coluna: 9
 	Lexema: 99999999999999999999
 	Valor: 18446744073709551615
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 4 | Coluna: 29
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: const
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 6 | Coluna: 1
 	Lexema: const
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 6 | Coluna: 7
 	Lexema: char
 
 TOKEN: Operador
 	Subtipo: ast
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 6 | Coluna: 12
 	Lexema: *
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 6 | Coluna: 13
 	Lexema: s
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 6 | Coluna: 15
 	Lexema: =
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 7 | Coluna: 1
 	Lexema: duas
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 7 | Coluna: 6
 	Lexema: linhas
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 8 | Coluna: 1
 	Lexema: char
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 8 | Coluna: 6
 	Lexema: c
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 8 | Coluna: 8
 	Lexema: =
 
 TOKEN: Constante
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 8 | Coluna: 10
 	Lexema: '\777'
 	Valor: �
 
 TOKEN: Extra
 	Subtipo: ponto-virgula
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 8 | Coluna: 16
 	Lexema: ;
 
 TOKEN: Palavra-chave
 	Subtipo: char
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 10 | Coluna: 1
 	Lexema: char
 
 TOKEN: Identificador
 	Subtipo: N/A
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 10 | Coluna: 6
 	Lexema: c
 
 TOKEN: Operador
 	Subtipo: atrib
-	Arquivo: teste.c
+	Arquivo: teste-erros.c
 	Linha: 10 | Coluna: 8
 	Lexema: =
 

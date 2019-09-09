@@ -7,7 +7,7 @@ TOKEN: Extra
 TOKEN: Extra
 	Subtipo: parenteses-fechar
 	Arquivo: main.c
-	Linha: 31 | Coluna: 118
+	Linha: 31 | Coluna: 116
 	Lexema: )
 
 TOKEN: Extra
@@ -49,7 +49,7 @@ TOKEN: Extra
 TOKEN: Extra
 	Subtipo: parenteses-fechar
 	Arquivo: main.c
-	Linha: 40 | Coluna: 55
+	Linha: 40 | Coluna: 53
 	Lexema: )
 
 TOKEN: Extra
