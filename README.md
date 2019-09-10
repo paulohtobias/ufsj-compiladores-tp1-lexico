@@ -42,6 +42,13 @@ Onde `OPCOES` pode ser zero ou mais das seguintes opções:
 ## Limitações
 
 - Pouco suporte às diretivas de pré-processamento.
+- Não suporta o identificador de número variável de argumentos de função `...` visto nas famílias de funções `printf` e `scanf`.
+
+Ex.:
+```C
+int printf(const char *format, ...);
+```
+Seria identificado como três operadores `.` (acesso a membro de struct) consecutivos.
 
 ---
 ## Saída
