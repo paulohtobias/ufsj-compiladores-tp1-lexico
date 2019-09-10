@@ -10,4 +10,6 @@ char c = '\777';
 char c = 'a
 ';
 
+char c = 'aaaa'
+
 /* comentario multi-linha não finalizado

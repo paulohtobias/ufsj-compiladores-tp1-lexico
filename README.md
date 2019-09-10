@@ -464,6 +464,8 @@ char c = '\777';
 char c = 'a
 ';
 
+char c = 'aaaa'
+
 /* comentario multi-linha não finalizado
 
 ```
@@ -487,7 +489,9 @@ teste-erros.c:10:10: erro: caractere ' final ausente
 'a
 teste-erros.c:11:1: erro: caractere ' final ausente
 ';
-teste-erros.c:13:1: erro: comentário incompleto.
+teste-erros.c:13:10: warning: char com mais de um caractere
+'aaaa'
+teste-erros.c:15:1: erro: comentário incompleto.
 /* comentario multi-linha não finalizado
 
 TOKEN: Palavra-chave
@@ -636,7 +640,32 @@ TOKEN: Operador
 	Linha: 10 | Coluna: 8
 	Lexema: =
 
+TOKEN: Palavra-chave
+	Subtipo: char
+	Arquivo: teste-erros.c
+	Linha: 13 | Coluna: 1
+	Lexema: char
+
+TOKEN: Identificador
+	Subtipo: N/A
+	Arquivo: teste-erros.c
+	Linha: 13 | Coluna: 6
+	Lexema: c
+
+TOKEN: Operador
+	Subtipo: atrib
+	Arquivo: teste-erros.c
+	Linha: 13 | Coluna: 8
+	Lexema: =
+
+TOKEN: Constante
+	Subtipo: char
+	Arquivo: teste-erros.c
+	Linha: 13 | Coluna: 10
+	Lexema: 'aaaa'
+	Valor: a
+
 Fim
-Warnings: 2
+Warnings: 3
 Erros: 7
 ```

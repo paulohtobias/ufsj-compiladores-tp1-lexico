@@ -143,7 +143,7 @@ static int char_init(afd_t *afd) {
 	int res;
 
 	afd_t afd_char;
-	afd_init(&afd_char, 5);
+	afd_init(&afd_char, 4);
 
 	// Estado inicial. Deve começar com aspas simples.
 	afd_transicao_t transicoes_0[] = {
@@ -153,8 +153,9 @@ static int char_init(afd_t *afd) {
 
 	// Estado 1.
 	afd_transicao_t transicoes_1[] = {
-		{2, {"[^'\\\\\\n]", "[^\'\\\\\n]", NULL}},
-		{3, {"\\", "\\\\", NULL}}
+		{1, {"[^\'\\\\\\n]", "[^\'\\\\\\n]", NULL}},
+		{2, {"\\", "\\\\", NULL}},
+		{3, {"\'", "\'", NULL}}
 	};
 	plist_append(
 		afd_char.estados,
@@ -163,22 +164,12 @@ static int char_init(afd_t *afd) {
 
 	// Estado 2.
 	afd_transicao_t transicoes_2[] = {
-		{4, {"'", "'"}}
+		{1, {".", "."}}
 	};
 	plist_append(
 		afd_char.estados,
 		afd_criar_estado(transicoes_2, ARR_TAMANHO(transicoes_2), false, char_incompleto)
 	);
-
-	// Estado 3.
-	afd_transicao_t transicoes_3[] = {
-		{3, {"[^'\\n]", "[^'\n]"}},
-		{4, {"'", "'"}}
-	};
-	plist_append(
-		afd_char.estados,
-		afd_criar_estado(transicoes_3, ARR_TAMANHO(transicoes_3), false, char_incompleto)
-	)
 
 	// Estado Final.
 	plist_append(
@@ -336,7 +327,7 @@ static void char_adicionar(const char *arquivo, const char *lexema, size_t compr
 
 	// Checa se não existem mais caracteres.
 	if (*lexema != '\'') {
-		LOG_WARNING(arquivo, linha, coluna, lexema, comprimento, "char com mais de um caractere")
+		LOG_WARNING(arquivo, linha, coluna, token.contexto.lexema, comprimento, "char com mais de um caractere")
 	}
 
 	token_adicionar(&token);
